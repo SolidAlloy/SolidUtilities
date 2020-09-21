@@ -1,4 +1,4 @@
-﻿namespace Utilities.Extensions
+﻿namespace SolidUtilities.Extensions
 {
     using System;
 

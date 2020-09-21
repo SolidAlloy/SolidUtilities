@@ -1,11 +1,11 @@
-﻿namespace Utilities.Editor.SerializableCollections
+﻿namespace SolidUtilities.Editor.SerializableCollections
 {
     using System;
     using System.Collections.Generic;
     using System.Reflection;
+    using SolidUtilities.SerializableCollections;
     using UnityEditor;
     using UnityEngine;
-    using Utilities.SerializableCollections;
     using Object = UnityEngine.Object;
 
     [CustomPropertyDrawer(typeof(SerializableDictionary<,>), true)]

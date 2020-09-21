@@ -1,12 +1,12 @@
 {
   "name": "com.solidalloy.util",
   "version": "1.0.0",
-  "displayName": "Utilities",
+  "displayName": "Solid Utilities",
   "description": "Different utilities that simplify development in Unity3D",
- "keywords": [
+  "keywords": [
     "util",
-	"utilities",
-	"helper"
+    "utilities",
+    "helper"
   ],
   "author": {
     "name": "SolidAlloy",

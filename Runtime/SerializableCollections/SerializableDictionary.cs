@@ -1,4 +1,4 @@
-﻿namespace Utilities.SerializableCollections
+﻿namespace SolidUtilities.SerializableCollections
 {
     using System;
     using System.Collections;

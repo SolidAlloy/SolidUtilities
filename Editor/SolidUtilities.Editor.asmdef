@@ -1,7 +1,7 @@
 {
-    "name": "Utilities.Editor",
+    "name": "SolidUtilities.Editor",
     "references": [
-        "GUID:e9673b3253d93344086615bbd0bb381f"
+        "GUID:b73ef07971851e14fa74ae50b76f8225"
     ],
     "includePlatforms": [
         "Editor"
