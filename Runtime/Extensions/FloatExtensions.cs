@@ -2,13 +2,21 @@
 {
     using System;
 
+    /// <summary>
+    /// Different useful extensions for <see cref="float"/>.
+    /// </summary>
     public static class FloatExtensions
     {
-        private const float Tolerance = 0.01f;
-
-        public static bool ApproximatelyEquals(this float firstNum, float secondNum)
+        /// <summary>
+        /// Determines if the numbers are equal with a certain tolerance.
+        /// </summary>
+        /// <param name="firstNum">First number.</param>
+        /// <param name="secondNum">Second number.</param>
+        /// <param name="tolerance">Tolerance by which to determine if the numbers are equal. Default is 0.01f.</param>
+        /// <returns>Whether numbers are equal with tolerance.</returns>
+        public static bool ApproximatelyEquals(this float firstNum, float secondNum, float tolerance = 0.01f)
         {
-            return Math.Abs(firstNum - secondNum) < Tolerance;
+            return Math.Abs(firstNum - secondNum) < tolerance;
         }
     }
 }

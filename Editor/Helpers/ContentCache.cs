@@ -3,6 +3,10 @@
     using System.Collections.Generic;
     using UnityEngine;
 
+    /// <summary>
+    /// Allows to create a <see cref="GUIContent"/> instance and keep it in cache, reducing the garbage collection
+    /// overhead.
+    /// </summary>
     public class ContentCache
     {
         private readonly Dictionary<string, GUIContent> _contentCache = new Dictionary<string, GUIContent>();

@@ -8,6 +8,7 @@
     using UnityEngine;
     using Object = UnityEngine.Object;
 
+    /// <summary>Property drawer of <see cref="SerializableDictionary{TKey,TValue}"/>.</summary>
     [CustomPropertyDrawer(typeof(SerializableDictionary<,>), true)]
     public class SerializableDictionaryPropertyDrawer : PropertyDrawer
     {

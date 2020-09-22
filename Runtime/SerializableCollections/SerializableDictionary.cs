@@ -6,6 +6,12 @@
     using System.Runtime.Serialization;
     using UnityEngine;
 
+    /// <summary>Dictionary that can be serialized by Unity and shown in the inspector.</summary>
+    /// <typeparam name="TKey">Key type.</typeparam>
+    /// <typeparam name="TValue">Value type.</typeparam>
+    /// <remarks>
+    /// This is a fork of https://github.com/azixMcAze/Unity-SerializableDictionary. I cleaned it up and refactored a bit.
+    /// </remarks>
     [Serializable]
     public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary,
         ISerializationCallbackReceiver, IDeserializationCallback, ISerializable

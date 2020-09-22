@@ -3,10 +3,19 @@
   using Helpers;
   using UnityEngine;
 
+  /// <summary>
+  /// Icon that can have different tints depending on its state: active, highlighted, etc. Useful for creating custom
+  /// inspectors and drawers.
+  /// </summary>
   public class EditorIcon
   {
+    /// <summary>Icon with the default color.</summary>
     public readonly Texture2D Default;
+
+    /// <summary>Icon with the active state tint.</summary>
     public readonly Texture2D Active;
+
+    /// <summary>Icon with the highlighted state tint.</summary>
     public readonly Texture2D Highlighted;
 
     public EditorIcon(Texture2D icon)

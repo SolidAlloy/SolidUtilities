@@ -4,8 +4,15 @@
     using System.Diagnostics;
     using Debug = UnityEngine.Debug;
 
+    /// <summary>
+    /// Basic timer that logs execution time of a method or part of the method. It does not warm up the execution and
+    /// runs the actions only once.
+    /// </summary>
     public static class Timer
     {
+        /// <summary>Log time in ms the action took.</summary>
+        /// <param name="actionName">Name of the action which execution is measured.</param>
+        /// <param name="action">Action to execute.</param>
         public static void LogTime(string actionName, Action action)
         {
             var stopWatch = Stopwatch.StartNew();

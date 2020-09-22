@@ -4,9 +4,15 @@
     using UnityEditor;
     using UnityEngine;
 
+    /// <summary>Different useful methods that simplify <see cref="EditorGUILayout"/> API.</summary>
     public static class EditorDrawHelper
     {
+        /// <summary>
+        /// Cache that creates <see cref="GUIContent"/> instances and keeps them, reducing the garbage
+        /// collection overhead.
+        /// </summary>
         public static readonly ContentCache ContentCache = new ContentCache();
+
         private const float PlaceholderIndent = 14f;
 
         private static readonly GUIStyle SearchToolbarStyle = new GUIStyle(EditorStyles.toolbar)
@@ -31,6 +37,10 @@
             margin = new RectOffset(4, 4, 4, 4)
         };
 
+        /// <summary>Draws content in an automatically laid out scroll view.</summary>
+        /// <param name="scrollPos">Position of the thumb.</param>
+        /// <param name="drawContent">Action that draws the content in the scroll view.</param>
+        /// <returns>The new thumb position.</returns>
         public static Vector2 DrawInScrollView(Vector2 scrollPos, Action drawContent)
         {
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
@@ -39,6 +49,11 @@
             return scrollPos;
         }
 
+        /// <summary>Draws content in the vertical direction.</summary>
+        /// <param name="drawContent">Action that draws the content.</param>
+        /// <param name="option">Option to draw the vertical group with.</param>
+        /// <param name="backgroundColor">Background of the vertical group rectangle.</param>
+        /// <returns>Height of the vertical group rectangle.</returns>
         public static float DrawVertically(Action drawContent, GUILayoutOption option, Color backgroundColor)
         {
             Rect rect = EditorGUILayout.BeginVertical(option);
@@ -48,6 +63,9 @@
             return rect.height;
         }
 
+        /// <summary>Draws content in the vertical direction.</summary>
+        /// <param name="drawContent">Action that draws the content.</param>
+        /// <returns>Rectangle of the vertical group.</returns>
         public static Rect DrawVertically(Action drawContent)
         {
             Rect rect = EditorGUILayout.BeginVertical();
@@ -56,6 +74,8 @@
             return rect;
         }
 
+        /// <summary>Draws content in the vertical direction.</summary>
+        /// <param name="drawContent">Action that draws the content.</param>
         public static void DrawVertically(Action<Rect> drawContent)
         {
             Rect rect = EditorGUILayout.BeginVertical();
@@ -63,19 +83,25 @@
             EditorGUILayout.EndVertical();
         }
 
-        public static void DrawBorders(float windowWidth, float windowHeight, Color color)
+        /// <summary>Draws borders with a given color and width around a rectangle.</summary>
+        /// <param name="rectWidth">Width of the rectangle.</param>
+        /// <param name="rectHeight">Height of the rectangle.</param>
+        /// <param name="color">Color of the borders.</param>
+        /// <param name="borderWidth">Width of the borders.</param>
+        public static void DrawBorders(float rectWidth, float rectHeight, Color color, float borderWidth = 1f)
         {
             if (Event.current.type != EventType.Repaint)
                 return;
 
-            const float borderWidth = 1f;
-
-            EditorGUI.DrawRect(new Rect(0f, 0f, borderWidth, windowHeight), color);
-            EditorGUI.DrawRect(new Rect(0f, 0f, windowWidth, borderWidth), color);
-            EditorGUI.DrawRect(new Rect(windowWidth - borderWidth, 0f, borderWidth, 0f), color);
-            EditorGUI.DrawRect(new Rect(0f, windowHeight - borderWidth, windowWidth, borderWidth), color);
+            EditorGUI.DrawRect(new Rect(0f, 0f, borderWidth, rectHeight), color);
+            EditorGUI.DrawRect(new Rect(0f, 0f, rectWidth, borderWidth), color);
+            EditorGUI.DrawRect(new Rect(rectWidth - borderWidth, 0f, borderWidth, 0f), color);
+            EditorGUI.DrawRect(new Rect(0f, rectHeight - borderWidth, rectWidth, borderWidth), color);
         }
 
+        /// <summary>Draws search toolbar with the search toolbar style.</summary>
+        /// <param name="drawToolbar">Action that draws the toolbar.</param>
+        /// <param name="toolbarHeight">Height of the toolbar.</param>
         public static void DrawWithSearchToolbarStyle(Action drawToolbar, float toolbarHeight)
         {
             EditorGUILayout.BeginHorizontal(
@@ -88,6 +114,8 @@
             EditorGUILayout.EndHorizontal();
         }
 
+        /// <summary>Shows the info message.</summary>
+        /// <param name="message">The message to output.</param>
         public static void DrawInfoMessage(string message)
         {
             var messageContent = new GUIContent(message, EditorIcons.Info);
@@ -95,6 +123,9 @@
             GUI.Label(labelPos, messageContent, InfoMessageStyle);
         }
 
+        /// <summary>Draws content and checks if it was changed.</summary>
+        /// <param name="drawContent">Action that draws the content.</param>
+        /// <returns>Whether the content was changed.</returns>
         public static bool CheckIfChanged(Action drawContent)
         {
             EditorGUI.BeginChangeCheck();
@@ -102,6 +133,13 @@
             return EditorGUI.EndChangeCheck();
         }
 
+        /// <summary>Draws a text field that is always focused.</summary>
+        /// <param name="rect">Rectangle to draw the field in.</param>
+        /// <param name="text">The text to show in the field.</param>
+        /// <param name="placeholder">Placeholder to show if the field is empty.</param>
+        /// <param name="style">Style to draw the field with.</param>
+        /// <param name="controlName">Unique control name of the field.</param>
+        /// <returns>The text that was written to the field.</returns>
         public static string FocusedTextField(Rect rect, string text, string placeholder, GUIStyle style, string controlName)
         {
             GUI.SetNextControlName(controlName);

@@ -2,8 +2,13 @@
 {
     using UnityEngine;
 
+    /// <summary>
+    /// Different useful extensions for <see cref="Rect"/>
+    /// </summary>
     public static class RectExtensions
     {
+        /// <summary>Rounds up x, y, width, and height of the rect.</summary>
+        /// <param name="rect">Rect to round coordinates for.</param>
         public static void RoundUpCoordinates(this ref Rect rect)
         {
             rect.x = Mathf.Round(rect.x);

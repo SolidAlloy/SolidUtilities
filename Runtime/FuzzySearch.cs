@@ -2,11 +2,22 @@
 {
     using System.Runtime.CompilerServices;
 
+    /// <summary>
+    /// Implementation of the fuzzy search algorithm.
+    /// </summary>
     public static class FuzzySearch
     {
         private const int BaseCharScore = 5;
         private const int ScoreForEqualChars = 2;
 
+        /// <summary>
+        /// Determines if an item should be included in the search result and outputs its score (its position in the
+        /// list of matching items.)
+        /// </summary>
+        /// <param name="searchString">Search string to compare the item to.</param>
+        /// <param name="itemName">Name of the item to include in the result list.</param>
+        /// <param name="score">Score of the item that determines how high in the result list it should be placed.</param>
+        /// <returns>Whether to include the result in the list.</returns>
         public static bool CanBeIncluded(string searchString, string itemName, out int score)
         {
             /*
