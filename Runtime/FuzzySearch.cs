@@ -18,6 +18,18 @@
         /// <param name="itemName">Name of the item to include in the result list.</param>
         /// <param name="score">Score of the item that determines how high in the result list it should be placed.</param>
         /// <returns>Whether to include the result in the list.</returns>
+        /// <example><code>
+        /// EnumerateTree()
+        /// .Where(node => node.Type != null)
+        /// .Select(node =>
+        /// {
+        ///     bool includeInSearch = FuzzySearch.CanBeIncluded(_searchString, node.FullTypeName, out int score);
+        ///     return new { score, item = node, include = includeInSearch };
+        /// })
+        /// .Where(x => x.include)
+        /// .OrderByDescending(x => x.score)
+        /// .Select(x => x.item));
+        /// </code></example>
         public static bool CanBeIncluded(string searchString, string itemName, out int score)
         {
             /*

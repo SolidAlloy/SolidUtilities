@@ -9,6 +9,7 @@
         /// <param name="texture">Texture to rotate.</param>
         /// <param name="clockwise">Whether to rotate the texture clockwise.</param>
         /// <returns>The rotated texture.</returns>
+        /// <example><code>EditorIcon TriangleDown = new EditorIcon(Database.TriangleRight.Rotate());</code></example>
         public static Texture2D Rotate(this Texture2D texture, bool clockwise = true)
         {
             var original = texture.GetPixels32();
@@ -37,6 +38,10 @@
             return rotatedTexture;
         }
 
+        /// <summary>Draws the texture in a given rect.</summary>
+        /// <param name="texture">The texture to draw.</param>
+        /// <param name="rect">Rectangle in which to draw the texture.</param>
+        /// <example><code>tintedIcon.Draw(triangleRect);</code></example>
         public static void Draw(this Texture2D texture, Rect rect) => GUI.DrawTexture(rect, texture);
     }
 }

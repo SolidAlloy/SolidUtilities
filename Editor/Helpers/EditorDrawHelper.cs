@@ -41,6 +41,13 @@
         /// <param name="scrollPos">Position of the thumb.</param>
         /// <param name="drawContent">Action that draws the content in the scroll view.</param>
         /// <returns>The new thumb position.</returns>
+        /// <example><code>
+        /// _thumbPos = EditorDrawHelper.DrawInScrollView(_thumbPos, () =>
+        /// {
+        ///     float contentHeight = EditorDrawHelper.DrawVertically(_selectionTree.Draw, _preventExpandingHeight,
+        ///         DropdownStyle.BackgroundColor);
+        /// });
+        /// </code></example>
         public static Vector2 DrawInScrollView(Vector2 scrollPos, Action drawContent)
         {
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
@@ -54,6 +61,10 @@
         /// <param name="option">Option to draw the vertical group with.</param>
         /// <param name="backgroundColor">Background of the vertical group rectangle.</param>
         /// <returns>Height of the vertical group rectangle.</returns>
+        /// <example><code>
+        /// float contentHeight = EditorDrawHelper.DrawVertically(_selectionTree.Draw, _preventExpandingHeight,
+        ///     DropdownStyle.BackgroundColor);
+        /// </code></example>
         public static float DrawVertically(Action drawContent, GUILayoutOption option, Color backgroundColor)
         {
             Rect rect = EditorGUILayout.BeginVertical(option);
@@ -66,6 +77,13 @@
         /// <summary>Draws content in the vertical direction.</summary>
         /// <param name="drawContent">Action that draws the content.</param>
         /// <returns>Rectangle of the vertical group.</returns>
+        /// <example><code>
+        /// Rect newWholeListRect = EditorDrawHelper.DrawVertically(() =>
+        /// {
+        ///     for (int index = 0; index &lt; nodes.Count; ++index)
+        ///         nodes[index].DrawSelfAndChildren(0, visibleRect);
+        /// });
+        /// </code></example>
         public static Rect DrawVertically(Action drawContent)
         {
             Rect rect = EditorGUILayout.BeginVertical();
@@ -76,6 +94,16 @@
 
         /// <summary>Draws content in the vertical direction.</summary>
         /// <param name="drawContent">Action that draws the content.</param>
+        /// <example><code>
+        /// EditorDrawHelper.DrawVertically(windowRect =>
+        /// {
+        ///     if (Event.current.type == EventType.Repaint)
+        ///         _windowRect = windowRect;
+        ///
+        ///     for (int index = 0; index &lt; nodes.Count; ++index)
+        ///         nodes[index].DrawSelfAndChildren(0, visibleRect);
+        /// });
+        /// </code></example>
         public static void DrawVertically(Action<Rect> drawContent)
         {
             Rect rect = EditorGUILayout.BeginVertical();
@@ -88,6 +116,9 @@
         /// <param name="rectHeight">Height of the rectangle.</param>
         /// <param name="color">Color of the borders.</param>
         /// <param name="borderWidth">Width of the borders.</param>
+        /// <example><code>
+        /// EditorDrawHelper.DrawBorders(position.width, position.height, DropdownStyle.BorderColor);
+        /// </code></example>
         public static void DrawBorders(float rectWidth, float rectHeight, Color color, float borderWidth = 1f)
         {
             if (Event.current.type != EventType.Repaint)
@@ -102,6 +133,9 @@
         /// <summary>Draws search toolbar with the search toolbar style.</summary>
         /// <param name="drawToolbar">Action that draws the toolbar.</param>
         /// <param name="toolbarHeight">Height of the toolbar.</param>
+        /// <example><code>
+        /// EditorDrawHelper.DrawWithSearchToolbarStyle(DrawSearchToolbar, DropdownStyle.SearchToolbarHeight);
+        /// </code></example>
         public static void DrawWithSearchToolbarStyle(Action drawToolbar, float toolbarHeight)
         {
             EditorGUILayout.BeginHorizontal(
@@ -116,6 +150,7 @@
 
         /// <summary>Shows the info message.</summary>
         /// <param name="message">The message to output.</param>
+        /// <example><code>EditorDrawHelper.DrawInfoMessage("No types to select.");</code></example>
         public static void DrawInfoMessage(string message)
         {
             var messageContent = new GUIContent(message, EditorIcons.Info);
@@ -126,6 +161,12 @@
         /// <summary>Draws content and checks if it was changed.</summary>
         /// <param name="drawContent">Action that draws the content.</param>
         /// <returns>Whether the content was changed.</returns>
+        /// <example><code>
+        /// bool changed = EditorDrawHelper.CheckIfChanged(() =>
+        /// {
+        ///     _searchString = DrawSearchField(innerToolbarArea, _searchString);
+        /// });
+        /// </code></example>
         public static bool CheckIfChanged(Action drawContent)
         {
             EditorGUI.BeginChangeCheck();
@@ -140,6 +181,10 @@
         /// <param name="style">Style to draw the field with.</param>
         /// <param name="controlName">Unique control name of the field.</param>
         /// <returns>The text that was written to the field.</returns>
+        /// <example><code>
+        /// searchText = EditorDrawHelper.FocusedTextField(searchFieldArea, searchText, "Search",
+        ///     DropdownStyle.SearchToolbarStyle, _searchFieldControlName);
+        /// </code></example>
         public static string FocusedTextField(Rect rect, string text, string placeholder, GUIStyle style, string controlName)
         {
             GUI.SetNextControlName(controlName);

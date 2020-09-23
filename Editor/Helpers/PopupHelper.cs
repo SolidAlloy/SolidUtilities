@@ -24,6 +24,14 @@
         /// <param name="indentWidth">Indent width in pixels each new subfolder has in the path.</param>
         /// <param name="flatTree">Calculate recommended width for a flat tree.</param>
         /// <returns>The recommended width a popup window should have.</returns>
+        /// <example><code>
+        /// float windowWidth = PopupHelper.CalculatePopupWidth(
+        ///     _selectionTree.SelectionPaths,
+        ///     DropdownStyle.DefaultLabelStyle,
+        ///     (int) DropdownStyle.GlobalOffset,
+        ///     (int) DropdownStyle.IndentWidth,
+        ///     false);
+        /// </code></example>
         public static int CalculatePopupWidth(IEnumerable<string> items, GUIStyle style, int globalOffsetWidth, int indentWidth, bool flatTree)
         {
             if ( ! items.Any())

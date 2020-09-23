@@ -10,6 +10,10 @@
     /// Collection of icons to use for creating custom inspectors and drawers. Icons can have different tints
     /// depending on their state: active, highlighted, etc.
     /// </summary>
+    /// <example><code>
+    /// var messageContent = new GUIContent(message, EditorIcons.Info);
+    /// EditorIcon triangleIcon = Expanded ? EditorIcons.TriangleDown : EditorIcons.TriangleRight;
+    /// </code></example>
     public static class EditorIcons
     {
         /// <summary>

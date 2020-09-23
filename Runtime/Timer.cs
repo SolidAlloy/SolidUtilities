@@ -13,6 +13,13 @@
         /// <summary>Log time in ms the action took.</summary>
         /// <param name="actionName">Name of the action which execution is measured.</param>
         /// <param name="action">Action to execute.</param>
+        /// <example><code>
+        /// LogTime("Show popup", () =>
+        /// {
+        ///     var dropdownWindow = new DropdownWindow(rect);
+        ///     dropdownWindow.ShowInPopup();
+        /// });
+        /// </code></example>
         public static void LogTime(string actionName, Action action)
         {
             var stopWatch = Stopwatch.StartNew();

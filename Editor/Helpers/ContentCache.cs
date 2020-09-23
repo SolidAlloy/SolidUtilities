@@ -16,6 +16,9 @@
         /// </summary>
         /// <param name="text">Text in GUIContent.</param>
         /// <returns>GUIContent instance containing the text.</returns>
+        /// <example><code>
+        /// GUI.Label(placeHolderArea, ContentCache.GetItem(placeholder), PlaceholderStyle);
+        /// </code></example>
         public GUIContent GetItem(string text)
         {
             if (_contentCache.TryGetValue(text, out GUIContent content))

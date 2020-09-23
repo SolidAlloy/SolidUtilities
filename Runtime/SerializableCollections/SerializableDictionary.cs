@@ -12,6 +12,12 @@
     /// <remarks>
     /// This is a fork of https://github.com/azixMcAze/Unity-SerializableDictionary. I cleaned it up and refactored a bit.
     /// </remarks>
+    /// <example><code>
+    /// public class Animals : MonoBehaviour
+    /// {
+    ///     [SerializeField] private SerializableDictionary&lt;string, Animal&gt; _animals;
+    /// }
+    /// </code></example>
     [Serializable]
     public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary,
         ISerializationCallbackReceiver, IDeserializationCallback, ISerializable
