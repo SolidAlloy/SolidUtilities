@@ -1,7 +1,7 @@
 # SolidUtilities
 Different utilities that simplify development in Unity3D. They include extensions for common Unity structures such as Rect and Texture2D, different methods that make it easier to develop custom interfaces and property drawers, etc.
 
-You can read the full documentation on the repository [Wiki](https://github.com/SolidAlloy/unity-util/wiki).
+You can read the full documentation on the repository [Wiki](https://github.com/SolidAlloy/SolidUtilities/wiki).
 
 I'm adding new utilities as I write code for other Unity3D projects and discover some common patterns/methods I use throughout the codebase.
 
