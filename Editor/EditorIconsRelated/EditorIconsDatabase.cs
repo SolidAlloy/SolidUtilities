@@ -12,11 +12,11 @@
     {
         [SerializeField, Multiline(6)] private string _description;
 
-        public Texture2D TriangleRight;
-        [SerializeField] private Material _activeDarkSkin;
-        [SerializeField] private Material _activeLightSkin;
-        [SerializeField] private Material _highlightedDarkSkin;
-        [SerializeField] private Material _highlightedLightSkin;
+        public Texture2D TriangleRight = null;
+        [SerializeField] private Material _activeDarkSkin = null;
+        [SerializeField] private Material _activeLightSkin = null;
+        [SerializeField] private Material _highlightedDarkSkin = null;
+        [SerializeField] private Material _highlightedLightSkin = null;
 
         public Material Active => DarkSkin ? _activeDarkSkin : _activeLightSkin;
         public Material Highlighted => DarkSkin ? _highlightedDarkSkin : _highlightedLightSkin;
