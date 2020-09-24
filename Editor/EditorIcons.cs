@@ -32,7 +32,7 @@
 
         private static EditorIconsDatabase GetDatabase()
         {
-            const string databaseGuid = "77b69d89a67a8ad4f80ee7ffcabd3c20";
+            const string databaseGuid = "86b4b7622f8a9fc4382b4c179f1e601a";
             string databasePath = AssetDatabase.GUIDToAssetPath(databaseGuid);
             var database = AssetDatabase.LoadAssetAtPath<EditorIconsDatabase>(databasePath);
             Assert.IsNotNull(database);
