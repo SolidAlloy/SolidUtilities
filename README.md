@@ -17,6 +17,7 @@ I'm adding new utilities as I write code for other Unity3D projects and discover
 Once you have the OpenUpm cli, run the following command:
 
 ```openupm install com.solidalloy.type.references```
+
 Or if you don't have it, add the scoped registry to manifest.json with the desired dependency semantic version: 
 
 ```
