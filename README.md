@@ -1,4 +1,6 @@
 # SolidUtilities
+[![openupm](https://img.shields.io/npm/v/com.solidalloy.util?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.solidalloy.util/)
+
 Different utilities that simplify development in Unity3D. They include extensions for common Unity structures such as Rect and Texture2D, different methods that make it easier to develop custom interfaces and property drawers, etc.
 
 You can read the full documentation on the repository [Wiki](https://github.com/SolidAlloy/SolidUtilities/wiki).
@@ -8,6 +10,43 @@ I'm adding new utilities as I write code for other Unity3D projects and discover
 #### Projects that use SolidUtilities:
 
 - [ClassTypeReference-for-Unity](https://github.com/SolidAlloy/ClassTypeReference-for-Unity)
+
+  
+
+## Install with OpenUPM
+Once you have the OpenUpm cli, run the following command:
+
+```openupm install com.solidalloy.type.references```
+Or if you don't have it, add the scoped registry to manifest.json with the desired dependency semantic version: 
+
+```
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.solidalloy.util",
+        "com.openupm"
+      ]
+    }
+  ],
+  "dependencies": {
+    "com.solidalloy.util": "1.0.0""
+  },
+
+```
+
+
+
+## Install via Git URL
+
+Project supports Unity Package Manager. To install the project as a Git package do the following:
+
+1. In Unity, open **Window** -> **Package Manager**.
+2. Press the **+** button, choose "**Add package from git URL...**"
+3. Enter "https://github.com/SolidAlloy/SolidUtilities.git" and press **Add**.
+
+
 
 # The most useful utilities
 
