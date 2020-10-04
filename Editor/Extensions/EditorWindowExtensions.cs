@@ -1,5 +1,6 @@
 ﻿namespace SolidUtilities.Editor.Extensions
 {
+    using System;
     using UnityEditor;
     using UnityEngine;
 
@@ -8,8 +9,11 @@
     {
         /// <summary>Resizes the window to the needed size.</summary>
         /// <param name="window">The window to change the size of.</param>
-        /// <param name="width">The width to set. If the value is 0f, the width will not be changed.</param>
-        /// <param name="height">The height to set. If the value is 0f, the height will not be changed.</param>
+        /// <param name="width">The width to set. If the value is -1f, the width will not be changed.</param>
+        /// <param name="height">The height to set. If the value is -1f, the height will not be changed.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if width or height are negative numbers and not -1f.
+        /// </exception>
         /// <example><code>
         /// public class DummyWindow : EditorWindow
         /// {
@@ -27,10 +31,13 @@
         ///     }
         /// }
         /// </code></example>
-        public static void Resize(this EditorWindow window, float width = 0f, float height = 0f)
+        public static void Resize(this EditorWindow window, float width = -1f, float height = -1f)
         {
-            bool changeWidth = width != 0f;
-            bool changeHeight = height != 0f;
+            EnsureTheValueIsNotNegative(nameof(width), width);
+            EnsureTheValueIsNotNegative(nameof(height), height);
+
+            bool changeWidth = width != -1f;
+            bool changeHeight = height != -1f;
 
             Rect positionToAdjust = window.position;
 
@@ -59,6 +66,12 @@
             }
 
             window.position = positionToAdjust;
+        }
+
+        private static void EnsureTheValueIsNotNegative(string valueName, float value)
+        {
+            if (value < 0f && value != -1f)
+                throw new ArgumentOutOfRangeException(valueName, value, "The value can only be positive or -1f.");
         }
     }
 }
