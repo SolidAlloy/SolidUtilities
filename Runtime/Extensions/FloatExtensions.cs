@@ -7,13 +7,11 @@
     /// </summary>
     public static class FloatExtensions
     {
-        /// <summary>
-        /// Determines if the numbers are equal with a certain tolerance.
-        /// </summary>
+        /// <summary>Determines if the numbers are equal with a certain tolerance.</summary>
         /// <param name="firstNum">First number.</param>
         /// <param name="secondNum">Second number.</param>
         /// <param name="tolerance">Tolerance by which to determine if the numbers are equal. Default is 0.01f.</param>
-        /// <returns>Whether numbers are equal with tolerance.</returns>
+        /// <returns>Whether the numbers are equal with tolerance.</returns>
         /// <example><code>
         /// if (contentHeight.ApproximatelyEquals(position.height))
         ///    return true;
@@ -22,5 +20,17 @@
         {
             return Math.Abs(firstNum - secondNum) < tolerance;
         }
+
+        /// <summary>Determines if the number are not equal with a certain tolerance.</summary>
+        /// <param name="firstNum">First number.</param>
+        /// <param name="secondNum">Second number.</param>
+        /// <param name="tolerance">Tolerance by which to determine if the numbers are equal. Default is 0.01f.</param>
+        /// <returns>Whether the numbers are not equal with tolerance.</returns>
+        /// <example><code>
+        /// if (_optimalWidth.DoesNotEqualApproximately(position.width))
+        ///     this.Resize(_optimalWidth);
+        /// </code></example>
+        public static bool DoesNotEqualApproximately(this float firstNum, float secondNum, float tolerance = 0.01f) =>
+            !firstNum.ApproximatelyEquals(secondNum, tolerance);
     }
 }
