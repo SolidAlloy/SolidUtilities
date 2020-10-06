@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.2.1...1.3.0) (2020-10-06)
+
+
+### Features
+
+* Added a measure unit choice for Timer.LogTime() ([7d61f96](https://github.com/SolidAlloy/SolidUtilities/commit/7d61f96ca8beafce856cb64f2a571f7f7af69217))
+
 ## [1.2.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.2.0...1.2.1) (2020-10-04)
 
 
