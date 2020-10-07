@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.3.0...1.4.0) (2020-10-07)
+
+
+### Features
+
+* Added AssetCreator, a wrapper of ProjectWindowUtil.CreateAsset() ([7335615](https://github.com/SolidAlloy/SolidUtilities/commit/7335615a015550833e03311a879f70ef1707f813))
+
 # [1.3.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.2.1...1.3.0) (2020-10-06)
 
 
