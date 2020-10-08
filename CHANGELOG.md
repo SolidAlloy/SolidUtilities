@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.4.0...1.5.0) (2020-10-08)
+
+
+### Features
+
+* Added EditorWindow.MoveOutOfScreen and AssetDatabaseHelper.MakeSureFolderExists ([d5ff96e](https://github.com/SolidAlloy/SolidUtilities/commit/d5ff96e88bd75171c7efddf6c3bd8c5e708484fb))
+
 # [1.4.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.3.0...1.4.0) (2020-10-07)
 
 
