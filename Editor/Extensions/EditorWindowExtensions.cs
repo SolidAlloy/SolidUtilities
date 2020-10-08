@@ -68,6 +68,13 @@
             window.position = positionToAdjust;
         }
 
+        /// <summary>Moves the window out of screen to hide but not close it.</summary>
+        /// <param name="window">The window to hide.</param>
+        public static void MoveOutOfScreen(this EditorWindow window)
+        {
+            window.position = new Rect(Screen.currentResolution.width + 10f, Screen.currentResolution.height + 10f, 0f, 0f);
+        }
+
         private static void EnsureTheValueIsNotNegative(string valueName, float value)
         {
             if (value < 0f && value != -1f)

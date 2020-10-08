@@ -45,7 +45,7 @@
 
             _calledOnGuiOnce = true;
             ProjectWindowUtil.CreateAsset(_asset, _assetName);
-            position = new Rect(Screen.currentResolution.width + 10f, Screen.currentResolution.height + 10f, 0f, 0f);
+            this.MoveOutOfScreen();
         }
 
         private void OnDestroy()
