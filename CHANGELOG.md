@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.5.0...1.6.0) (2020-10-10)
+
+
+### Features
+
+* Added MakeSureIsGenericTypeDefinition Type extension method. ([2bc1f86](https://github.com/SolidAlloy/SolidUtilities/commit/2bc1f8669a1a9c3867cf123ee282ec9fd73f3a79))
+
 # [1.5.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.4.0...1.5.0) (2020-10-08)
 
 
