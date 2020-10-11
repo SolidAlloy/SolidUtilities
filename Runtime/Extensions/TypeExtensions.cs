@@ -117,23 +117,5 @@
 
             return baseType.IsAssignableFrom(typeToCheck) || subClassOfRawGeneric;
         }
-
-        /// <summary>Makes the type a generic type definition if it is not.</summary>
-        /// <param name="typeToCheck">The type to check.</param>
-        /// <returns>A type that was made GenericTypeDefinition if it was not before.</returns>
-        /// <example><code>
-        /// void UseGenericType(Type genericType)
-        /// {
-        ///     genericType = genericType.MakeSureIsGenericTypeDefinition();
-        ///     // Use genericType
-        /// }
-        ///
-        /// UseGenericType(typeof(GenericClass&lt;>)); // is the right way to use the method
-        /// UseGenericType(typeof(GenericClass&lt;int>)); // but this works too now
-        /// </code></example>
-        public static Type MakeSureIsGenericTypeDefinition(this Type typeToCheck)
-        {
-            return typeToCheck.IsGenericTypeDefinition ? typeToCheck : typeToCheck.GetGenericTypeDefinition();
-        }
     }
 }
