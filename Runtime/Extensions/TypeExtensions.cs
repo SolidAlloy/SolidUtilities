@@ -9,6 +9,22 @@
     /// <summary>Different useful extensions for <see cref="System.Type"/>.</summary>
     public static class TypeExtensions
     {
+        private static readonly HashSet<Type> UnitySerializablePrimitiveTypes = new HashSet<Type>
+        {
+            typeof(bool), typeof(byte), typeof(sbyte), typeof(char), typeof(double), typeof(float), typeof(int),
+            typeof(uint), typeof(long), typeof(ulong), typeof(short), typeof(ushort), typeof(string)
+        };
+
+        private static readonly HashSet<Type> UnitySerializableBuiltinTypes = new HashSet<Type>
+        {
+            typeof(Vector2), typeof(Vector3), typeof(Vector4), typeof(Rect), typeof(Quaternion), typeof(Matrix4x4),
+            typeof(Color), typeof(Color32), typeof(LayerMask), typeof(AnimationCurve), typeof(Gradient),
+            typeof(RectOffset), typeof(GUIStyle)
+        };
+
+        private static readonly HashSet<Type> SerializableExceptions =
+            new HashSet<Type> { typeof(object), typeof(decimal) };
+
         /// <summary>Finds a field recursively in the fields of a class.</summary>
         /// <param name="parentType">The class type to start the search from.</param>
         /// <param name="path">The path to a field, separated by dot.</param>
@@ -116,6 +132,26 @@
                 subClassOfRawGeneric = typeToCheck.IsSubclassOfRawGeneric(baseType);
 
             return baseType.IsAssignableFrom(typeToCheck) || subClassOfRawGeneric;
+        }
+
+        /// <summary>Checks if the type is serializable by Unity.</summary>
+        /// <param name="type">The type to check.</param>
+        /// <returns><see langword="true"/> if the type can be serialized by Unity.</returns>
+        public static bool IsUnitySerializable(this Type type)
+        {
+            if (type.IsAbstract) // static classes and interfaces are considered abstract too.
+                return false;
+
+            if (type.IsSerializable && !SerializableExceptions.Contains(type) && type.GetSerializedFields().Any())
+                return true;
+
+            if (type.InheritsFrom(typeof(UnityEngine.Object)) && ! type.IsGenericTypeDefinition)
+                return true;
+
+            if (type.IsEnum)
+                return true;
+
+            return UnitySerializablePrimitiveTypes.Contains(type) || UnitySerializableBuiltinTypes.Contains(type);
         }
     }
 }
