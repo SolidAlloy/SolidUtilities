@@ -1,3 +1,15 @@
+# [1.7.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.6.0...1.7.0) (2020-10-12)
+
+
+### Bug Fixes
+
+* Corrected the IsUnitySerializable method so that it doesn't include serializable classes from the System namespace ([fa83be9](https://github.com/SolidAlloy/SolidUtilities/commit/fa83be955ca93dfc2cadfe0fc58b3ea54f1bf062))
+
+
+### Features
+
+* Added TypeExtensions.IsUnitySerializable method ([70e1443](https://github.com/SolidAlloy/SolidUtilities/commit/70e14436c8a4dcae714e0954e27d8af5008babc2))
+
 # [1.6.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.5.0...1.6.0) (2020-10-10)
 
 
