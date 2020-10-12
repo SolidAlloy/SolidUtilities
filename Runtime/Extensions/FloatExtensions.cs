@@ -1,6 +1,7 @@
 ﻿namespace SolidUtilities.Extensions
 {
     using System;
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Different useful extensions for <see cref="float"/>.
@@ -16,7 +17,7 @@
         /// if (contentHeight.ApproximatelyEquals(position.height))
         ///    return true;
         /// </code></example>
-        public static bool ApproximatelyEquals(this float firstNum, float secondNum, float tolerance = 0.01f)
+        [PublicAPI] public static bool ApproximatelyEquals(this float firstNum, float secondNum, float tolerance = 0.01f)
         {
             return Math.Abs(firstNum - secondNum) < tolerance;
         }
@@ -30,7 +31,7 @@
         /// if (_optimalWidth.DoesNotEqualApproximately(position.width))
         ///     this.Resize(_optimalWidth);
         /// </code></example>
-        public static bool DoesNotEqualApproximately(this float firstNum, float secondNum, float tolerance = 0.01f) =>
+        [PublicAPI] public static bool DoesNotEqualApproximately(this float firstNum, float secondNum, float tolerance = 0.01f) =>
             !firstNum.ApproximatelyEquals(secondNum, tolerance);
     }
 }

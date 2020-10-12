@@ -2,6 +2,7 @@
 {
     using System;
     using System.Reflection;
+    using JetBrains.Annotations;
     using UnityEditor;
     using UnityEngine;
 
@@ -22,7 +23,7 @@
         ///
         /// fieldDrawer.OnGUI(typeRefArea, _property, _label);
         /// </code></example>
-        public static void SetAttribute(this PropertyDrawer drawer, PropertyAttribute attribute)
+        [PublicAPI] public static void SetAttribute(this PropertyDrawer drawer, PropertyAttribute attribute)
         {
             var attributeField = typeof(PropertyDrawer).GetField("m_Attribute", BindingFlags.NonPublic | BindingFlags.Instance)
                                  ?? throw new NullReferenceException("m_Attribute field was not found in PropertyDrawer class.");
@@ -41,7 +42,7 @@
         /// fieldDrawer.SetFieldInfo(field);
         /// fieldDrawer.OnGUI(typeRefArea, _property, _label);
         /// </code></example>
-        public static void SetFieldInfo(this PropertyDrawer drawer, FieldInfo fieldInfo)
+        [PublicAPI] public static void SetFieldInfo(this PropertyDrawer drawer, FieldInfo fieldInfo)
         {
             var fieldInfoField = typeof(PropertyDrawer).GetField("m_FieldInfo", BindingFlags.NonPublic | BindingFlags.Instance)
                                  ?? throw new NullReferenceException("m_FieldInfo field was not found in PropertyDrawer class.");

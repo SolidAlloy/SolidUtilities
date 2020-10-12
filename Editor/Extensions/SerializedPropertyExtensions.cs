@@ -1,5 +1,6 @@
 ﻿namespace SolidUtilities.Editor.Extensions
 {
+    using JetBrains.Annotations;
     using UnityEditor;
 
     /// <summary>Different useful extensions for <see cref="SerializedProperty"/>.</summary>
@@ -11,7 +12,7 @@
         /// </summary>
         /// <param name="property">The property to check.</param>
         /// <returns>Whether the property is built-in.</returns>
-        public static bool IsBuiltIn(this SerializedProperty property)
+        [PublicAPI] public static bool IsBuiltIn(this SerializedProperty property)
         {
             if (property.name == "size" || property.name == "Array")
                 return true;

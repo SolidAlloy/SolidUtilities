@@ -3,6 +3,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using JetBrains.Annotations;
     using UnityEditor;
 
     /// <summary>
@@ -16,7 +17,7 @@
     ///     Draw(field);
     /// }
     /// </code></example>
-    public class ChildProperties : IEnumerator<SerializedProperty>, IEnumerable<SerializedProperty>
+    [PublicAPI] public class ChildProperties : IEnumerator<SerializedProperty>, IEnumerable<SerializedProperty>
     {
         private readonly SerializedObject _parentObject;
         private readonly bool _enterChildren;

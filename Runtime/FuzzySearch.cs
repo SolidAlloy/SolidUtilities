@@ -1,6 +1,7 @@
 ﻿namespace SolidUtilities
 {
     using System.Runtime.CompilerServices;
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Implementation of the fuzzy search algorithm.
@@ -30,7 +31,7 @@
         /// .OrderByDescending(x => x.score)
         /// .Select(x => x.item));
         /// </code></example>
-        public static bool CanBeIncluded(string searchString, string itemName, out int score)
+        [PublicAPI] public static bool CanBeIncluded(string searchString, string itemName, out int score)
         {
             /*
              * The score for one char starts from 5. For each char in item name that matches the corresponding char in

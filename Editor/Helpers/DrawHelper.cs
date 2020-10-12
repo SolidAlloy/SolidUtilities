@@ -1,6 +1,7 @@
 ﻿namespace SolidUtilities.Editor.Helpers
 {
     using System;
+    using JetBrains.Annotations;
     using UnityEngine;
 
     /// <summary>Different useful methods that simplify <see cref="GUILayout"/> API.</summary>
@@ -21,7 +22,7 @@
         ///         DrawHamburgerMenuButton();
         /// });
         /// </code></example>
-        public static void DrawHorizontally(Action drawContent)
+        [PublicAPI] public static void DrawHorizontally(Action drawContent)
         {
             GUILayout.BeginHorizontal();
             drawContent();
@@ -36,7 +37,7 @@
         ///     EditorDrawHelper.DrawInfoMessage("No types to select.");
         /// });
         /// </code></example>
-        public static void DrawVertically(Action drawContent)
+        [PublicAPI] public static void DrawVertically(Action drawContent)
         {
             GUILayout.BeginVertical();
             drawContent();
@@ -52,7 +53,7 @@
         ///     EditorDrawHelper.DrawInfoMessage("No types to select.");
         /// });
         /// </code></example>
-        public static void DrawVertically(GUIStyle style, Action drawContent)
+        [PublicAPI] public static void DrawVertically(GUIStyle style, Action drawContent)
         {
             GUILayout.BeginVertical(style);
             drawContent();
@@ -69,7 +70,7 @@
         ///     GUI.FocusControl(null);
         /// }
         /// </code></example>
-        public static bool CloseButton(Rect buttonRect)
+        [PublicAPI] public static bool CloseButton(Rect buttonRect)
         {
             // This is a known problem that the button does not align to center horizontally for some reason.
             // I tried alignment = TextAnchor.MiddleCenter, setting padding and margin to different values,
@@ -88,6 +89,6 @@
         ///     GUILayout.Height(toolbarHeight),
         ///     DrawHelper.ExpandWidth(false));
         /// </code></example>
-        public static GUILayoutOption ExpandWidth(bool expand) => expand ? ExpandWidthTrue : ExpandWidthFalse;
+        [PublicAPI] public static GUILayoutOption ExpandWidth(bool expand) => expand ? ExpandWidthTrue : ExpandWidthFalse;
     }
 }

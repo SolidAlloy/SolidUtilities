@@ -1,5 +1,6 @@
 ﻿namespace SolidUtilities.Extensions
 {
+    using JetBrains.Annotations;
     using UnityEngine;
 
     /// <summary>Different useful extensions for <see cref="Texture2D"/>.</summary>
@@ -10,7 +11,7 @@
         /// <param name="clockwise">Whether to rotate the texture clockwise.</param>
         /// <returns>The rotated texture.</returns>
         /// <example><code>EditorIcon TriangleDown = new EditorIcon(Database.TriangleRight.Rotate());</code></example>
-        public static Texture2D Rotate(this Texture2D texture, bool clockwise = true)
+        [PublicAPI] public static Texture2D Rotate(this Texture2D texture, bool clockwise = true)
         {
             var original = texture.GetPixels32();
             var rotated = new Color32[original.Length];
@@ -42,6 +43,6 @@
         /// <param name="texture">The texture to draw.</param>
         /// <param name="rect">Rectangle in which to draw the texture.</param>
         /// <example><code>tintedIcon.Draw(triangleRect);</code></example>
-        public static void Draw(this Texture2D texture, Rect rect) => GUI.DrawTexture(rect, texture);
+        [PublicAPI] public static void Draw(this Texture2D texture, Rect rect) => GUI.DrawTexture(rect, texture);
     }
 }

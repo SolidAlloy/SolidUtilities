@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using JetBrains.Annotations;
     using UnityEditor;
 
     /// <summary>Various methods that simplify <see cref="AssetDatabase"/> usage.</summary>
@@ -21,7 +22,7 @@
         /// File.WriteAllText(fullAssetPath, template);
         /// AssetDatabase.Refresh();
         /// </code></example>
-        public static void MakeSureFolderExists(string folderPath)
+        [PublicAPI] public static void MakeSureFolderExists(string folderPath)
         {
             if (folderPath.Contains("."))
             {

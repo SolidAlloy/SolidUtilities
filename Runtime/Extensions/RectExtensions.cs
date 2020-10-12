@@ -1,5 +1,6 @@
 ﻿namespace SolidUtilities.Extensions
 {
+    using JetBrains.Annotations;
     using UnityEngine;
 
     /// <summary>
@@ -10,7 +11,7 @@
         /// <summary>Rounds up x, y, width, and height of the rect.</summary>
         /// <param name="rect">Rect to round coordinates for.</param>
         /// <example><code>popupArea.RoundUpCoordinates();</code></example>
-        public static void RoundUpCoordinates(this ref Rect rect)
+        [PublicAPI] public static void RoundUpCoordinates(this ref Rect rect)
         {
             rect.x = Mathf.Round(rect.x);
             rect.y = Mathf.Round(rect.y);
@@ -31,7 +32,7 @@
         /// <example><code>
         /// (Rect searchFieldArea, Rect buttonArea) = innerToolbarArea.CutVertically(DropdownStyle.IconSize, true);
         /// </code></example>
-        public static (Rect leftRect, Rect rightRect) CutVertically(this Rect originalRect, float cutDistance,
+        [PublicAPI] public static (Rect leftRect, Rect rightRect) CutVertically(this Rect originalRect, float cutDistance,
             bool fromRightBorder = false)
         {
             Rect leftRect, rightRect;
@@ -61,7 +62,7 @@
         /// <param name="rightPadding">Width of the right padding in pixels.</param>
         /// <returns>The smaller rect that appeared after creating paddings.</returns>
         /// <example><code>Rect innerToolbarArea = outerToolbarArea.AddHorizontalPadding(10f, 2f);</code></example>
-        public static Rect AddHorizontalPadding(this Rect rect, float leftPadding, float rightPadding)
+        [PublicAPI] public static Rect AddHorizontalPadding(this Rect rect, float leftPadding, float rightPadding)
         {
             rect.xMin += leftPadding;
             rect.width -= rightPadding;
@@ -77,7 +78,7 @@
         /// <example><code>
         /// Rect innerToolbarArea = outerToolbarArea.AlignMiddleVertically(DropdownStyle.LabelHeight);
         /// </code></example>
-        public static Rect AlignMiddleVertically(this Rect rect, float height)
+        [PublicAPI] public static Rect AlignMiddleVertically(this Rect rect, float height)
         {
             rect.y = rect.y + rect.height * 0.5f - height * 0.5f;
             rect.height = height;

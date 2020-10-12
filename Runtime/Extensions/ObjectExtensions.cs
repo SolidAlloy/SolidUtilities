@@ -1,6 +1,7 @@
 ﻿namespace SolidUtilities.Extensions
 {
     using System;
+    using JetBrains.Annotations;
 
     /// <summary> Different useful extensions for <see cref="object"/>.</summary>
     internal static class ObjectExtensions
@@ -12,7 +13,7 @@
         /// <param name="obj">The object to cast.</param>
         /// <typeparam name="T">The type to cast to.</typeparam>
         /// <returns>The cast object of type <typeparamref name="T"/> or default instance.</returns>
-        public static T CastOrDefault<T>(this object obj)
+        [PublicAPI] public static T CastOrDefault<T>(this object obj)
         {
             try
             {

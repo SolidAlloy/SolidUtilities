@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics;
+    using JetBrains.Annotations;
     using Debug = UnityEngine.Debug;
 
     public enum TimeUnit { Milliseconds, Nanoseconds }
@@ -25,7 +26,7 @@
         ///     dropdownWindow.ShowInPopup();
         /// });
         /// </code></example>
-        public static void LogTime(string actionName, TimeUnit timeUnit, Action action)
+        [PublicAPI] public static void LogTime(string actionName, TimeUnit timeUnit, Action action)
         {
             var stopWatch = Stopwatch.StartNew();
             action();

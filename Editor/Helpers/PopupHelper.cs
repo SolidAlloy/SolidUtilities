@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using JetBrains.Annotations;
     using UnityEngine;
 
     /// <summary>Helps to draw a popup window.</summary>
@@ -32,6 +33,7 @@
         ///     (int) DropdownStyle.IndentWidth,
         ///     false);
         /// </code></example>
+        [PublicAPI]
         public static int CalculatePopupWidth(IEnumerable<string> items, GUIStyle style, int globalOffsetWidth, int indentWidth, bool flatTree)
         {
             if ( ! items.Any())

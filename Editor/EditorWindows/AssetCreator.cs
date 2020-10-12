@@ -1,6 +1,7 @@
 ﻿namespace SolidUtilities.Editor.EditorWindows
 {
     using Extensions;
+    using JetBrains.Annotations;
     using UnityEditor;
     using UnityEngine;
 
@@ -8,7 +9,7 @@
     /// ProjectWindowUtil.CreateAsset() works well only when called inside OnGUI(). This is an editor window created
     /// solely for the purpose of invoking ProjectWindowUtil.CreateAsset() inside OnGUI().
     /// </summary>
-    public class AssetCreator : EditorWindow
+    [PublicAPI] public class AssetCreator : EditorWindow
     {
         private Object _asset;
         private string _assetName;

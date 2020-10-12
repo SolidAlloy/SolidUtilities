@@ -1,6 +1,7 @@
 ﻿namespace SolidUtilities.Editor.Extensions
 {
     using System;
+    using JetBrains.Annotations;
     using UnityEditor;
     using UnityEngine;
 
@@ -31,7 +32,7 @@
         ///     }
         /// }
         /// </code></example>
-        public static void Resize(this EditorWindow window, float width = -1f, float height = -1f)
+        [PublicAPI] public static void Resize(this EditorWindow window, float width = -1f, float height = -1f)
         {
             EnsureTheValueIsNotNegative(nameof(width), width);
             EnsureTheValueIsNotNegative(nameof(height), height);
@@ -70,7 +71,7 @@
 
         /// <summary>Moves the window out of screen to hide but not close it.</summary>
         /// <param name="window">The window to hide.</param>
-        public static void MoveOutOfScreen(this EditorWindow window)
+        [PublicAPI] public static void MoveOutOfScreen(this EditorWindow window)
         {
             window.position = new Rect(Screen.currentResolution.width + 10f, Screen.currentResolution.height + 10f, 0f, 0f);
         }

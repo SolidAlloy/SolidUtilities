@@ -1,6 +1,7 @@
 ﻿namespace SolidUtilities.Editor.Helpers
 {
     using System;
+    using JetBrains.Annotations;
     using UnityEngine;
 
     /// <summary>Helps to create new textures.</summary>
@@ -17,7 +18,7 @@
         ///     Graphics.Blit(Default, temporary, material);
         /// });
         /// </code></example>
-        public static void WithSRGBWrite(Action createTexture)
+        [PublicAPI] public static void WithSRGBWrite(Action createTexture)
         {
             bool previousValue = GL.sRGBWrite;
             GL.sRGBWrite = true;
@@ -39,6 +40,7 @@
         ///     Graphics.Blit(icon, temporary, material);
         /// });
         /// </code></example>
+        [PublicAPI]
         public static void WithTemporaryActiveTexture(int width, int height, int depthBuffer, Action<RenderTexture> useTexture)
         {
             WithTemporaryTexture(width, height, depthBuffer, temporary =>
@@ -63,6 +65,7 @@
         ///     Graphics.Blit(icon, temporary, material);
         /// });
         /// </code></example>
+        [PublicAPI]
         public static void WithTemporaryTexture(int width, int height, int depthBuffer, Action<RenderTexture> useTexture)
         {
             RenderTexture temporary = RenderTexture.GetTemporary(width, height, depthBuffer);
