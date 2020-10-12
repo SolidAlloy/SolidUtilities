@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using JetBrains.Annotations;
     using UnityEngine;
 
     /// <summary>Different useful extensions for <see cref="System.Type"/>.</summary>
@@ -22,9 +23,6 @@
             typeof(RectOffset), typeof(GUIStyle)
         };
 
-        private static readonly HashSet<Type> SerializableExceptions =
-            new HashSet<Type> { typeof(object), typeof(decimal) };
-
         /// <summary>Finds a field recursively in the fields of a class.</summary>
         /// <param name="parentType">The class type to start the search from.</param>
         /// <param name="path">The path to a field, separated by dot.</param>
@@ -33,7 +31,7 @@
         /// FieldInfo nestedField = targetType.GetFieldAtPath("parentField.nestedField");
         /// Debug.Log((string)nestedField.GetValue(obj));
         /// </code></example>
-        public static FieldInfo GetFieldAtPath(this Type parentType, string path)
+        [PublicAPI] public static FieldInfo GetFieldAtPath(this Type parentType, string path)
         {
             FieldInfo field = null;
             const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
@@ -65,7 +63,7 @@
         ///     field.SetValue(serializedObject, newValue);
         /// }
         /// </code></example>
-        public static IEnumerable<FieldInfo> GetSerializedFields(this Type type)
+        [PublicAPI] public static IEnumerable<FieldInfo> GetSerializedFields(this Type type)
         {
             const BindingFlags instanceFilter = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
             var instanceFields = type.GetFields(instanceFilter);
@@ -75,7 +73,7 @@
         /// <summary>Checks whether the type is nullable.</summary>
         /// <param name="type">The type to check.</param>
         /// <returns>True if the type is nullable.</returns>
-        public static bool IsNullable(this Type type)
+        [PublicAPI] public static bool IsNullable(this Type type)
         {
             return ! type.IsValueType || Nullable.GetUnderlyingType(type) != null;
         }
@@ -94,7 +92,7 @@
         /// bool intIsSubclass = typeof(IntDerivative).IsSubclassOfRawGeneric(typeof(Base&lt;>)); // true
         /// bool stringIsSubclass = typeof(StringDerivative).IsSubclassOfRawGeneric(typeof(Base&lt;>)); // true
         /// </code></example>
-        public static bool IsSubclassOfRawGeneric(this Type typeToCheck, Type generic)
+        [PublicAPI] public static bool IsSubclassOfRawGeneric(this Type typeToCheck, Type generic)
         {
             while (typeToCheck != null && typeToCheck != typeof(object))
             {
@@ -125,7 +123,7 @@
         /// bool isAssignableWithoutTypeParam = typeof(typeof(Base&lt;>)).IsAssignableFrom(IntDerivative); // false
         /// bool inherits = typeof(IntDerivative).Inherits(typeof(Base&lt;>)); // true
         /// </code></example>
-        public static bool InheritsFrom(this Type typeToCheck, Type baseType)
+        [PublicAPI] public static bool InheritsFrom(this Type typeToCheck, Type baseType)
         {
             bool subClassOfRawGeneric = false;
             if (baseType.IsGenericType)
@@ -137,12 +135,18 @@
         /// <summary>Checks if the type is serializable by Unity.</summary>
         /// <param name="type">The type to check.</param>
         /// <returns><see langword="true"/> if the type can be serialized by Unity.</returns>
-        public static bool IsUnitySerializable(this Type type)
+        [PublicAPI] public static bool IsUnitySerializable(this Type type)
         {
+            static bool IsSystemType(Type type) => type.Namespace != null && type.Namespace.StartsWith("System");
+
+            static bool IsCustomSerializableType(Type type) =>
+                type.IsSerializable && type.GetSerializedFields().Any() &&
+                !IsSystemType(type);
+
             if (type.IsAbstract) // static classes and interfaces are considered abstract too.
                 return false;
 
-            if (type.IsSerializable && !SerializableExceptions.Contains(type) && type.GetSerializedFields().Any())
+            if (IsCustomSerializableType(type))
                 return true;
 
             if (type.InheritsFrom(typeof(UnityEngine.Object)) && ! type.IsGenericTypeDefinition)
