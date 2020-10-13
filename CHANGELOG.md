@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.7.0...1.7.1) (2020-10-13)
+
+
+### Bug Fixes
+
+* Removed static modifiers from local methods for C[#7](https://github.com/SolidAlloy/SolidUtilities/issues/7) compatibility ([35a1496](https://github.com/SolidAlloy/SolidUtilities/commit/35a1496be8ea0923572d66a1699df33bd65dcab6))
+
 # [1.7.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.6.0...1.7.0) (2020-10-12)
 
 
