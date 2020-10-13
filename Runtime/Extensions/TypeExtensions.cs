@@ -137,11 +137,11 @@
         /// <returns><see langword="true"/> if the type can be serialized by Unity.</returns>
         [PublicAPI] public static bool IsUnitySerializable(this Type type)
         {
-            static bool IsSystemType(Type type) => type.Namespace != null && type.Namespace.StartsWith("System");
+            bool IsSystemType(Type typeToCheck) => typeToCheck.Namespace != null && typeToCheck.Namespace.StartsWith("System");
 
-            static bool IsCustomSerializableType(Type type) =>
-                type.IsSerializable && type.GetSerializedFields().Any() &&
-                !IsSystemType(type);
+            bool IsCustomSerializableType(Type typeToCheck) =>
+                typeToCheck.IsSerializable && typeToCheck.GetSerializedFields().Any() &&
+                !IsSystemType(typeToCheck);
 
             if (type.IsAbstract) // static classes and interfaces are considered abstract too.
                 return false;
