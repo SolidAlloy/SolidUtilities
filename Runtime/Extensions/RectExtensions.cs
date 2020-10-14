@@ -3,9 +3,7 @@
     using JetBrains.Annotations;
     using UnityEngine;
 
-    /// <summary>
-    /// Different useful extensions for <see cref="Rect"/>
-    /// </summary>
+    /// <summary>Different useful extensions for <see cref="Rect"/>.</summary>
     public static class RectExtensions
     {
         /// <summary>Rounds up x, y, width, and height of the rect.</summary>
