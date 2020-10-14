@@ -1,9 +1,13 @@
 ﻿namespace SolidUtilities.Editor.Extensions
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
     using JetBrains.Annotations;
     using UnityEditor;
     using UnityEngine;
+    using Object = UnityEngine.Object;
 
     /// <summary>Different useful extensions for <see cref="EditorWindow"/>.</summary>
     public static class EditorWindowExtensions
@@ -73,7 +77,26 @@
         /// <param name="window">The window to hide.</param>
         [PublicAPI] public static void MoveOutOfScreen(this EditorWindow window)
         {
-            window.position = new Rect(Screen.currentResolution.width + 10f, Screen.currentResolution.height + 10f, 0f, 0f);
+            window.position = new Rect(
+                Screen.currentResolution.width + 10f,
+                Screen.currentResolution.height + 10f,
+                0f, 0f);
+        }
+
+        /// <summary>
+        /// Centers the window in the main Unity window. This is not the same as centering a window on screen,
+        /// because the Unity window may not be maximized.
+        /// </summary>
+        /// <param name="window">The window to center.</param>
+        [PublicAPI] public static void CenterOnMainWin(this EditorWindow window)
+        {
+            Rect main = EditorGUIUtility.GetMainWindowPosition();
+            Rect pos = window.position;
+            float centerWidth = (main.width - pos.width) * 0.5f;
+            float centerHeight = (main.height - pos.height) * 0.5f;
+            pos.x = main.x + centerWidth;
+            pos.y = main.y + centerHeight;
+            window.position = pos;
         }
 
         private static void EnsureTheValueIsNotNegative(string valueName, float value)
