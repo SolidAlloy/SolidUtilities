@@ -1,3 +1,16 @@
+# [1.8.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.7.1...1.8.0) (2020-10-15)
+
+
+### Bug Fixes
+
+* Added handling of different rect sizes for Vector2.Center() ([3084c57](https://github.com/SolidAlloy/SolidUtilities/commit/3084c57ccd0d91ac4765cc9483d50ecd4ecc4aa2))
+
+
+### Features
+
+* Added EditorWindow.CenterOnMainWin method ([3c94dad](https://github.com/SolidAlloy/SolidUtilities/commit/3c94dad795b18431375f7757c880b66beeb24b0a))
+* Added Vector2.Center(Rect outerRect) method ([0d23827](https://github.com/SolidAlloy/SolidUtilities/commit/0d238273e512c28e447ae68f544d38691a50a18c))
+
 ## [1.7.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.7.0...1.7.1) (2020-10-13)
 
 
