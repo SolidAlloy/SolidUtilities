@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.8.0...1.8.1) (2020-10-18)
+
+
+### Bug Fixes
+
+* AssetCreator no longer exists rename mode as soon as the asset is created ([406f910](https://github.com/SolidAlloy/SolidUtilities/commit/406f910a30aa45fade385501fd1743ff409e6971))
+
 # [1.8.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.7.1...1.8.0) (2020-10-15)
 
 
