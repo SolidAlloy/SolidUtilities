@@ -3,7 +3,7 @@
     using Extensions;
     using JetBrains.Annotations;
     using UnityEditor;
-    using UnityEngine;
+    using Object = UnityEngine.Object;
 
     /// <summary>
     /// ProjectWindowUtil.CreateAsset() works well only when called inside OnGUI(). This is an editor window created
@@ -14,6 +14,7 @@
         private Object _asset;
         private string _assetName;
         private bool _calledOnGuiOnce;
+        private bool _receivedOnProjectChangeOnce;
 
         /// <summary>
         /// Creates an instance of AssetCreator and invokes ProjectWindowUtil.CreateAsset() inside of its OnGUI().
@@ -32,11 +33,23 @@
             _assetName = assetName;
             this.Resize(1f, 1f);
 
-            EditorApplication.projectChanged += Close;
             EditorApplication.quitting += Close;
 
             Show();
             Focus();
+        }
+
+        private void OnProjectChange()
+        {
+            // The first time OnProjectChange is called is when the asset is created and interactive renaming is initiated.
+            // The second time - is when the asset was renamed.
+            if ( ! _receivedOnProjectChangeOnce)
+            {
+                _receivedOnProjectChangeOnce = true;
+                return;
+            }
+
+            Close();
         }
 
         private void OnGUI()
@@ -51,7 +64,6 @@
 
         private void OnDestroy()
         {
-            EditorApplication.projectChanged -= Close;
             EditorApplication.quitting -= Close;
         }
     }
