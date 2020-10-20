@@ -157,5 +157,15 @@
 
             return UnitySerializablePrimitiveTypes.Contains(type) || UnitySerializableBuiltinTypes.Contains(type);
         }
+
+        /// <summary>Checks whether the type has no fields, methods, and other members.</summary>
+        /// <param name="type">The type to check.</param>
+        /// <returns><see langword="true"/> if the type is empty.</returns>
+        [PublicAPI]
+        public static bool IsEmpty(this Type type)
+        {
+            // One found member is the default constructor.
+            return type.GetMembers((BindingFlags) (-1)).Length == 1;
+        }
     }
 }
