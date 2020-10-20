@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.9.0...1.10.0) (2020-10-20)
+
+
+### Features
+
+* Added Type.IsEmpty method ([d9d3978](https://github.com/SolidAlloy/SolidUtilities/commit/d9d3978b7578a162d1a2f98d66c0423c17c6bd13))
+
 # [1.9.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.8.1...1.9.0) (2020-10-20)
 
 
