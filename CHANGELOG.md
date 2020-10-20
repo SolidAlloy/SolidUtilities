@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.8.1...1.9.0) (2020-10-20)
+
+
+### Features
+
+* Added two new extension methods: MonoScript.GetClassType and MonoScript.GetNamespaceName ([c55fc09](https://github.com/SolidAlloy/SolidUtilities/commit/c55fc093bff35868a37e13ebb4844306994c79d9))
+
 ## [1.8.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.8.0...1.8.1) (2020-10-18)
 
 
