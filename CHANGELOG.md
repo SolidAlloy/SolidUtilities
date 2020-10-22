@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.10.0...1.11.0) (2020-10-22)
+
+
+### Features
+
+* Added the string.IsValidPath method ([63cef87](https://github.com/SolidAlloy/SolidUtilities/commit/63cef873e6029e08c012816fcffd4e2c559d49fe))
+
 # [1.10.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.9.0...1.10.0) (2020-10-20)
 
 
