@@ -1,11 +1,34 @@
 ﻿namespace SolidUtilities.Extensions
 {
-    using System.Collections;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
     using System.Text.RegularExpressions;
+    using JetBrains.Annotations;
 
-    public static class IdentifierExtensions
+    /// <summary>Different useful extensions for <see cref="string"/>.</summary>
+    public static class StringExtensions
     {
-        // definition of a valid C# identifier: http://msdn.microsoft.com/en-us/library/aa664670(v=vs.71).aspx
+        #region IsValidPath
+
+        private static readonly HashSet<char> InvalidFilenameChars = new HashSet<char>(Path.GetInvalidFileNameChars());
+
+        /// <summary>Checks if the path is a valid Unity path.</summary>
+        /// <param name="path">The path to check.</param>
+        /// <returns><c>true</c> if the path is a valid Unity path.</returns>
+        [PublicAPI] public static bool IsValidPath(this string path)
+        {
+            return path
+                .Split('/')
+                .All(filename => ! filename.Any(
+                    character => InvalidFilenameChars.Contains(character)));
+        }
+
+        #endregion
+
+        #region IsValidIdentifier
+
+                // definition of a valid C# identifier: http://msdn.microsoft.com/en-us/library/aa664670(v=vs.71).aspx
         private const string FormattingCharacter = @"\p{Cf}";
         private const string ConnectingCharacter = @"\p{Pc}";
         private const string DecimalDigitCharacter = @"\p{Nd}";
@@ -51,6 +74,9 @@
 
         private static readonly Regex ValidIdentifierRegex = new Regex("^" + IdentifierOrKeyword + "$", RegexOptions.Compiled);
 
+        /// <summary>Checks whether a string is a valid identifier (class name, namespace name, etc.)</summary>
+        /// <param name="identifier">The string to check.</param>
+        /// <returns><see langword="true"/> if the string is a valid identifier.</returns>
         public static bool IsValidIdentifier(this string identifier)
         {
             if (string.IsNullOrWhiteSpace(identifier))
@@ -58,12 +84,14 @@
 
             string normalizedIdentifier = identifier.Normalize();
 
-            // 1. check that the identifier match the valid identifier regex and it's not a C# keyword
-            if (ValidIdentifierRegex.IsMatch(normalizedIdentifier) && ! ((IList) Keywords).Contains(normalizedIdentifier))
+            // 1. check that the identifier matches the valid identifier regex and it's not a C# keyword
+            if (ValidIdentifierRegex.IsMatch(normalizedIdentifier) && ! Keywords.Contains(normalizedIdentifier))
                 return true;
 
             // 2. check if the identifier starts with @
             return normalizedIdentifier.StartsWith("@") && ValidIdentifierRegex.IsMatch(normalizedIdentifier.Substring(1));
         }
+
+        #endregion
     }
 }
