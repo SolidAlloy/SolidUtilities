@@ -28,7 +28,7 @@
 
         #region IsValidIdentifier
 
-                // definition of a valid C# identifier: http://msdn.microsoft.com/en-us/library/aa664670(v=vs.71).aspx
+        // definition of a valid C# identifier: https://www.programiz.com/csharp-programming/keywords-identifiers
         private const string FormattingCharacter = @"\p{Cf}";
         private const string ConnectingCharacter = @"\p{Pc}";
         private const string DecimalDigitCharacter = @"\p{Nd}";
@@ -78,6 +78,14 @@
         /// <param name="identifier">The string to check.</param>
         /// <returns><see langword="true"/> if the string is a valid identifier.</returns>
         public static bool IsValidIdentifier(this string identifier)
+        {
+            return identifier.Contains('.')
+                ? identifier.Split('.').All(IsValidIdentifierInternal)
+                : IsValidIdentifierInternal(identifier);
+        }
+
+        // This is the pure IsValidIdentifier method that does not accept dot-separated identifiers.
+        private static bool IsValidIdentifierInternal(string identifier)
         {
             if (string.IsNullOrWhiteSpace(identifier))
                 return false;

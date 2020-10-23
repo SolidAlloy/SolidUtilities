@@ -1,6 +1,5 @@
 ﻿namespace SolidUtilities.Editor.Helpers
 {
-    using System;
     using System.Linq;
     using JetBrains.Annotations;
     using UnityEditor;
@@ -15,7 +14,6 @@
         /// <param name="folderPath">
         /// The path to a folder. The parent folder of the path is considered the Assets folder.
         /// </param>
-        /// <exception cref="ArgumentException">If the path contains a file.</exception>
         /// <example><code>
         /// string fullAssetPath = $"{Application.dataPath}/Scripts/GenericScriptableObjects/Generic_{className}.cs";
         /// AssetDatabaseHelper.MakeSureFolderExists("Scripts/GenericScriptableObjects");
@@ -24,12 +22,6 @@
         /// </code></example>
         [PublicAPI] public static void MakeSureFolderExists(string folderPath)
         {
-            if (folderPath.Contains("."))
-            {
-                throw new ArgumentException($"The path {folderPath} contains a file. The method can only " +
-                                            "create folders, files are not allowed.");
-            }
-
             folderPath = folderPath.Trim('/');
             var folders = folderPath.Split('/');
 
