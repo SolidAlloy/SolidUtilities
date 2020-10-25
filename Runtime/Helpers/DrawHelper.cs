@@ -90,5 +90,16 @@
         ///     DrawHelper.ExpandWidth(false));
         /// </code></example>
         [PublicAPI] public static GUILayoutOption ExpandWidth(bool expand) => expand ? ExpandWidthTrue : ExpandWidthFalse;
+
+        /// <summary>Draws content with disabled GUI so that it cannot be edited.</summary>
+        /// <param name="drawContent">The action to draw content.</param>
+        [PublicAPI]
+        public static void WithDisabledGUI(Action drawContent)
+        {
+            bool prevValue = GUI.enabled;
+            GUI.enabled = false;
+            drawContent();
+            GUI.enabled = prevValue;
+        }
     }
 }
