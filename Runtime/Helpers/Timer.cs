@@ -1,4 +1,4 @@
-﻿namespace SolidUtilities
+﻿namespace SolidUtilities.Helpers
 {
     using System;
     using System.Diagnostics;
