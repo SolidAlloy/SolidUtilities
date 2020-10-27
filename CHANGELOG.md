@@ -1,3 +1,18 @@
+# [1.12.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.11.0...1.12.0) (2020-10-27)
+
+
+### Bug Fixes
+
+* resolved the issue with absent EditorGUIUtility.GetMainWindowPosition on older Unity versions ([d47fc21](https://github.com/SolidAlloy/SolidUtilities/commit/d47fc21b03a6ec5523237b5da54e3566660d9772))
+
+
+### Features
+
+* Added Hash.SHA1 method ([f7fb534](https://github.com/SolidAlloy/SolidUtilities/commit/f7fb534c197d1bb283258463498a348fd9847b7d))
+* Added PackageSearcher.FindPackageByName method ([d028c84](https://github.com/SolidAlloy/SolidUtilities/commit/d028c84c537df1243518f5732abb91a2ce265887))
+* Added the DrawHelper.WidthDisabledGUI method ([58e72c2](https://github.com/SolidAlloy/SolidUtilities/commit/58e72c21a8bd2847717043708329b990a325e75b))
+* Added the ReadOnly attribute ([7b5f46d](https://github.com/SolidAlloy/SolidUtilities/commit/7b5f46d26208696d7e55bb0c68c39536ad5eb4ea))
+
 # [1.11.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.10.0...1.11.0) (2020-10-22)
 
 
