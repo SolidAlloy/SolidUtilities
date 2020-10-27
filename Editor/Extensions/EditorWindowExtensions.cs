@@ -90,7 +90,12 @@
         /// <param name="window">The window to center.</param>
         [PublicAPI] public static void CenterOnMainWin(this EditorWindow window)
         {
+#if UNITY_2020_1_OR_NEWER
             Rect main = EditorGUIUtility.GetMainWindowPosition();
+#else
+            Rect main = GetEditorMainWindowPos();
+#endif
+
             Rect pos = window.position;
             float centerWidth = (main.width - pos.width) * 0.5f;
             float centerHeight = (main.height - pos.height) * 0.5f;
@@ -103,6 +108,47 @@
         {
             if (value < 0f && value != -1f)
                 throw new ArgumentOutOfRangeException(valueName, value, "The value can only be positive or -1f.");
+        }
+
+        private static IEnumerable<Type> GetAllDerivedTypes(this AppDomain appDomain, Type parentType)
+        {
+            return from assembly in appDomain.GetAssemblies()
+                from assemblyType in assembly.GetTypes()
+                where assemblyType.IsSubclassOf(parentType)
+                select assemblyType;
+        }
+
+        private static Rect GetEditorMainWindowPos()
+        {
+            const int mainWindowIndex = 4;
+            const string showModeName = "m_ShowMode";
+            const string positionName = "position";
+            const string containerWindowName = "ContainerWindow";
+
+            Type containerWinType = AppDomain.CurrentDomain
+                .GetAllDerivedTypes(typeof(ScriptableObject))
+                .FirstOrDefault(type => type.Name == containerWindowName);
+
+            if (containerWinType == null)
+                throw new MissingMemberException($"Can't find internal type {containerWindowName}. Maybe something has changed inside Unity.");
+
+            FieldInfo showModeField = containerWinType.GetField(showModeName, BindingFlags.NonPublic | BindingFlags.Instance);
+            PropertyInfo positionProperty = containerWinType.GetProperty(positionName, BindingFlags.Public | BindingFlags.Instance);
+
+            if (showModeField == null || positionProperty == null)
+                throw new MissingFieldException($"Can't find internal fields '{showModeName}' or '{positionName}'. Maybe something has changed inside Unity.");
+
+            var windows = Resources.FindObjectsOfTypeAll(containerWinType);
+
+            foreach (Object win in windows)
+            {
+                if ((int) showModeField.GetValue(win) != mainWindowIndex)
+                    continue;
+
+                return (Rect)positionProperty.GetValue(win, null);
+            }
+
+            throw new NotSupportedException("Can't find internal main window. Maybe something has changed inside Unity");
         }
     }
 }
