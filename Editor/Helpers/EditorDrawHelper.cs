@@ -7,13 +7,14 @@
     using UnityEngine;
 
     /// <summary>Different useful methods that simplify <see cref="EditorGUILayout"/> API.</summary>
+    [PublicAPI]
     public static class EditorDrawHelper
     {
         /// <summary>
         /// Cache that creates <see cref="GUIContent"/> instances and keeps them, reducing the garbage
         /// collection overhead.
         /// </summary>
-        [PublicAPI] public static readonly ContentCache ContentCache = new ContentCache();
+        public static readonly ContentCache ContentCache = new ContentCache();
 
         private const float PlaceholderIndent = 14f;
 
@@ -50,7 +51,7 @@
         ///         DropdownStyle.BackgroundColor);
         /// });
         /// </code></example>
-        [PublicAPI] public static Vector2 DrawInScrollView(Vector2 scrollPos, Action drawContent)
+        public static Vector2 DrawInScrollView(Vector2 scrollPos, Action drawContent)
         {
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
             drawContent();
@@ -67,7 +68,7 @@
         /// float contentHeight = EditorDrawHelper.DrawVertically(_selectionTree.Draw, _preventExpandingHeight,
         ///     DropdownStyle.BackgroundColor);
         /// </code></example>
-        [PublicAPI] public static float DrawVertically(Action drawContent, GUILayoutOption option, Color backgroundColor)
+        public static float DrawVertically(Action drawContent, GUILayoutOption option, Color backgroundColor)
         {
             Rect rect = EditorGUILayout.BeginVertical(option);
             EditorGUI.DrawRect(rect, backgroundColor);
@@ -86,7 +87,7 @@
         ///         nodes[index].DrawSelfAndChildren(0, visibleRect);
         /// });
         /// </code></example>
-        [PublicAPI] public static Rect DrawVertically(Action drawContent)
+        public static Rect DrawVertically(Action drawContent)
         {
             Rect rect = EditorGUILayout.BeginVertical();
             drawContent();
@@ -106,7 +107,7 @@
         ///         nodes[index].DrawSelfAndChildren(0, visibleRect);
         /// });
         /// </code></example>
-        [PublicAPI] public static void DrawVertically(Action<Rect> drawContent)
+        public static void DrawVertically(Action<Rect> drawContent)
         {
             Rect rect = EditorGUILayout.BeginVertical();
             drawContent(rect);
@@ -121,7 +122,7 @@
         /// <example><code>
         /// EditorDrawHelper.DrawBorders(position.width, position.height, DropdownStyle.BorderColor);
         /// </code></example>
-        [PublicAPI] public static void DrawBorders(float rectWidth, float rectHeight, Color color, float borderWidth = 1f)
+        public static void DrawBorders(float rectWidth, float rectHeight, Color color, float borderWidth = 1f)
         {
             if (Event.current.type != EventType.Repaint)
                 return;
@@ -138,7 +139,7 @@
         /// <example><code>
         /// EditorDrawHelper.DrawWithSearchToolbarStyle(DrawSearchToolbar, DropdownStyle.SearchToolbarHeight);
         /// </code></example>
-        [PublicAPI] public static void DrawWithSearchToolbarStyle(Action drawToolbar, float toolbarHeight)
+        public static void DrawWithSearchToolbarStyle(Action drawToolbar, float toolbarHeight)
         {
             EditorGUILayout.BeginHorizontal(
                 SearchToolbarStyle,
@@ -153,7 +154,7 @@
         /// <summary>Shows the info message.</summary>
         /// <param name="message">The message to output.</param>
         /// <example><code>EditorDrawHelper.DrawInfoMessage("No types to select.");</code></example>
-        [PublicAPI] public static void DrawInfoMessage(string message)
+        public static void DrawInfoMessage(string message)
         {
             var messageContent = new GUIContent(message, EditorIcons.Info);
             Rect labelPos = EditorGUI.IndentedRect(GUILayoutUtility.GetRect(messageContent, InfoMessageStyle));
@@ -169,7 +170,7 @@
         ///     _searchString = DrawSearchField(innerToolbarArea, _searchString);
         /// });
         /// </code></example>
-        [PublicAPI] public static bool CheckIfChanged(Action drawContent)
+        public static bool CheckIfChanged(Action drawContent)
         {
             EditorGUI.BeginChangeCheck();
             drawContent();
@@ -187,7 +188,6 @@
         /// searchText = EditorDrawHelper.FocusedTextField(searchFieldArea, searchText, "Search",
         ///     DropdownStyle.SearchToolbarStyle, _searchFieldControlName);
         /// </code></example>
-        [PublicAPI]
         public static string FocusedTextField(Rect rect, string text, string placeholder, GUIStyle style, string controlName)
         {
             GUI.SetNextControlName(controlName);
@@ -216,12 +216,27 @@
         ///     _serializedTypeRef.TypeNameHasMultipleDifferentValues,
         ///     DrawTypeSelectionControl);
         /// </code></example>
-        [PublicAPI] public static void WhileShowingMixedValue(bool showMixedValue, Action drawAction)
+        public static void WhileShowingMixedValue(bool showMixedValue, Action drawAction)
         {
             bool valueToRestore = EditorGUI.showMixedValue;
             EditorGUI.showMixedValue = showMixedValue;
             drawAction();
             EditorGUI.showMixedValue = valueToRestore;
+        }
+
+        /// <summary>
+        /// Draw content in a property wrapper, useful for making regular GUI controls work with SerializedProperty.
+        /// </summary>
+        /// <param name="position">Rectangle on the screen to use for the control, including label if applicable.</param>
+        /// <param name="label">Optional label in front of the slider. Use null to use the name from the
+        /// SerializedProperty. Use GUIContent.none to not display a label.</param>
+        /// <param name="property">The SerializedProperty to use for the control.</param>
+        /// <param name="drawContent">The action to draw content for the property.</param>
+        public static void InPropertyWrapper(Rect position, GUIContent label, SerializedProperty property, Action drawContent)
+        {
+            EditorGUI.BeginProperty(position, label, property);
+            drawContent();
+            EditorGUI.EndProperty();
         }
     }
 }
