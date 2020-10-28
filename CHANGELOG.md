@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.12.0...1.13.0) (2020-10-28)
+
+
+### Features
+
+* Added SerializedProperty.GetObjectType and EditorDrawHelper.InPropertyWrapper methods ([6d031f7](https://github.com/SolidAlloy/SolidUtilities/commit/6d031f78406b1cb4d6fa4f7ae284444bbbab207d))
+
 # [1.12.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.11.0...1.12.0) (2020-10-27)
 
 
