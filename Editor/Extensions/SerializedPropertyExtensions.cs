@@ -33,9 +33,42 @@
         {
             const BindingFlags instanceFieldFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
             Type parentType = property.serializedObject.targetObject.GetType();
-            FieldInfo propertyField = parentType.GetField(property.propertyPath, instanceFieldFlags);
-            Assert.IsNotNull(propertyField);
-            return propertyField.FieldType;
+
+            const string arraySuffix = ".Array.data";
+            string fieldName = property.propertyPath;
+
+            if (fieldName.Contains(arraySuffix))
+            {
+                int suffixIndex = fieldName.IndexOf(arraySuffix, StringComparison.Ordinal);
+                fieldName = fieldName.Substring(0, suffixIndex);
+                FieldInfo propertyField = parentType.GetField(fieldName, instanceFieldFlags);
+                Assert.IsNotNull(propertyField);
+                Type collectionType = propertyField.FieldType;
+                Type realType;
+
+                if (collectionType.IsGenericType && collectionType.GetGenericArguments().Length == 1)
+                {
+                    realType = collectionType.GetGenericArguments()[0];
+                }
+                else if (collectionType.IsArray)
+                {
+                    realType = collectionType.GetElementType();
+                }
+                else
+                {
+                    throw new ArgumentException("The method does not know how to handle this collection type. " +
+                                                "Please contact the author of the plugin to discuss how it can be implemented.");
+                }
+
+                Assert.IsNotNull(realType);
+                return realType;
+            }
+            else
+            {
+                FieldInfo propertyField = parentType.GetField(fieldName, instanceFieldFlags);
+                Assert.IsNotNull(propertyField);
+                return propertyField.FieldType;
+            }
         }
     }
 }
