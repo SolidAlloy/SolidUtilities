@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.13.0...1.14.0) (2020-10-29)
+
+
+### Features
+
+* Made SerializedProperty.GetObjectType work with the collection fields ([d81529b](https://github.com/SolidAlloy/SolidUtilities/commit/d81529b5fab3cc551962e972a0463785e2eb102f))
+
 # [1.13.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.12.0...1.13.0) (2020-10-28)
 
 
