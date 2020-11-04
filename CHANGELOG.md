@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.14.0...1.15.0) (2020-11-04)
+
+
+### Features
+
+* Added IEnumerable.ToHashSet() method ([3422287](https://github.com/SolidAlloy/SolidUtilities/commit/34222872a9cbdf862bc6babf255b33acb6c12109))
+
 # [1.14.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.13.0...1.14.0) (2020-10-29)
 
 
