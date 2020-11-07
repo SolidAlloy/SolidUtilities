@@ -3,6 +3,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using Extensions;
     using JetBrains.Annotations;
     using UnityEditor;
 
@@ -21,20 +22,22 @@
     {
         private readonly SerializedObject _parentObject;
         private readonly bool _enterChildren;
+        private readonly bool _excludeBuiltInProperties;
         private SerializedProperty _currentProp;
-        private bool _endPropertyNotReached = true;
-        private bool _startedIteration;
+        private bool _nextPropertyExists;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChildProperties"/> class.
         /// </summary>
         /// <param name="parentObject">The parent serialized object which child properties you want to inspect.</param>
-        /// <param name="enterChildren">Whether to iterate through child properties recursively.</param>
-        public ChildProperties(SerializedObject parentObject, bool enterChildren)
+        /// <param name="enterChildren">Whether to iterate through child properties recursively. <c>false</c> by default.</param>
+        /// <param name="excludeBuiltInProperties">Whether to exclude built-in properties from the iteration. <c>true</c> by default.</param>
+        public ChildProperties(SerializedObject parentObject, bool enterChildren = false, bool excludeBuiltInProperties = true)
         {
             _parentObject = parentObject;
             _enterChildren = enterChildren;
-            MoveToFirstProp();
+            _excludeBuiltInProperties = excludeBuiltInProperties;
+            Reset();
         }
 
         SerializedProperty IEnumerator<SerializedProperty>.Current => _currentProp;
@@ -42,40 +45,30 @@
 
         bool IEnumerator.MoveNext()
         {
-            if ( ! _startedIteration)
-                _endPropertyNotReached = MoveToFirstProp();
-
-            if ( ! _endPropertyNotReached)
+            if ( ! _nextPropertyExists)
                 return false;
 
-            _endPropertyNotReached = _currentProp.Next(_enterChildren);
-            return _endPropertyNotReached;
+            _nextPropertyExists = _currentProp.Next(_enterChildren);
+
+            if (_excludeBuiltInProperties)
+            {
+                while (_nextPropertyExists && _currentProp.IsBuiltIn())
+                    _nextPropertyExists = _currentProp.Next(_enterChildren);
+            }
+
+            return _nextPropertyExists;
         }
 
-        void IEnumerator.Reset()
+        public void Reset()
         {
-            MoveToFirstProp();
-            _startedIteration = false;
-            _endPropertyNotReached = false;
+            _currentProp = _parentObject.GetIterator();
+            _nextPropertyExists = _currentProp.Next(true);
         }
 
         void IDisposable.Dispose() { }
 
-        IEnumerator<SerializedProperty> IEnumerable<SerializedProperty>.GetEnumerator()
-        {
-            return this;
-        }
+        IEnumerator<SerializedProperty> IEnumerable<SerializedProperty>.GetEnumerator() => this;
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this;
-        }
-
-        private bool MoveToFirstProp()
-        {
-            _currentProp = _parentObject.GetIterator();
-            _startedIteration = true;
-            return _currentProp.Next(true);
-        }
+        IEnumerator IEnumerable.GetEnumerator() => this;
     }
 }
