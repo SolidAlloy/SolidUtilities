@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.17.0...1.17.1) (2020-11-08)
+
+
+### Bug Fixes
+
+* Replaced triangle_right_16.png to avoid errors for some users ([a78106a](https://github.com/SolidAlloy/SolidUtilities/commit/a78106a6a18d87510922400e19877cc5d1881415))
+
 # [1.17.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.16.0...1.17.0) (2020-11-08)
 
 
