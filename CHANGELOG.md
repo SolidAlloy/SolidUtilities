@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.16.0...1.17.0) (2020-11-08)
+
+
+### Features
+
+* Made ChildProperties iterate over visible properies only by default ([b25f81a](https://github.com/SolidAlloy/SolidUtilities/commit/b25f81a3ac0d6d108d0bc533f456ff23f8f9639c))
+
 # [1.16.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.15.0...1.16.0) (2020-11-07)
 
 
