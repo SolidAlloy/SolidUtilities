@@ -238,5 +238,19 @@
             drawContent();
             EditorGUI.EndProperty();
         }
+
+        /// <summary>
+        /// Draws content with the specified indent level.
+        /// </summary>
+        /// <param name="indentLevel">The indent level to set while drawing content.</param>
+        /// <param name="drawContent">The action that draws content.</param>
+        [PublicAPI]
+        public static void DrawWithIndentLevel(int indentLevel, Action drawContent)
+        {
+            int previousIndentLevel = EditorGUI.indentLevel;
+            EditorGUI.indentLevel = 0;
+            drawContent();
+            EditorGUI.indentLevel = previousIndentLevel;
+        }
     }
 }
