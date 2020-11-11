@@ -248,7 +248,7 @@
         public static void DrawWithIndentLevel(int indentLevel, Action drawContent)
         {
             int previousIndentLevel = EditorGUI.indentLevel;
-            EditorGUI.indentLevel = 0;
+            EditorGUI.indentLevel = indentLevel;
             drawContent();
             EditorGUI.indentLevel = previousIndentLevel;
         }
