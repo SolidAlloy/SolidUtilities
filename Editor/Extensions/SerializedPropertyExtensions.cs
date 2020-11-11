@@ -4,6 +4,7 @@
     using System.Reflection;
     using JetBrains.Annotations;
     using NUnit.Framework;
+    using SolidUtilities.Extensions;
     using UnityEditor;
 
     /// <summary>Different useful extensions for <see cref="SerializedProperty"/>.</summary>
@@ -65,7 +66,7 @@
             }
             else
             {
-                FieldInfo propertyField = parentType.GetField(fieldName, instanceFieldFlags);
+                FieldInfo propertyField = parentType.GetFieldAtPath(fieldName, instanceFieldFlags);
                 Assert.IsNotNull(propertyField);
                 return propertyField.FieldType;
             }

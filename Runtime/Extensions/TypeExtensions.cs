@@ -26,15 +26,17 @@
         /// <summary>Finds a field recursively in the fields of a class.</summary>
         /// <param name="parentType">The class type to start the search from.</param>
         /// <param name="path">The path to a field, separated by dot.</param>
+        /// <param name="flags">Custom flags to search the field.</param>
         /// <returns>Field info if the field is found, and null if not.</returns>
         /// <example><code>
         /// FieldInfo nestedField = targetType.GetFieldAtPath("parentField.nestedField");
         /// Debug.Log((string)nestedField.GetValue(obj));
         /// </code></example>
-        [PublicAPI] public static FieldInfo GetFieldAtPath(this Type parentType, string path)
+        [PublicAPI]
+        public static FieldInfo GetFieldAtPath(this Type parentType, string path,
+            BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static)
         {
             FieldInfo field = null;
-            const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 
             foreach (string part in path.Split('.'))
             {
