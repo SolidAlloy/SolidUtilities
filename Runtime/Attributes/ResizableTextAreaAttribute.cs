@@ -1,10 +1,11 @@
 ﻿namespace SolidUtilities.Attributes
 {
     using System;
-    using JetBrains.Annotations;
     using UnityEngine;
 
+    /// <summary>
+    /// Draws text in a wide field with lines wrap and auto-adjusting height.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
-    [BaseTypeRequired(typeof(string))]
     public class ResizableTextAreaAttribute : PropertyAttribute { }
 }
