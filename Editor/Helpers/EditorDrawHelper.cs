@@ -264,5 +264,24 @@
         {
             return (T) Editor.CreateEditor(targetObject, typeof(T));
         }
+
+        /// <summary>
+        /// Returns the same value as <see cref="Screen.currentResolution.width"/> if one screen is used. Returns the
+        /// sum of two screens' widths when two monitors are used and Unity is located on the second screen. It will
+        /// only return the incorrect value when Unity is located on the second screen and is not fullscreen.
+        /// </summary>
+        /// <returns>
+        /// Screen width if one monitor is used, or sum of screen widths if multiple monitors are used.
+        /// </returns>
+        /// <remarks>
+        /// <see cref="Display.displays"/> always returns 1 in Editor, so there is no way to check the resolution of
+        /// both monitors. This method uses a workaround but it does not work correctly when Unity is on the second
+        /// screen and is not fullscreen. Any help to overcome this issue will be appreciated.
+        /// </remarks>
+        [PublicAPI, Pure]
+        public static float GetScreenWidth()
+        {
+            return Mathf.Max(EditorGUIUtility.GetMainWindowPosition().xMax, Screen.currentResolution.width);
+        }
     }
 }
