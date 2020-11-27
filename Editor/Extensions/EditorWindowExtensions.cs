@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using Helpers;
     using JetBrains.Annotations;
     using UnityEditor;
     using UnityEngine;
@@ -57,17 +58,18 @@
 
             if (changeWidth)
             {
-                float screenWidth = Screen.currentResolution.width;
+                float screenWidth = EditorDrawHelper.GetScreenWidth();
                 if (positionToAdjust.xMax >= screenWidth)
                     positionToAdjust.x -= positionToAdjust.xMax - screenWidth;
             }
 
             if (changeHeight)
             {
-                const float windowTitleBarHeight = 40f;
-                float screenHeight = Screen.currentResolution.height - windowTitleBarHeight;
-                if (positionToAdjust.yMax >= screenHeight)
-                    positionToAdjust.y -= positionToAdjust.yMax - screenHeight;
+                // MainWindow is more reliable than Screen.currentResolution.height, especially for the multi-display setup.
+                float mainWinYMax = EditorGUIUtility.GetMainWindowPosition().yMax;
+
+                if (positionToAdjust.yMax >= mainWinYMax)
+                    positionToAdjust.y -= positionToAdjust.yMax - mainWinYMax;
             }
 
             window.position = positionToAdjust;
@@ -118,6 +120,7 @@
                 select assemblyType;
         }
 
+        [UsedImplicitly]
         private static Rect GetEditorMainWindowPos()
         {
             const int mainWindowIndex = 4;
