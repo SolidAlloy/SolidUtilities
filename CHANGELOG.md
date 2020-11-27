@@ -1,3 +1,20 @@
+# [1.18.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.17.1...1.18.0) (2020-11-27)
+
+
+### Bug Fixes
+
+* Made SerializedProperty.GetObjectType work with custom serializable classes ([f385e1e](https://github.com/SolidAlloy/SolidUtilities/commit/f385e1eb0917aed59daa6ccfc831df23ef2f33ff))
+* Started using a more reliable method to check if EditorWindow is overflowing the screen ([e23abce](https://github.com/SolidAlloy/SolidUtilities/commit/e23abcec0559975907781fd6bcab97895642bb3d))
+* Started using correct indent level in DrawWithIndentLevel() ([9b43825](https://github.com/SolidAlloy/SolidUtilities/commit/9b438257c5da6c914c2a6ef7e7c57b1d5a16c475))
+
+
+### Features
+
+* Added new EditorDrawHelper.DrawWithIndentLevel() method ([cad369c](https://github.com/SolidAlloy/SolidUtilities/commit/cad369c1b2a4964b93eb88f135d0a4591eb46e6a))
+* Added ResizableTextArea attribute ([23664a5](https://github.com/SolidAlloy/SolidUtilities/commit/23664a5382d6990ccc5c99aa7d9fa4ca9f455b1e))
+* Added the CreateEditor<T>() method ([94b4c02](https://github.com/SolidAlloy/SolidUtilities/commit/94b4c02eb8a21627a77fa1687e659aef2b74d67f))
+* Added the GetScreenWidth method to calculate the sum of screen widths if multiple displays are used. ([1c3243b](https://github.com/SolidAlloy/SolidUtilities/commit/1c3243b3c79cc4987b31477caaab147260e7b6fc))
+
 ## [1.17.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.17.0...1.17.1) (2020-11-08)
 
 
