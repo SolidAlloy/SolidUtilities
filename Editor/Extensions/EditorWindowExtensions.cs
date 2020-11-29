@@ -3,12 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
     using Helpers;
     using JetBrains.Annotations;
     using UnityEditor;
     using UnityEngine;
+
+#if UNITY_2020_1_OR_NEWER
+    using System.Reflection;
     using Object = UnityEngine.Object;
+#endif
 
     /// <summary>Different useful extensions for <see cref="EditorWindow"/>.</summary>
     public static class EditorWindowExtensions
@@ -66,7 +69,7 @@
             if (changeHeight)
             {
                 // MainWindow is more reliable than Screen.currentResolution.height, especially for the multi-display setup.
-                float mainWinYMax = EditorGUIUtility.GetMainWindowPosition().yMax;
+                float mainWinYMax = GetMainWindowPosition().yMax;
 
                 if (positionToAdjust.yMax >= mainWinYMax)
                     positionToAdjust.y -= positionToAdjust.yMax - mainWinYMax;
@@ -92,11 +95,7 @@
         /// <param name="window">The window to center.</param>
         [PublicAPI] public static void CenterOnMainWin(this EditorWindow window)
         {
-#if UNITY_2020_1_OR_NEWER
-            Rect main = EditorGUIUtility.GetMainWindowPosition();
-#else
-            Rect main = GetEditorMainWindowPos();
-#endif
+            Rect main = GetMainWindowPosition();
 
             Rect pos = window.position;
             float centerWidth = (main.width - pos.width) * 0.5f;
@@ -112,6 +111,7 @@
                 throw new ArgumentOutOfRangeException(valueName, value, "The value can only be positive or -1f.");
         }
 
+        [UsedImplicitly]
         private static IEnumerable<Type> GetAllDerivedTypes(this AppDomain appDomain, Type parentType)
         {
             return from assembly in appDomain.GetAssemblies()
@@ -120,9 +120,20 @@
                 select assemblyType;
         }
 
-        [UsedImplicitly]
-        private static Rect GetEditorMainWindowPos()
+        /// <summary>
+        /// Returns the rectangle of the main Unity window.
+        /// </summary>
+        /// <returns>Rectangle of the main Unity window.</returns>
+        /// <remarks>
+        /// For Unity 2020.1 and above, this is just a wrapper of <see cref="EditorGUIUtility.GetMainWindowPosition"/>,
+        /// but below 2020.1 this is a separate solution.
+        /// </remarks>
+        [PublicAPI, Pure]
+        private static Rect GetMainWindowPosition()
         {
+#if UNITY_2020_1_OR_NEWER
+            return EditorGUIUtility.GetMainWindowPosition();
+#else
             const int mainWindowIndex = 4;
             const string showModeName = "m_ShowMode";
             const string positionName = "position";
@@ -152,6 +163,7 @@
             }
 
             throw new NotSupportedException("Can't find internal main window. Maybe something has changed inside Unity");
+#endif
         }
     }
 }
