@@ -63,25 +63,16 @@
             {
                 float screenWidth = EditorDrawHelper.GetScreenWidth();
                 if (positionToAdjust.xMax >= screenWidth)
-                {
                     positionToAdjust.x -= positionToAdjust.xMax - screenWidth;
-                    Debug.Log($"previous pos.x: {window.position.x}, new pos.x: {positionToAdjust.x}");
-                }
             }
 
             if (changeHeight)
             {
-                Debug.Log($"previous height: {window.position.height}, new height: {height}");
-
                 // MainWindow is more reliable than Screen.currentResolution.height, especially for the multi-display setup.
                 float mainWinYMax = GetMainWindowPosition().yMax;
 
                 if (positionToAdjust.yMax >= mainWinYMax)
-                {
                     positionToAdjust.y -= positionToAdjust.yMax - mainWinYMax;
-                    Debug.Log($"previous pos.y: {window.position.y}, new pos.y: {positionToAdjust.y}");
-                }
-
             }
 
             window.position = positionToAdjust;
