@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.18.0...1.18.1) (2020-11-29)
+
+
+### Bug Fixes
+
+* hid all instances EditorGUIUtility.GetMainWindowPosition() under the #if preprocessor directive ([a834cea](https://github.com/SolidAlloy/SolidUtilities/commit/a834ceaab6a510c74c3177b792deb1cbd56f80e1))
+
 # [1.18.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.17.1...1.18.0) (2020-11-27)
 
 
