@@ -105,14 +105,5 @@
             if (value < 0f && value != -1f)
                 throw new ArgumentOutOfRangeException(valueName, value, "The value can only be positive or -1f.");
         }
-
-        [UsedImplicitly]
-        private static IEnumerable<Type> GetAllDerivedTypes(this AppDomain appDomain, Type parentType)
-        {
-            return from assembly in appDomain.GetAssemblies()
-                from assemblyType in assembly.GetTypes()
-                where assemblyType.IsSubclassOf(parentType)
-                select assemblyType;
-        }
     }
 }

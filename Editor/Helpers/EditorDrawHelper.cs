@@ -1,6 +1,8 @@
 ﻿namespace SolidUtilities.Editor.Helpers
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using JetBrains.Annotations;
     using SolidUtilities.Helpers;
     using UnityEditor;
@@ -332,6 +334,15 @@
 
             throw new NotSupportedException("Can't find internal main window. Maybe something has changed inside Unity");
 #endif
+        }
+
+        [UsedImplicitly]
+        private static IEnumerable<Type> GetAllDerivedTypes(this AppDomain appDomain, Type parentType)
+        {
+            return from assembly in appDomain.GetAssemblies()
+                from assemblyType in assembly.GetTypes()
+                where assemblyType.IsSubclassOf(parentType)
+                select assemblyType;
         }
     }
 }
