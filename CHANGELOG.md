@@ -1,3 +1,11 @@
+## [1.18.2](https://github.com/SolidAlloy/SolidUtilities/compare/1.18.1...1.18.2) (2020-11-30)
+
+
+### Bug Fixes
+
+* Moved GetMainWindowPosition to EditorDrawHelper and fixed incorrect preprocessor directives ([2838d6a](https://github.com/SolidAlloy/SolidUtilities/commit/2838d6a9adb6ecbe06c8dc59f67e725f10f1e0ca))
+* Moved the GetAllDerivedTypes method to EditorDrawHelper ([cbc143c](https://github.com/SolidAlloy/SolidUtilities/commit/cbc143c838cc2d7830b4164abab8e8d3bc026e51))
+
 ## [1.18.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.18.0...1.18.1) (2020-11-29)
 
 
