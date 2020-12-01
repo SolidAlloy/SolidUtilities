@@ -1,3 +1,10 @@
+## [1.18.3](https://github.com/SolidAlloy/SolidUtilities/compare/1.18.2...1.18.3) (2020-12-01)
+
+
+### Bug Fixes
+
+* Fixed the missing right border in EditorDrawHelper.DrawBorders() ([4a9a8b8](https://github.com/SolidAlloy/SolidUtilities/commit/4a9a8b8d374cc1b1cf314108e6b3f7ab5493c6a0))
+
 ## [1.18.2](https://github.com/SolidAlloy/SolidUtilities/compare/1.18.1...1.18.2) (2020-11-30)
 
 
