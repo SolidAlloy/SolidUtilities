@@ -1,4 +1,4 @@
-﻿namespace SolidUtilities.Editor
+﻿namespace SolidUtilities.Editor.Helpers
 {
     using System;
     using System.Collections;

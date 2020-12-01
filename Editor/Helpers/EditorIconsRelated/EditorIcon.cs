@@ -1,4 +1,4 @@
-﻿namespace SolidUtilities.Editor.EditorIconsRelated
+﻿namespace SolidUtilities.Editor.Helpers.EditorIconsRelated
 {
   using Helpers;
   using JetBrains.Annotations;
