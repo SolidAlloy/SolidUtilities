@@ -133,10 +133,16 @@
             if (Event.current.type != EventType.Repaint)
                 return;
 
-            EditorGUI.DrawRect(new Rect(0f, 0f, borderWidth, rectHeight), color);
-            EditorGUI.DrawRect(new Rect(0f, 0f, rectWidth, borderWidth), color);
-            EditorGUI.DrawRect(new Rect(rectWidth - borderWidth, 0f, borderWidth, 0f), color);
-            EditorGUI.DrawRect(new Rect(0f, rectHeight - borderWidth, rectWidth, borderWidth), color);
+            var leftBorder = new Rect(0f, 0f, borderWidth, rectHeight);
+            var topBorder = new Rect(0f, 0f, rectWidth, borderWidth);
+            var rightBorder = new Rect(0f, 0f, rectWidth, borderWidth);
+            var bottomBorder = new Rect(0f, rectHeight - borderWidth, rectWidth, borderWidth);
+
+
+            EditorGUI.DrawRect(leftBorder, color);
+            EditorGUI.DrawRect(topBorder, color);
+            EditorGUI.DrawRect(rightBorder, color);
+            EditorGUI.DrawRect(bottomBorder, color);
         }
 
         /// <summary>Draws search toolbar with the search toolbar style.</summary>
