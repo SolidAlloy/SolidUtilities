@@ -1,3 +1,12 @@
+# [1.19.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.18.3...1.19.0) (2020-12-02)
+
+
+### Features
+
+* Added AssetSearcher.FindObjectsWithValue() that searches for assets and scene objects that contains a variable with a certain value. ([33a3872](https://github.com/SolidAlloy/SolidUtilities/commit/33a38721e849557db318eb422f29e9efd6473237))
+* Added RegexExtensions class with its first method - Find() ([d2b501e](https://github.com/SolidAlloy/SolidUtilities/commit/d2b501e039c9d0a95f9c206bf388b53949dc41e3))
+* Added RelativeToAbsolutePath and GUIDToAbsolutePath methods ([8ad53bd](https://github.com/SolidAlloy/SolidUtilities/commit/8ad53bd3e7c9ab4488dfba0209fdf508f0ffe24f))
+
 ## [1.18.3](https://github.com/SolidAlloy/SolidUtilities/compare/1.18.2...1.18.3) (2020-12-01)
 
 
