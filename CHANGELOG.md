@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.19.0...1.20.0) (2020-12-02)
+
+
+### Features
+
+* Added the Vector2.RoundUp() method ([c57a9fa](https://github.com/SolidAlloy/SolidUtilities/commit/c57a9fa85df37770b1fec78b2f4fad47c61d5af0))
+
 # [1.19.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.18.3...1.19.0) (2020-12-02)
 
 
