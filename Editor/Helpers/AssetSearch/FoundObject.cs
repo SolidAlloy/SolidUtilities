@@ -3,6 +3,11 @@
     using System.Collections;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Represents information about object found with the matching value of a variable. It contains the object type
+    /// (scene object, prefab, etc.) and details about where the variable with the matching value was found (path to
+    /// the asset, the component where it was found, etc.)
+    /// </summary>
     public readonly struct FoundObject : IEnumerable<KeyValuePair<string, string>>
     {
         public readonly ObjectType Type;
