@@ -36,5 +36,16 @@
             var smallerRectPosition = new Vector2(outerRect.x + horizontalPadding, outerRect.y + verticalPadding);
             return new Rect(smallerRectPosition, smallerRectSize);
         }
+
+        /// <summary>Returns a new vector with values rounded up to the nearest integers.</summary>
+        /// <param name="vector">The vector which values to round up.</param>
+        /// <returns>New vector with rounded values.</returns>
+        [PublicAPI]
+        public static Vector2 RoundUp(this Vector2 vector)
+        {
+            vector.x = Mathf.Round(vector.x);
+            vector.y = Mathf.Round(vector.y);
+            return vector;
+        }
     }
 }

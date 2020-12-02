@@ -138,7 +138,6 @@
             var rightBorder = new Rect(0f, 0f, rectWidth, borderWidth);
             var bottomBorder = new Rect(0f, rectHeight - borderWidth, rectWidth, borderWidth);
 
-
             EditorGUI.DrawRect(leftBorder, color);
             EditorGUI.DrawRect(topBorder, color);
             EditorGUI.DrawRect(rightBorder, color);
