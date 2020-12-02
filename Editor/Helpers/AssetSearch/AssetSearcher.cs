@@ -36,6 +36,37 @@
         /// <param name="variableName">The name of the variable to search for.</param>
         /// <param name="value">The value of the variable to search for.</param>
         /// <returns>A list of <see cref="FoundObject"/> that contain details about each found match.</returns>
+        /// <example><code>
+        /// [Serializable] public class CustomClass
+        /// {
+        ///     [SerializeField] private string _testField;
+        /// }
+        ///
+        /// public class TestBehaviour : MonoBehaviour
+        /// {
+        ///     [SerializeField] private CustomClass _test;
+        /// }
+        ///
+        /// public class TestScriptableObject : ScriptableObject
+        /// {
+        ///     public CustomClass ScriptableTestField;
+        /// }
+        ///
+        /// // This will find all prefabs, scriptable objects, and scene objects where the value of _testField was set
+        /// to "value set in editor". It will then output details about each found match: path to the asset, component
+        /// where the variable was found, etc.
+        /// var foundObjects = AssetSearcher.FindObjectsWithValue("_testField", "value set in editor");
+        ///
+        /// foreach (FoundObject foundObject in foundObjects)
+        /// {
+        ///     Debug.Log($"[foundObject.Type]");
+        ///
+        ///     foreach (var detail in foundObject)
+        ///     {
+        ///         Debug.Log($"{detail.Key}: {detail.Value}");
+        ///     }
+        /// }
+        /// </code></example>
         [PublicAPI]
         public static List<FoundObject> FindObjectsWithValue(string variableName, string value)
         {
@@ -131,7 +162,7 @@
             {
                 string line = lines[index];
 
-                // When value is overriden in prefab, the lines looks like this:
+                // When value is overriden in a prefab, the lines looks like this:
                 // propertyPath: _typeRef.TypeNameAndAssembly
                 // value: ExtendedScriptableObjects.Variable`1, ExtendedScriptableObjects
                 // So if the value was found, we also must check that it belongs to the correct variable
