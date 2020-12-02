@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Text.RegularExpressions;
-    using Helpers;
     using JetBrains.Annotations;
     using SolidUtilities.Extensions;
     using UnityEditor;
@@ -17,8 +16,8 @@
     /// </summary>
     public static class AssetSearcher
     {
-        private const string AssetPath = "AssetPath";
-        private const string ScenePath = "ScenePath";
+        private const string Asset = "Asset";
+        private const string Scene = "Scene";
         private const string Component = "Component";
         private const string Object = "Object";
 
@@ -131,12 +130,12 @@
             int scriptLineIndex = FindClosestLineAboveWithText(lines, index, ScriptLinePattern);
             string componentName = GetComponentNameFromScriptLine(lines[scriptLineIndex]);
 
-            return new FoundObject(ObjectType.Prefab) { { AssetPath, relativePath }, { Component, componentName } };
+            return new FoundObject(ObjectType.Prefab) { { Asset, relativePath }, { Component, componentName } };
         }
 
         private static FoundObject GetScriptableObject(string assetPath)
         {
-            return new FoundObject(ObjectType.ScriptableObject) { { AssetPath, assetPath } };
+            return new FoundObject(ObjectType.ScriptableObject) { { Asset, assetPath } };
         }
 
         private static bool IsScene([NotNull] string assetPath)
@@ -203,7 +202,6 @@
             // value: ExtendedScriptableObjects.Variable`1, ExtendedScriptableObjects
             // In the target line that is located 2 lines above the value, we can find GUID to the prefab asset and
             // FileID that is a locator of the component where the value was overriden.
-            // TODO: search for propertyPath: as well to get only matching value of the needed variable
             string targetLine = lines[valueLineIndex - 2];
 
             string prefabGuid = GUIDRegex.Find(targetLine);
@@ -220,7 +218,7 @@
             int scriptLineIndex = FindClosestLineBelowWithText(prefabLines, fileIdLineIndex, ScriptLinePattern);
             string componentName = GetComponentNameFromScriptLine(prefabLines[scriptLineIndex]);
 
-            return new FoundObject(ObjectType.PrefabOverride) { { ScenePath, scenePath }, { Object, objectName }, { Component, componentName } };
+            return new FoundObject(ObjectType.PrefabOverride) { { Scene, scenePath }, { Object, objectName }, { Component, componentName } };
         }
 
         private static FoundObject GetSceneObject(string[] lines, int valueLineIndex, string scenePath)
@@ -239,7 +237,7 @@
             int objectNameLineIndex = FindClosestLineBelowWithText(lines, gameObjectLineIndex, "m_Name:");
             string objectName = ObjectNameRegex.Find(lines[objectNameLineIndex]);
 
-            return new FoundObject(ObjectType.SceneObject) { { ScenePath, scenePath }, { Component, componentName }, { Object, objectName } };
+            return new FoundObject(ObjectType.SceneObject) { { Scene, scenePath }, { Object, objectName }, { Component, componentName } };
         }
 
         private static int FindClosestLineAboveWithText(string[] lines, int index, string text, bool exactMatch = false)
