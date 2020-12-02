@@ -1,3 +1,10 @@
+## [1.20.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.20.0...1.20.1) (2020-12-02)
+
+
+### Bug Fixes
+
+* Started initializing GUIStyles in properties instead of field initializers ([a77f9f6](https://github.com/SolidAlloy/SolidUtilities/commit/a77f9f69198f5c25ccd22d33eb46b12c8a115e9e))
+
 # [1.20.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.19.0...1.20.0) (2020-12-02)
 
 
