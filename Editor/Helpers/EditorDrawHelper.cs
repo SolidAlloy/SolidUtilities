@@ -24,27 +24,66 @@
 
         private const float PlaceholderIndent = 14f;
 
-        private static readonly GUIStyle SearchToolbarStyle = new GUIStyle(EditorStyles.toolbar)
-        {
-            padding = new RectOffset(0, 0, 0, 0),
-            stretchHeight = true,
-            stretchWidth = true,
-            fixedHeight = 0f
-        };
+        // EditorStyles built-in styles may not be initialized yet when EditorDrawHelper static constructor is called,
+        // and it will cause NullReferenceException, so GUIStyles are initialized inside properties instead.
+        private static GUIStyle _searchToolbarStyle;
+        private static GUIStyle _infoMessageStyle;
+        private static GUIStyle _placeholderStyle;
 
-        private static readonly GUIStyle InfoMessageStyle = new GUIStyle( "HelpBox")
+        private static GUIStyle SearchToolbarStyle
         {
-            margin = new RectOffset(4, 4, 2, 2),
-            fontSize = 10,
-            richText = true
-        };
+            get
+            {
+                if (_searchToolbarStyle == null)
+                {
+                    _searchToolbarStyle= new GUIStyle(EditorStyles.toolbar)
+                    {
+                        padding = new RectOffset(0, 0, 0, 0),
+                        stretchHeight = true,
+                        stretchWidth = true,
+                        fixedHeight = 0f
+                    };
+                }
 
-        private static readonly GUIStyle PlaceholderStyle = new GUIStyle(EditorStyles.centeredGreyMiniLabel)
+                return _searchToolbarStyle;
+            }
+        }
+
+        private static GUIStyle InfoMessageStyle
         {
-            alignment = TextAnchor.MiddleLeft,
-            clipping = TextClipping.Clip,
-            margin = new RectOffset(4, 4, 4, 4)
-        };
+            get
+            {
+                if (_infoMessageStyle == null)
+                {
+                    _infoMessageStyle = new GUIStyle( "HelpBox")
+                    {
+                        margin = new RectOffset(4, 4, 2, 2),
+                        fontSize = 10,
+                        richText = true
+                    };
+                }
+
+                return _searchToolbarStyle;
+            }
+        }
+
+        private static GUIStyle PlaceholderStyle
+        {
+            get
+            {
+                if (_placeholderStyle == null)
+                {
+                    _placeholderStyle = new GUIStyle(EditorStyles.centeredGreyMiniLabel)
+                    {
+                        alignment = TextAnchor.MiddleLeft,
+                        clipping = TextClipping.Clip,
+                        margin = new RectOffset(4, 4, 4, 4)
+                    };
+                }
+
+                return _placeholderStyle;
+            }
+        }
 
         /// <summary>Draws content in an automatically laid out scroll view.</summary>
         /// <param name="scrollPos">Position of the thumb.</param>
