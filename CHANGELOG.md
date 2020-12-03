@@ -1,3 +1,10 @@
+## [1.20.2](https://github.com/SolidAlloy/SolidUtilities/compare/1.20.1...1.20.2) (2020-12-03)
+
+
+### Bug Fixes
+
+* Fixed the ArgumentException when using ResizableTextArea attribute ([4263516](https://github.com/SolidAlloy/SolidUtilities/commit/4263516074e3fe17f98213f00bb61457131a8d5a))
+
 ## [1.20.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.20.0...1.20.1) (2020-12-02)
 
 
