@@ -9,6 +9,9 @@
     public class ResizableTextAreaAttributeDrawer : PropertyDrawer
     {
         private static GUIStyle _style;
+        private static readonly GUIContent _tempContent = new GUIContent();
+
+        private float _textAreaHeight;
 
         private static GUIStyle Style
         {
@@ -21,16 +24,32 @@
             }
         }
 
+        private static GUIContent TempContent(string text)
+        {
+            _tempContent.text = text;
+            return _tempContent;
+        }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            float labelHeight = EditorGUIUtility.singleLineHeight;
+            return labelHeight + _textAreaHeight;
+        }
+
         public override void OnGUI(Rect fieldRect, SerializedProperty property, GUIContent label)
         {
             if (property.type != "string")
                 throw new ArgumentException($"ResizableTextArea attribute works only with string fields. {property.type} type was used instead.");
 
-            // EditorGUILayout adds one empty line for some reason
             Rect labelRect = new Rect(fieldRect) { height = EditorGUIUtility.singleLineHeight };
             EditorGUI.LabelField(labelRect, label);
 
-            property.stringValue = EditorGUILayout.TextArea(property.stringValue, Style);
+            // fieldRect has the correct width only if the event type is repaint.
+            if (Event.current.type == EventType.Repaint)
+                _textAreaHeight = Style.CalcHeight(TempContent(property.stringValue), fieldRect.width);
+
+            var textAreaRect = new Rect(fieldRect.x, fieldRect.y + EditorGUIUtility.singleLineHeight, fieldRect.width, _textAreaHeight);
+            property.stringValue = EditorGUI.TextArea(textAreaRect, property.stringValue, Style);
 
             if (property.serializedObject.hasModifiedProperties)
                 property.serializedObject.ApplyModifiedProperties();
