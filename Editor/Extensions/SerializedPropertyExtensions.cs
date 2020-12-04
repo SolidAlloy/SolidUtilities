@@ -42,7 +42,7 @@
             {
                 int suffixIndex = fieldName.IndexOf(arraySuffix, StringComparison.Ordinal);
                 fieldName = fieldName.Substring(0, suffixIndex);
-                FieldInfo propertyField = parentType.GetField(fieldName, instanceFieldFlags);
+                FieldInfo propertyField = parentType.GetFieldAtPath(fieldName, instanceFieldFlags);
                 Assert.IsNotNull(propertyField);
                 Type collectionType = propertyField.FieldType;
                 Type realType;
