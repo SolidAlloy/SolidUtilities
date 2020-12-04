@@ -50,6 +50,32 @@
             return field;
         }
 
+        /// <summary> Searches for the specified field in the type and all its base types. </summary>
+        /// <param name="type">The type to search in.</param>
+        /// <param name="name">The name of the field.</param>
+        /// <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags" />
+        /// that specify how the search is conducted.</param>
+        /// <returns>The field found in the class hierarchy, or null if the field was not found.</returns>
+        /// <exception cref="NullReferenceException"><paramref name="name"/> is null.</exception>
+        [PublicAPI]
+        public static FieldInfo GetFieldRecursive(this Type type, string name, BindingFlags flags)
+        {
+            while (true)
+            {
+                FieldInfo field = type.GetField(name, flags);
+
+                if (field != null)
+                    return field;
+
+                Type baseType = type.BaseType;
+
+                if (baseType == null)
+                    return null;
+
+                type = baseType;
+            }
+        }
+
         /// <summary>
         /// Collects all the serializable fields of a class: private ones with SerializeField attribute and public ones.
         /// </summary>
