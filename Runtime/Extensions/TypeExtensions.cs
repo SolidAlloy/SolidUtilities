@@ -40,7 +40,7 @@
 
             foreach (string part in path.Split('.'))
             {
-                field = parentType.GetField(part, flags);
+                field = parentType.GetFieldRecursive(part, flags);
                 if (field == null)
                     return null;
 
