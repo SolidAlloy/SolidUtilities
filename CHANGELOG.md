@@ -1,3 +1,15 @@
+# [1.21.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.20.2...1.21.0) (2020-12-04)
+
+
+### Bug Fixes
+
+* Fixed assertion error when private GenericSO field is used in the parent class of a MonoBehaviour ([f32fd7b](https://github.com/SolidAlloy/SolidUtilities/commit/f32fd7bc83c820b5a4fcffa5267a25f1fde3e8ef))
+
+
+### Features
+
+* Added the Type.GetFieldRecursive method to search for a field in the whole class hierarchy ([f956fec](https://github.com/SolidAlloy/SolidUtilities/commit/f956fecec6ed3036d78647d799fa9d4e0cc2fd70))
+
 ## [1.20.2](https://github.com/SolidAlloy/SolidUtilities/compare/1.20.1...1.20.2) (2020-12-03)
 
 
