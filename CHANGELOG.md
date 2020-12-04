@@ -1,3 +1,10 @@
+## [1.21.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.21.0...1.21.1) (2020-12-04)
+
+
+### Bug Fixes
+
+* Fixed assertion error when generic object field is used in a custom serialized class ([e4894bb](https://github.com/SolidAlloy/SolidUtilities/commit/e4894bb4579fcbb2f835a19b88f18f6c3eb66f4c))
+
 # [1.21.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.20.2...1.21.0) (2020-12-04)
 
 
