@@ -1,3 +1,10 @@
+# [1.22.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.21.1...1.22.0) (2020-12-10)
+
+
+### Features
+
+* Added string.MakeClassFriendly() and string.StripGenericSuffix() methods ([e8a7036](https://github.com/SolidAlloy/SolidUtilities/commit/e8a70362899c566c0de76336d8f27e15aceb97eb))
+
 ## [1.21.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.21.0...1.21.1) (2020-12-04)
 
 
