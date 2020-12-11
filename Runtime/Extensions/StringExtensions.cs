@@ -101,5 +101,22 @@
         }
 
         #endregion
+
+        /// <summary>
+        /// Returns a substring that follows the last occurence of <paramref name="character"/>.
+        /// </summary>
+        /// <param name="text">The string to search in.</param>
+        /// <param name="character">The char to search for.</param>
+        /// <returns>A substring that follows the last occurence of <paramref name="character"/>.</returns>
+        [PublicAPI, Pure]
+        public static string GetSubstringAfterLast(this string text, char character)
+        {
+            int lastDot = text.LastIndexOf(character);
+
+            if (lastDot == -1)
+                return text;
+
+            return text.Substring(lastDot + 1, text.Length - lastDot - 1);
+        }
     }
 }
