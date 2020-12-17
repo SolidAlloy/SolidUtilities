@@ -118,5 +118,15 @@
 
             return text.Substring(lastDot + 1, text.Length - lastDot - 1);
         }
+
+        /// <summary>
+        /// Counts the number of times <paramref name="substring"/> occured in <paramref name="text"/>.
+        /// </summary>
+        /// <param name="text">The string to search in.</param>
+        /// <param name="substring">The substring to search for.</param>
+        /// <returns>The number of times <paramref name="substring"/> occured in <paramref name="text"/>.</returns>
+        [PublicAPI, Pure]
+        public static int CountSubstrings(this string text, string substring) =>
+            (text.Length - text.Replace(substring, string.Empty).Length) / substring.Length;
     }
 }
