@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Text.RegularExpressions;
+    using Extensions;
     using JetBrains.Annotations;
     using SolidUtilities.Extensions;
     using UnityEditor;
@@ -91,6 +92,34 @@
             }
 
             return foundObjects;
+        }
+
+        /// <summary>
+        /// Gets the GUID of an asset where the type is located.
+        /// </summary>
+        /// <param name="type">Type to search for in assets.</param>
+        /// <returns>GUID of the asset where the type is located or <see cref="string.Empty"/> if the asset was not found.</returns>
+        [PublicAPI]
+        public static string GetClassGUID(Type type)
+        {
+            if (type == null)
+                return string.Empty;
+
+            var guids = AssetDatabase.FindAssets(type.Name);
+
+            foreach (string guid in guids)
+            {
+                string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                var asset = AssetDatabase.LoadAssetAtPath<MonoScript>(assetPath);
+
+                if (asset == null)
+                    continue;
+
+                if (asset.GetClassType() == type)
+                    return guid;
+            }
+
+            return string.Empty;
         }
 
         private static List<FoundObject> FindObjectsInFile(string assetPath, string variableName,
