@@ -10,8 +10,8 @@
     public static class MonoScriptExtensions
     {
         /// <summary>
-        /// Returns the <see cref="Type"/> of the class implemented by this script. Works with generic classes too
-        /// (the file must be named by the "GenericClass`1.cs" template).
+        /// Returns the <see cref="Type"/> of the class implemented by this script. Works for types not derived from
+        /// <see cref="UnityEngine.Object"/> and generic classes (the file must be named by the "GenericClass`1.cs" template).
         /// </summary>
         /// <param name="script">The script to get the type from.</param>
         /// <returns>The <see cref="Type"/> of the class implemented by this script or <see langword="null"/>,
@@ -23,9 +23,6 @@
                 return simpleType;
 
             string className = script.name;
-
-            if (IsNotGeneric(className))
-                return null;
 
             string assemblyName = script.GetAssemblyName();
             Assembly assembly = Assembly.Load(assemblyName);
@@ -60,7 +57,5 @@
             Match match = regex.Match(content);
             return match.Success ? match.Value : string.Empty;
         }
-
-        private static bool IsNotGeneric(string typeName) => ! typeName.Contains("`");
     }
 }
