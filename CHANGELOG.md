@@ -1,3 +1,10 @@
+## [1.22.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.22.0...1.22.1) (2020-12-17)
+
+
+### Bug Fixes
+
+* Fixed NullReferenceException when opening a drop-down with no types available ([9f9628b](https://github.com/SolidAlloy/SolidUtilities/commit/9f9628b3c55f059913bb9a3edc66a9dec14a17e1))
+
 # [1.22.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.21.1...1.22.0) (2020-12-10)
 
 

@@ -63,7 +63,7 @@
                     };
                 }
 
-                return _searchToolbarStyle;
+                return _infoMessageStyle;
             }
         }
 
