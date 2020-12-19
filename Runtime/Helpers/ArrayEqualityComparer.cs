@@ -1,4 +1,4 @@
-﻿namespace GenericUnityObjects.Editor.MonoBehaviour
+﻿namespace SolidUtilities.Helpers
 {
     using System.Collections.Generic;
 
