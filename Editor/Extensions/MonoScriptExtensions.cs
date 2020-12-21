@@ -1,10 +1,12 @@
 ﻿namespace SolidUtilities.Editor.Extensions
 {
     using System;
+    using System.IO;
     using System.Reflection;
     using System.Text.RegularExpressions;
     using JetBrains.Annotations;
     using UnityEditor;
+    using UnityEngine;
     using UnityEngine.Assertions;
 
     public static class MonoScriptExtensions
@@ -25,7 +27,20 @@
             string className = script.name;
 
             string assemblyName = script.GetAssemblyName();
-            Assembly assembly = Assembly.Load(assemblyName);
+            Assembly assembly;
+
+            try
+            {
+                assembly = Assembly.Load(assemblyName);
+            }
+            catch (Exception e)
+            {
+                // Whatever caused this exception, the type cannot be loaded, so disregard it as null.
+                if (e is FileNotFoundException || e is FileLoadException)
+                    return null;
+
+                throw;
+            }
 
             string namespaceName = script.GetNamespaceName();
             string fullTypeName = namespaceName == string.Empty ? className : $"{namespaceName}.{className}";
