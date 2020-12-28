@@ -18,13 +18,7 @@
             string assetPath = AssetDatabase.GUIDToAssetPath(guid);
             var script = AssetDatabase.LoadAssetAtPath<MonoScript>(assetPath);
 
-            if (script == null)
-            {
-                return null;
-            }
-
-            var type = script.GetClassType();
-            return type;
+            return script == null ? null : script.GetClassType();
         }
     }
 }

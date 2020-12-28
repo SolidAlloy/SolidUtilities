@@ -48,7 +48,7 @@
                                                      IdentifierPartCharacters + ")*";
 
         // C# keywords: http://msdn.microsoft.com/en-us/library/x53a06bb(v=vs.71).aspx
-        private static readonly string[] Keywords =
+        private static readonly HashSet<string> Keywords = new HashSet<string>
         {
             "abstract",  "event",      "new",        "struct",
             "as",        "explicit",   "null",       "switch",
@@ -77,6 +77,7 @@
         /// <summary>Checks whether a string is a valid identifier (class name, namespace name, etc.)</summary>
         /// <param name="identifier">The string to check.</param>
         /// <returns><see langword="true"/> if the string is a valid identifier.</returns>
+        [PublicAPI, Pure]
         public static bool IsValidIdentifier(this string identifier)
         {
             return identifier.Contains('.')
@@ -113,10 +114,7 @@
         {
             int lastDot = text.LastIndexOf(character);
 
-            if (lastDot == -1)
-                return text;
-
-            return text.Substring(lastDot + 1, text.Length - lastDot - 1);
+            return lastDot == -1 ? text : text.Substring(lastDot + 1, text.Length - lastDot - 1);
         }
 
         /// <summary>

@@ -8,21 +8,12 @@
     [CustomPropertyDrawer(typeof(ResizableTextAreaAttribute))]
     public class ResizableTextAreaAttributeDrawer : PropertyDrawer
     {
-        private static GUIStyle _style;
         private static readonly GUIContent _tempContent = new GUIContent();
+        private static GUIStyle _style;
 
         private float _textAreaHeight;
 
-        private static GUIStyle Style
-        {
-            get
-            {
-                if (_style == null)
-                    _style = new GUIStyle(EditorStyles.textField) { wordWrap = true };
-
-                return _style;
-            }
-        }
+        private static GUIStyle Style => _style ?? (_style = new GUIStyle(EditorStyles.textField) { wordWrap = true });
 
         private static GUIContent TempContent(string text)
         {

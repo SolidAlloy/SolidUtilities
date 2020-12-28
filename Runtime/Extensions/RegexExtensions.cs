@@ -21,7 +21,7 @@
         {
             string result = regex.Match(text).Value;
 
-            if (result == string.Empty)
+            if (result.Length == 0)
                 throw new ArgumentException($"Failed to find \"{regex}\" in the following text: \"{text}\".");
 
             return result;

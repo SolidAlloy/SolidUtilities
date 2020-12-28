@@ -53,8 +53,8 @@
         /// }
         ///
         /// // This will find all prefabs, scriptable objects, and scene objects where the value of _testField was set
-        /// to "value set in editor". It will then output details about each found match: path to the asset, component
-        /// where the variable was found, etc.
+        /// // to "value set in editor". It will then output details about each found match: path to the asset, component
+        /// // where the variable was found, etc.
         /// var foundObjects = AssetSearcher.FindObjectsWithValue("_testField", "value set in editor");
         ///
         /// foreach (FoundObject foundObject in foundObjects)
@@ -81,14 +81,9 @@
                 if (assetPath.Contains("com.unity"))
                     continue;
 
-                if (IsScene(assetPath))
-                {
-                    foundObjects.AddRange(FindObjectsOnScene(assetPath, variableName, value));
-                }
-                else
-                {
-                    foundObjects.AddRange(FindObjectsInFile(assetPath, variableName, value));
-                }
+                foundObjects.AddRange(IsScene(assetPath)
+                    ? FindObjectsOnScene(assetPath, variableName, value)
+                    : FindObjectsInFile(assetPath, variableName, value));
             }
 
             return foundObjects;

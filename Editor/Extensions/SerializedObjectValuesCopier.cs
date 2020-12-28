@@ -1,7 +1,6 @@
 ﻿namespace SolidUtilities.Editor.Extensions
 {
     using System.Collections.Generic;
-    using Editor;
     using Helpers;
     using JetBrains.Annotations;
     using UnityEditor;
@@ -69,7 +68,7 @@
 
             foreach (SerializedProperty childProperty in otherObjectProps)
             {
-                if (excludeValues != null && excludeValues.Contains(childProperty.name))
+                if (excludeValues?.Contains(childProperty.name) == true)
                     continue;
 
                 thisObject.CopyFromSerializedPropertyIfDifferent(childProperty);

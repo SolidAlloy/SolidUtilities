@@ -44,6 +44,7 @@
         }
 
         SerializedProperty IEnumerator<SerializedProperty>.Current => _currentProp;
+
         object IEnumerator.Current => _currentProp;
 
         bool IEnumerator.MoveNext()

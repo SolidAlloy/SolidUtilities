@@ -96,9 +96,13 @@
             const string builtInTypesPrefix = "Built-in.";
 
             if (BuiltInTypes.TryGetValue(fullTypeName, out string builtInName))
+            {
                 return withFolder ? builtInTypesPrefix + builtInName : builtInName;
+            }
             else
+            {
                 return fullTypeName;
+            }
         }
     }
 }

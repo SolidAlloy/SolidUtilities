@@ -124,13 +124,10 @@
         private static void MakeCharactersSameCase(bool searchStringCharIsUpper, bool previousItemNameCharIsNotLetter,
             ref char itemNameChar, ref int charScore)
         {
-            if (searchStringCharIsUpper)
+            if (searchStringCharIsUpper && previousItemNameCharIsNotLetter)
             {
-                if (previousItemNameCharIsNotLetter)
-                {
-                    charScore = BaseCharScore;
-                    itemNameChar = char.ToUpper(itemNameChar);
-                }
+                charScore = BaseCharScore;
+                itemNameChar = char.ToUpper(itemNameChar);
             }
             else if (IsUppercaseLetter(itemNameChar))
             {

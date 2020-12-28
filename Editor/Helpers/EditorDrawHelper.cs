@@ -30,60 +30,30 @@
         private static GUIStyle _infoMessageStyle;
         private static GUIStyle _placeholderStyle;
 
-        private static GUIStyle SearchToolbarStyle
-        {
-            get
+        private static GUIStyle SearchToolbarStyle =>
+            _searchToolbarStyle ?? (_searchToolbarStyle = new GUIStyle(EditorStyles.toolbar)
             {
-                if (_searchToolbarStyle == null)
-                {
-                    _searchToolbarStyle= new GUIStyle(EditorStyles.toolbar)
-                    {
-                        padding = new RectOffset(0, 0, 0, 0),
-                        stretchHeight = true,
-                        stretchWidth = true,
-                        fixedHeight = 0f
-                    };
-                }
+                padding = new RectOffset(0, 0, 0, 0),
+                stretchHeight = true,
+                stretchWidth = true,
+                fixedHeight = 0f
+            });
 
-                return _searchToolbarStyle;
-            }
-        }
-
-        private static GUIStyle InfoMessageStyle
-        {
-            get
+        private static GUIStyle InfoMessageStyle =>
+            _infoMessageStyle ?? (_infoMessageStyle = new GUIStyle("HelpBox")
             {
-                if (_infoMessageStyle == null)
-                {
-                    _infoMessageStyle = new GUIStyle( "HelpBox")
-                    {
-                        margin = new RectOffset(4, 4, 2, 2),
-                        fontSize = 10,
-                        richText = true
-                    };
-                }
+                margin = new RectOffset(4, 4, 2, 2),
+                fontSize = 10,
+                richText = true
+            });
 
-                return _infoMessageStyle;
-            }
-        }
-
-        private static GUIStyle PlaceholderStyle
-        {
-            get
+        private static GUIStyle PlaceholderStyle =>
+            _placeholderStyle ?? (_placeholderStyle = new GUIStyle(EditorStyles.centeredGreyMiniLabel)
             {
-                if (_placeholderStyle == null)
-                {
-                    _placeholderStyle = new GUIStyle(EditorStyles.centeredGreyMiniLabel)
-                    {
-                        alignment = TextAnchor.MiddleLeft,
-                        clipping = TextClipping.Clip,
-                        margin = new RectOffset(4, 4, 4, 4)
-                    };
-                }
-
-                return _placeholderStyle;
-            }
-        }
+                alignment = TextAnchor.MiddleLeft,
+                clipping = TextClipping.Clip,
+                margin = new RectOffset(4, 4, 4, 4)
+            });
 
         /// <summary>Draws content in an automatically laid out scroll view.</summary>
         /// <param name="scrollPos">Position of the thumb.</param>

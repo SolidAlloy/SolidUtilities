@@ -10,6 +10,8 @@
         /// <summary>Performs an action on each item.</summary>
         /// <param name="source">The source to enumerate.</param>
         /// <param name="action">The action to perform.</param>
+        /// <typeparam name="T">The type of elements.</typeparam>
+        /// <returns>Unchanged collection passed to the method.</returns>
         [PublicAPI]
         public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {

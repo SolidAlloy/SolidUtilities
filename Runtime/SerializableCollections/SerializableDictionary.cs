@@ -31,13 +31,21 @@
         public SerializableDictionary(IDictionary<TKey, TValue> dict) => _dict = new Dictionary<TKey, TValue>(dict);
 
         public ICollection<TKey> Keys => ((IDictionary<TKey, TValue>) _dict).Keys;
+
         public ICollection<TValue> Values => ((IDictionary<TKey, TValue>) _dict).Values;
+
         public int Count => ((IDictionary<TKey, TValue>) _dict).Count;
+
         public bool IsReadOnly => ((IDictionary<TKey, TValue>) _dict).IsReadOnly;
+
         public bool IsFixedSize => ((IDictionary) _dict).IsFixedSize;
+
         ICollection IDictionary.Keys => ((IDictionary) _dict).Keys;
+
         ICollection IDictionary.Values => ((IDictionary) _dict).Values;
+
         public bool IsSynchronized => ((IDictionary) _dict).IsSynchronized;
+
         public object SyncRoot => ((IDictionary) _dict).SyncRoot;
 
         public object this[object key]

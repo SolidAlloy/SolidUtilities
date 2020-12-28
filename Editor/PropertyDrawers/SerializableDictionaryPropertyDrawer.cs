@@ -563,16 +563,47 @@
             }
         }
 
-        private struct PropertyIdentity
+        private readonly struct PropertyIdentity : IEquatable<PropertyIdentity>
         {
+            private readonly Object _instance;
+            private readonly string _propertyPath;
+
             public PropertyIdentity(SerializedProperty property)
             {
-                Instance = property.serializedObject.targetObject;
-                PropertyPath = property.propertyPath;
+                _instance = property.serializedObject.targetObject;
+                _propertyPath = property.propertyPath;
             }
 
-            public Object Instance;
-            public string PropertyPath;
+            public override bool Equals(object obj)
+            {
+                return obj is PropertyIdentity method && this.Equals(method);
+            }
+
+            public bool Equals(PropertyIdentity p)
+            {
+                return _instance == p._instance && _propertyPath == p._propertyPath;
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    int hash = 17;
+                    hash = hash * 23 + _instance.GetHashCode();
+                    hash = hash * 23 + _propertyPath.GetHashCode();
+                    return hash;
+                }
+            }
+
+            public static bool operator ==(PropertyIdentity lhs, PropertyIdentity rhs)
+            {
+                return lhs.Equals(rhs);
+            }
+
+            public static bool operator !=(PropertyIdentity lhs, PropertyIdentity rhs)
+            {
+                return ! lhs.Equals(rhs);
+            }
         }
 
         private class ConflictState

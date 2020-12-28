@@ -6,7 +6,6 @@
     using System.Text.RegularExpressions;
     using JetBrains.Annotations;
     using UnityEditor;
-    using UnityEngine;
     using UnityEngine.Assertions;
 
     public static class MonoScriptExtensions
@@ -60,7 +59,7 @@
                 .GetMethod("GetAssemblyName", BindingFlags.NonPublic | BindingFlags.Instance);
 
             Assert.IsNotNull(getAssemblyNameMethod);
-            string assemblyName = (string) getAssemblyNameMethod.Invoke(script, new object[0]);
+            string assemblyName = (string) getAssemblyNameMethod.Invoke(script, null);
             string assemblyNameWithoutExtension = assemblyName.Split('.')[0];
             return assemblyNameWithoutExtension;
         }
