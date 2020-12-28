@@ -100,7 +100,7 @@
             if (type == null)
                 return string.Empty;
 
-            var guids = AssetDatabase.FindAssets(type.Name);
+            var guids = AssetDatabase.FindAssets($"t:MonoScript {type.Name}");
 
             foreach (string guid in guids)
             {
