@@ -3,9 +3,9 @@
     using System;
     using System.Reflection;
     using JetBrains.Annotations;
-    using NUnit.Framework;
     using SolidUtilities.Extensions;
     using UnityEditor;
+    using UnityEngine.Assertions;
 
     /// <summary>Different useful extensions for <see cref="SerializedProperty"/>.</summary>
     [PublicAPI]
