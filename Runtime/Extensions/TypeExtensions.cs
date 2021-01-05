@@ -189,11 +189,25 @@
         /// <summary>Checks whether the type has no fields, methods, and other members.</summary>
         /// <param name="type">The type to check.</param>
         /// <returns><see langword="true"/> if the type is empty.</returns>
-        [PublicAPI]
+        [PublicAPI, Pure]
         public static bool IsEmpty(this Type type)
         {
             // One found member is the default constructor.
             return type.GetMembers((BindingFlags) (-1)).Length == 1;
+        }
+
+        /// <summary>
+        /// Checks whether the type has a custom attribute of type <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="type">The type to check.</param>
+        /// <typeparam name="T">The type of attribute to search for.</typeparam>
+        /// <returns><c>true</c> if the type has a custom attribute of type <typeparamref name="T"/>.</returns>
+        [PublicAPI, Pure]
+        public static bool HasAttribute<T>(this Type type)
+            where T : Attribute
+        {
+            // GetCustomAttributes() skips a number of null checks and a pretty long method call chain.
+            return type.GetCustomAttributes(typeof(T), true).Length != 0;
         }
     }
 }
