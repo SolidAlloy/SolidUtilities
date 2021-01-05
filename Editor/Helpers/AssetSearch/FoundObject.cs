@@ -1,4 +1,4 @@
-﻿namespace SolidUtilities.Editor.Helpers.AssetSearch
+﻿namespace SolidUtilities.Editor.Helpers
 {
     using System.Collections;
     using System.Collections.Generic;

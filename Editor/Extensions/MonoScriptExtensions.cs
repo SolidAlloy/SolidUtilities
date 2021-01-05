@@ -5,6 +5,8 @@
     using System.Reflection;
     using System.Text.RegularExpressions;
     using JetBrains.Annotations;
+    using SolidUtilities.Extensions;
+    using SolidUtilities.Helpers;
     using UnityEditor;
     using UnityEngine.Assertions;
 
@@ -15,15 +17,28 @@
         /// <see cref="UnityEngine.Object"/> and generic classes (the file must be named by the "GenericClass`1.cs" template).
         /// </summary>
         /// <param name="script">The script to get the type from.</param>
+        /// <param name="searchInScriptText">If <c>true</c>, searches for the first class name occurence in script text.
+        /// Otherwise, it will search for a type with the name equal to the name of the script.</param>
         /// <returns>The <see cref="Type"/> of the class implemented by this script or <see langword="null"/>,
         /// if the type was not found.</returns>
-        [PublicAPI, CanBeNull] public static Type GetClassType(this MonoScript script)
+        [PublicAPI, CanBeNull] public static Type GetClassType(this MonoScript script, bool searchInScriptText = false)
         {
             Type simpleType = script.GetClass();
             if (simpleType != null)
                 return simpleType;
 
-            string className = script.name;
+            string className;
+
+            if (searchInScriptText)
+            {
+                className = GetFirstClassFromText(script.text);
+                if (string.IsNullOrEmpty(className))
+                    return null;
+            }
+            else
+            {
+                className = script.name;
+            }
 
             string assemblyName = script.GetAssemblyName();
             Assembly assembly;
@@ -46,6 +61,22 @@
 
             Type type = assembly.GetType(fullTypeName);
             return type;
+        }
+
+        private static string GetFirstClassFromText(string text)
+        {
+            const string classNameRegex = @"(?<=(class )|(struct )).*?(?=(\s|\n)*{)";
+            string className = Regex.Match(text, classNameRegex).Value;
+
+            if (string.IsNullOrEmpty(className))
+                return className;
+
+            if ( ! className.Contains("<"))
+                return className;
+
+            int argsCount = className.CountChars(',') + 1;
+            int bracketIndex = className.IndexOf('<');
+            return $"{className.Substring(0, bracketIndex)}`{argsCount}";
         }
 
         /// <summary>Returns the assembly name of the class implemented by this script.</summary>

@@ -1,4 +1,4 @@
-﻿namespace SolidUtilities.Editor.Helpers.AssetSearch
+﻿namespace SolidUtilities.Editor.Helpers
 {
     using System;
     using System.Collections.Generic;
@@ -7,6 +7,7 @@
     using Extensions;
     using JetBrains.Annotations;
     using SolidUtilities.Extensions;
+    using SolidUtilities.Helpers;
     using UnityEditor;
     using UnityEngine.Assertions;
 
@@ -94,24 +95,36 @@
         /// </summary>
         /// <param name="type">Type to search for in assets.</param>
         /// <returns>GUID of the asset where the type is located or <see cref="string.Empty"/> if the asset was not found.</returns>
-        [PublicAPI]
+        [PublicAPI, NotNull]
         public static string GetClassGUID(Type type)
         {
             if (type == null)
                 return string.Empty;
 
-            var guids = AssetDatabase.FindAssets($"t:MonoScript {type.Name}");
+            string typeName = type.Name;
+            var guids = AssetDatabase.FindAssets($"t:MonoScript {typeName.StripGenericSuffix()}");
 
             foreach (string guid in guids)
             {
                 string assetPath = AssetDatabase.GUIDToAssetPath(guid);
                 var asset = AssetDatabase.LoadAssetAtPath<MonoScript>(assetPath);
 
-                if (asset == null)
-                    continue;
+                if (Path.GetFileNameWithoutExtension(assetPath) == typeName)
+                {
+                    if (asset == null)
+                        return string.Empty;
 
-                if (asset.GetClassType() == type)
-                    return guid;
+                    if (asset.GetClassType() == type)
+                        return guid;
+                }
+                else
+                {
+                    if (asset == null)
+                        continue;
+
+                    if (asset.GetClassType(true) == type)
+                        return guid;
+                }
             }
 
             return string.Empty;
