@@ -126,5 +126,19 @@
         [PublicAPI, Pure]
         public static int CountSubstrings(this string text, string substring) =>
             (text.Length - text.Replace(substring, string.Empty).Length) / substring.Length;
+
+        public static int CountChars(this string text, char character)
+        {
+            int count = 0;
+            int textLength = text.Length;
+
+            for (int i = 0; i < textLength; i++)
+            {
+                if (text[i] == character)
+                    count++;
+            }
+
+            return count;
+        }
     }
 }
