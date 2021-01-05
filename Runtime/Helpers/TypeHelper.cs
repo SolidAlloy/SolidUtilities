@@ -58,23 +58,15 @@
         }
 
         /// <summary>
-        /// Strips the generic suffix from <paramref name="typeName"/> and leaves only the type name.
-        /// It can be something like `1 or _2.
+        /// Strips the generic suffix from <paramref name="typeName"/> and leaves only the type name itself.
         /// </summary>
         /// <param name="typeName">The name of the type to strip the suffix from.</param>
         /// <returns>Type name without a generic suffix.</returns>
         [PublicAPI, Pure]
         public static string StripGenericSuffix(this string typeName)
         {
-            char[] separators = { '_', '`' };
-            int separatorIndex = typeName.LastIndexOfAny(separators);
-
-            if (separatorIndex == -1 || typeName.Length == separatorIndex + 1)
-                return typeName;
-
-            return char.IsDigit(typeName[separatorIndex + 1])
-                ? typeName.Substring(0, separatorIndex)
-                : typeName;
+            int separatorIndex = typeName.IndexOf('`');
+            return separatorIndex == -1 ? typeName : typeName.Substring(0, separatorIndex);
         }
 
         /// <summary>
