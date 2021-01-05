@@ -6,7 +6,6 @@
     using UnityEditor;
     using UnityEngine;
 
-    [Flags]
     [PublicAPI]
     public enum LogModes
     {

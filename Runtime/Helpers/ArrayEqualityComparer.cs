@@ -1,6 +1,7 @@
 ﻿namespace SolidUtilities.Helpers
 {
     using System.Collections.Generic;
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Generic EqualityComparer for an array of <typeparamref name="T"/> that allows for quick equality check of arrays
@@ -8,7 +9,7 @@
     /// Note that elements of the array must correctly pass equality check for this (override <see cref="object.Equals"/>).
     /// </summary>
     /// <typeparam name="T">The type of array elements.</typeparam>
-    public sealed class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
+    public class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
     {
         private readonly EqualityComparer<T> _elementComparer;
 
@@ -18,11 +19,13 @@
         /// <param name="customElementComparer">
         /// Custom element comparer. Uses <see cref="EqualityComparer&lt;T>.Default"/> by default.
         /// </param>
+        [PublicAPI]
         public ArrayEqualityComparer(EqualityComparer<T> customElementComparer = null)
         {
             _elementComparer = customElementComparer ?? EqualityComparer<T>.Default;
         }
 
+        [PublicAPI]
         public bool Equals(T[] first, T[] second)
         {
             if (first == second)
@@ -45,6 +48,7 @@
             return true;
         }
 
+        [PublicAPI]
         public int GetHashCode(T[] array)
         {
             unchecked
