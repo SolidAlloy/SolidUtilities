@@ -153,9 +153,7 @@
         /// </code></example>
         [PublicAPI] public static bool InheritsFrom(this Type typeToCheck, Type baseType)
         {
-            bool subClassOfRawGeneric = false;
-            if (baseType.IsGenericType)
-                subClassOfRawGeneric = typeToCheck.IsSubclassOfRawGeneric(baseType);
+            bool subClassOfRawGeneric = baseType.IsGenericType && typeToCheck.IsSubclassOfRawGeneric(baseType);
 
             return baseType.IsAssignableFrom(typeToCheck) || subClassOfRawGeneric;
         }
@@ -208,6 +206,19 @@
         {
             // GetCustomAttributes() skips a number of null checks and a pretty long method call chain.
             return type.GetCustomAttributes(typeof(T), true).Length != 0;
+        }
+
+        /// <summary>
+        /// Gets the short name of the assembly where the type is defined. For example, typeof(string) will return "mscorlib".
+        /// </summary>
+        /// <param name="type">The type which assembly name to search for.</param>
+        /// <returns>Assembly name without the .dll extension.</returns>
+        [PublicAPI, Pure]
+        public static string GetShortAssemblyName(this Type type)
+        {
+            string assemblyFullName = type.Assembly.FullName;
+            int commaIndex = assemblyFullName.IndexOf(',');
+            return assemblyFullName.Substring(0, commaIndex);
         }
     }
 }
