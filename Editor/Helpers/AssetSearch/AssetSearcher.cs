@@ -94,40 +94,45 @@
         /// Gets the GUID of an asset where the type is located.
         /// </summary>
         /// <param name="type">Type to search for in assets.</param>
-        /// <returns>GUID of the asset where the type is located or <see cref="string.Empty"/> if the asset was not found.</returns>
-        [PublicAPI, NotNull]
-        public static string GetClassGUID(Type type)
+        /// <param name="GUID">GUID of the asset where the type is located, or <c>null</c> if the asset was not found.</param>
+        /// <param name="monoScript">MonoScript of the asset where the type is located, or <c>null</c> if the asset was not found.</param>
+        /// <returns><c>true</c> if the asset with the specified type was found.</returns>
+        [PublicAPI]
+        [ContractAnnotation("=> true, GUID: notnull; => false, GUID: null")]
+        public static bool GetAssetDetails(Type type, [CanBeNull] out string GUID, out MonoScript monoScript)
         {
+            GUID = string.Empty;
+            monoScript = null;
+
             if (type == null)
-                return string.Empty;
+                return false;
 
-            string typeName = type.Name;
-            var guids = AssetDatabase.FindAssets($"t:MonoScript {typeName.StripGenericSuffix()}");
+            if (type.IsGenericType)
+                type = type.GetGenericTypeDefinition();
 
-            foreach (string guid in guids)
+            foreach (string guid in AssetDatabase.FindAssets($"t:MonoScript {type.Name.StripGenericSuffix()}"))
             {
                 string assetPath = AssetDatabase.GUIDToAssetPath(guid);
                 var asset = AssetDatabase.LoadAssetAtPath<MonoScript>(assetPath);
 
-                if (Path.GetFileNameWithoutExtension(assetPath) == typeName)
-                {
-                    if (asset == null)
-                        return string.Empty;
+                if (asset is null || asset.GetClassType() != type)
+                    continue;
 
-                    if (asset.GetClassType() == type)
-                        return guid;
-                }
-                else
-                {
-                    if (asset == null)
-                        continue;
-
-                    if (asset.GetClassType(true) == type)
-                        return guid;
-                }
+                GUID = guid;
+                monoScript = asset;
+                return true;
             }
 
-            return string.Empty;
+            return false;
+        }
+
+        public static string GetClassGUID(Type type) =>
+            GetAssetDetails(type, out string guid, out MonoScript _) ? guid : string.Empty;
+
+        public static MonoScript GetMonoScriptFromType(Type type)
+        {
+            GetAssetDetails(type, out string _, out MonoScript monoScript);
+            return monoScript;
         }
 
         private static List<FoundObject> FindObjectsInFile(string assetPath, string variableName,
