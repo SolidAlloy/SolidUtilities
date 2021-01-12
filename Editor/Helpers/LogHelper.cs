@@ -1,10 +1,7 @@
 ﻿namespace SolidUtilities.Editor.Helpers
 {
-    using System;
-    using System.Reflection;
     using JetBrains.Annotations;
-    using UnityEditor;
-    using UnityEngine;
+    using UnityEditorInternals;
 
     [PublicAPI]
     public enum LogModes
@@ -39,30 +36,12 @@
     /// </summary>
     public static class LogHelper
     {
-        private static readonly MethodInfo RemoveLogEntriesByModeMethod;
-
-        static LogHelper()
-        {
-            const string logEntryClassName = "UnityEditor.LogEntry";
-            const string removeLogMethodName = "RemoveLogEntriesByMode";
-
-            var editorAssembly = Assembly.GetAssembly(typeof(Editor));
-            Type logEntryType = editorAssembly.GetType(logEntryClassName);
-            RemoveLogEntriesByModeMethod = logEntryType.GetMethod(removeLogMethodName, BindingFlags.NonPublic | BindingFlags.Static);
-
-            if (RemoveLogEntriesByModeMethod == null)
-            {
-                Debug.LogError($"Could not find the {logEntryClassName}.{removeLogMethodName}() method. " +
-                               "Please submit an issue and specify your Unity version: https://github.com/SolidAlloy/SolidUtilities/issues/new");
-            }
-        }
-
         /// <summary> Removes log entries that match <paramref name="mode"/> from console. </summary>
         /// <param name="mode">Mode of the log entries to remove.</param>
         [PublicAPI]
         public static void RemoveLogEntriesByMode(LogModes mode)
         {
-            RemoveLogEntriesByModeMethod?.Invoke(null, new object[] { mode });
+            LogEntry.Internal_RemoveLogEntriesByMode((int) mode);
         }
     }
 }

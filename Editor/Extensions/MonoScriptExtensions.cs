@@ -7,7 +7,7 @@
     using JetBrains.Annotations;
     using SolidUtilities.Extensions;
     using UnityEditor;
-    using UnityEngine.Assertions;
+    using UnityEditorInternals;
 
     public static class MonoScriptExtensions
     {
@@ -75,11 +75,7 @@
         /// </returns>
         [PublicAPI, NotNull] public static string GetAssemblyName(this MonoScript script)
         {
-            MethodInfo getAssemblyNameMethod = typeof(MonoScript)
-                .GetMethod("GetAssemblyName", BindingFlags.NonPublic | BindingFlags.Instance);
-
-            Assert.IsNotNull(getAssemblyNameMethod);
-            string assemblyName = (string) getAssemblyNameMethod.Invoke(script, null);
+            string assemblyName = script.Internal_GetAssemblyName();
             string assemblyNameWithoutExtension = assemblyName.Split('.')[0];
             return assemblyNameWithoutExtension;
         }
