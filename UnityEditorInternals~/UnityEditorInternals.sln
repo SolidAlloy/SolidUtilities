@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEditorInternals", "UnityEditorInternals\UnityEditorInternals.csproj", "{94677F00-FD8E-4E12-BC4F-91BF3371C309}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEngineInternals", "UnityEngineInternals\UnityEngineInternals.csproj", "{0ECCC8A8-BCF8-4429-A35C-05C9FFD4741C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{94677F00-FD8E-4E12-BC4F-91BF3371C309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94677F00-FD8E-4E12-BC4F-91BF3371C309}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94677F00-FD8E-4E12-BC4F-91BF3371C309}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94677F00-FD8E-4E12-BC4F-91BF3371C309}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ECCC8A8-BCF8-4429-A35C-05C9FFD4741C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ECCC8A8-BCF8-4429-A35C-05C9FFD4741C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ECCC8A8-BCF8-4429-A35C-05C9FFD4741C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ECCC8A8-BCF8-4429-A35C-05C9FFD4741C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
