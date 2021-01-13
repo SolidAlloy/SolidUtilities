@@ -2,7 +2,7 @@
 {
     using UnityEditor;
 
-    public static class MonoScriptProxy
+    public static class MonoImporterProxy
     {
         public static void CopyMonoScriptIconToImporters(MonoScript script) => MonoImporter.CopyMonoScriptIconToImporters(script);
     }
