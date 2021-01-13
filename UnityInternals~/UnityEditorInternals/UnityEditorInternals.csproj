@@ -47,7 +47,7 @@
         <Compile Include="EditorGUIUtilityProxy.cs" />
         <Compile Include="LogEntry.cs" />
         <Compile Include="MonoScriptExtensions.cs" />
-        <Compile Include="MonoScriptProxy.cs" />
+        <Compile Include="MonoImporterProxy.cs" />
         <Compile Include="PropertyDrawerExtensions.cs" />
     </ItemGroup>
     <ItemGroup>
