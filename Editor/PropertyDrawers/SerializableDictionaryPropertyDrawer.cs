@@ -12,26 +12,27 @@
     [CustomPropertyDrawer(typeof(SerializableDictionary<,>), true)]
     public class SerializableDictionaryPropertyDrawer : PropertyDrawer
     {
+        // TODO: Reflection access to already public properties is very inefficient. Need to rewrite the drawer to get rid of reflection.
         private const string KeysFieldName = "_keys";
         private const string ValuesFieldName = "_values";
         private const float IndentWidth = 15f;
 
-        private static readonly GUIContent IconPlus = IconContent("Toolbar Plus", "Add entry");
-        private static readonly GUIContent IconMinus = IconContent("Toolbar Minus", "Remove entry");
+        private static readonly GUIContent _iconPlus = IconContent("Toolbar Plus", "Add entry");
+        private static readonly GUIContent _iconMinus = IconContent("Toolbar Minus", "Remove entry");
 
-        private static readonly GUIContent WarningIconConflict =
+        private static readonly GUIContent _warningIconConflict =
             IconContent("console.warnicon.sml", "Conflicting key, this entry will be lost");
 
-        private static readonly GUIContent WarningIconOther = IconContent("console.infoicon.sml", "Conflicting key");
+        private static readonly GUIContent _warningIconOther = IconContent("console.infoicon.sml", "Conflicting key");
 
-        private static readonly GUIContent WarningIconNull =
+        private static readonly GUIContent _warningIconNull =
             IconContent("console.warnicon.sml", "Null key, this entry will be lost");
 
-        private static readonly GUIStyle ButtonStyle = GUIStyle.none;
+        private static readonly GUIStyle _buttonStyle = GUIStyle.none;
         private static readonly GUIContent _tempContent = new GUIContent();
-        private static readonly Dictionary<SerializedPropertyType, PropertyInfo> SerializedPropertyValueAccessorsDict;
+        private static readonly Dictionary<SerializedPropertyType, PropertyInfo> _serializedPropertyValueAccessorsDict;
 
-        private static readonly Dictionary<PropertyIdentity, ConflictState> ConflictStateDict =
+        private static readonly Dictionary<PropertyIdentity, ConflictState> _conflictStateDict =
             new Dictionary<PropertyIdentity, ConflictState>();
 
         static SerializableDictionaryPropertyDrawer()
@@ -58,13 +59,13 @@
             };
             Type serializedPropertyType = typeof(SerializedProperty);
 
-            SerializedPropertyValueAccessorsDict = new Dictionary<SerializedPropertyType, PropertyInfo>();
+            _serializedPropertyValueAccessorsDict = new Dictionary<SerializedPropertyType, PropertyInfo>();
             const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public;
 
             foreach (var kvp in serializedPropertyValueAccessorsNameDict)
             {
                 PropertyInfo propertyInfo = serializedPropertyType.GetProperty(kvp.Value, flags);
-                SerializedPropertyValueAccessorsDict.Add(kvp.Key, propertyInfo);
+                _serializedPropertyValueAccessorsDict.Add(kvp.Key, propertyInfo);
             }
         }
 
@@ -104,12 +105,12 @@
                 }
             }
 
-            float buttonWidth = ButtonStyle.CalcSize(IconPlus).x;
+            float buttonWidth = _buttonStyle.CalcSize(_iconPlus).x;
 
             Rect labelPosition = position;
             labelPosition.height = EditorGUIUtility.singleLineHeight;
             if (property.isExpanded)
-                labelPosition.xMax -= ButtonStyle.CalcSize(IconPlus).x;
+                labelPosition.xMax -= _buttonStyle.CalcSize(_iconPlus).x;
 
             EditorGUI.PropertyField(labelPosition, property, label, false);
 
@@ -119,7 +120,7 @@
                 buttonPosition.xMin = buttonPosition.xMax - buttonWidth;
                 buttonPosition.height = EditorGUIUtility.singleLineHeight;
                 EditorGUI.BeginDisabledGroup(conflictState.ConflictIndex != -1);
-                if (GUI.Button(buttonPosition, IconPlus, ButtonStyle))
+                if (GUI.Button(buttonPosition, _iconPlus, _buttonStyle))
                 {
                     buttonAction = Action.Add;
                     buttonActionIndex = keyArrayProperty.arraySize;
@@ -143,7 +144,7 @@
                     buttonPosition = linePosition;
                     buttonPosition.x = linePosition.xMax;
                     buttonPosition.height = EditorGUIUtility.singleLineHeight;
-                    if (GUI.Button(buttonPosition, IconMinus, ButtonStyle))
+                    if (GUI.Button(buttonPosition, _iconMinus, _buttonStyle))
                     {
                         buttonAction = Action.Remove;
                         buttonActionIndex = i;
@@ -152,20 +153,20 @@
                     if (i == conflictState.ConflictIndex && conflictState.ConflictOtherIndex == -1)
                     {
                         Rect iconPosition = linePosition;
-                        iconPosition.size = ButtonStyle.CalcSize(WarningIconNull);
-                        GUI.Label(iconPosition, WarningIconNull);
+                        iconPosition.size = _buttonStyle.CalcSize(_warningIconNull);
+                        GUI.Label(iconPosition, _warningIconNull);
                     }
                     else if (i == conflictState.ConflictIndex)
                     {
                         Rect iconPosition = linePosition;
-                        iconPosition.size = ButtonStyle.CalcSize(WarningIconConflict);
-                        GUI.Label(iconPosition, WarningIconConflict);
+                        iconPosition.size = _buttonStyle.CalcSize(_warningIconConflict);
+                        GUI.Label(iconPosition, _warningIconConflict);
                     }
                     else if (i == conflictState.ConflictOtherIndex)
                     {
                         Rect iconPosition = linePosition;
-                        iconPosition.size = ButtonStyle.CalcSize(WarningIconOther);
-                        GUI.Label(iconPosition, WarningIconOther);
+                        iconPosition.size = _buttonStyle.CalcSize(_warningIconOther);
+                        GUI.Label(iconPosition, _warningIconOther);
                     }
 
                     linePosition.y += lineHeight;
@@ -384,10 +385,10 @@
         private static ConflictState GetConflictState(SerializedProperty property)
         {
             var propId = new PropertyIdentity(property);
-            if ( ! ConflictStateDict.TryGetValue(propId, out ConflictState conflictState))
+            if ( ! _conflictStateDict.TryGetValue(propId, out ConflictState conflictState))
             {
                 conflictState = new ConflictState();
-                ConflictStateDict.Add(propId, conflictState);
+                _conflictStateDict.Add(propId, conflictState);
             }
 
             return conflictState;
@@ -417,7 +418,7 @@
 
         private static object GetPropertyValue(SerializedProperty p)
         {
-            if (SerializedPropertyValueAccessorsDict.TryGetValue(p.propertyType, out PropertyInfo propertyInfo))
+            if (_serializedPropertyValueAccessorsDict.TryGetValue(p.propertyType, out PropertyInfo propertyInfo))
                 return propertyInfo.GetValue(p, null);
 
             return p.isArray ? GetPropertyValueArray(p) : GetPropertyValueGeneric(p);
@@ -425,7 +426,7 @@
 
         private static void SetPropertyValue(SerializedProperty p, object v)
         {
-            if (SerializedPropertyValueAccessorsDict.TryGetValue(p.propertyType, out PropertyInfo propertyInfo))
+            if (_serializedPropertyValueAccessorsDict.TryGetValue(p.propertyType, out PropertyInfo propertyInfo))
             {
                 propertyInfo.SetValue(p, v, null);
             }
