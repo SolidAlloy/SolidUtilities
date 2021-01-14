@@ -16,7 +16,7 @@
     /// <see cref="ValuesCollection"/> is also increased (note that they must be used instead of
     /// <see cref="Keys"/> and <see cref="Values"/>)
     /// </remarks>
-    internal class FastIterationDictionary<TKey, TValue> : IDictionary<TKey, TValue>
+    public class FastIterationDictionary<TKey, TValue> : IDictionary<TKey, TValue>
     {
         private readonly List<TKey> _keys;
         private readonly List<TValue> _values;
