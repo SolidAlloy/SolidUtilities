@@ -30,9 +30,9 @@
     {
       Texture2D newTexture = null;
 
-      TextureHelper.WithSRGBWrite(() =>
+      using (new TextureHelper.SRGBWriteScope(true))
       {
-        TextureHelper.WithTemporaryActiveTexture(Default.width, Default.height, 0, temporary =>
+        using (var temporary = new TemporaryActiveTexture(Default.width, Default.height, 0))
         {
           GL.Clear(false, true, new Color(1f, 1f, 1f, 0f));
           Graphics.Blit(Default, temporary, material);
@@ -45,8 +45,8 @@
           newTexture.ReadPixels(new Rect(0.0f, 0.0f, Default.width, Default.width), 0, 0);
           newTexture.alphaIsTransparency = true;
           newTexture.Apply();
-        });
-      });
+        }
+      }
 
       return newTexture;
     }

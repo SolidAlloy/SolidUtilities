@@ -1,20 +1,17 @@
 ﻿namespace SolidUtilities.Editor.Helpers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using JetBrains.Annotations;
-    using SolidUtilities.Helpers;
     using UnityEditor;
     using UnityEngine;
     using Object = UnityEngine.Object;
 
 #if !UNITY_2020_1_OR_NEWER
-    using System.Reflection;
+    using UnityEditorInternals;
 #endif
 
     /// <summary>Different useful methods that simplify <see cref="EditorGUILayout"/> API.</summary>
-    public static class EditorDrawHelper
+    public static partial class EditorDrawHelper
     {
         /// <summary>
         /// Cache that creates <see cref="GUIContent"/> instances and keeps them, reducing the garbage
@@ -22,22 +19,9 @@
         /// </summary>
         public static readonly ContentCache ContentCache = new ContentCache();
 
-        private const float PlaceholderIndent = 14f;
-
         // EditorStyles built-in styles may not be initialized yet when EditorDrawHelper static constructor is called,
         // and it will cause NullReferenceException, so GUIStyles are initialized inside properties instead.
-        private static GUIStyle _searchToolbarStyle;
         private static GUIStyle _infoMessageStyle;
-        private static GUIStyle _placeholderStyle;
-
-        private static GUIStyle SearchToolbarStyle =>
-            _searchToolbarStyle ?? (_searchToolbarStyle = new GUIStyle(EditorStyles.toolbar)
-            {
-                padding = new RectOffset(0, 0, 0, 0),
-                stretchHeight = true,
-                stretchWidth = true,
-                fixedHeight = 0f
-            });
 
         private static GUIStyle InfoMessageStyle =>
             _infoMessageStyle ?? (_infoMessageStyle = new GUIStyle("HelpBox")
@@ -46,6 +30,8 @@
                 fontSize = 10,
                 richText = true
             });
+
+        private static GUIStyle _placeholderStyle;
 
         private static GUIStyle PlaceholderStyle =>
             _placeholderStyle ?? (_placeholderStyle = new GUIStyle(EditorStyles.centeredGreyMiniLabel)
@@ -153,24 +139,6 @@
             EditorGUI.DrawRect(bottomBorder, color);
         }
 
-        /// <summary>Draws search toolbar with the search toolbar style.</summary>
-        /// <param name="drawToolbar">Action that draws the toolbar.</param>
-        /// <param name="toolbarHeight">Height of the toolbar.</param>
-        /// <example><code>
-        /// EditorDrawHelper.DrawWithSearchToolbarStyle(DrawSearchToolbar, DropdownStyle.SearchToolbarHeight);
-        /// </code></example>
-        [PublicAPI] public static void DrawWithSearchToolbarStyle(Action drawToolbar, float toolbarHeight)
-        {
-            EditorGUILayout.BeginHorizontal(
-                SearchToolbarStyle,
-                GUILayout.Height(toolbarHeight),
-                DrawHelper.ExpandWidth(false));
-
-            drawToolbar();
-
-            EditorGUILayout.EndHorizontal();
-        }
-
         /// <summary>Shows the info message.</summary>
         /// <param name="message">The message to output.</param>
         /// <example><code>EditorDrawHelper.DrawInfoMessage("No types to select.");</code></example>
@@ -210,68 +178,19 @@
         /// </code></example>
         [PublicAPI] public static string FocusedTextField(Rect rect, string text, string placeholder, GUIStyle style, string controlName)
         {
+            const float placeholderIndent = 14f;
+
             GUI.SetNextControlName(controlName);
             text = EditorGUI.TextField(rect, text, style);
             EditorGUI.FocusTextInControl(controlName);
 
             if (Event.current.type == EventType.Repaint && string.IsNullOrEmpty(text))
             {
-                var placeHolderArea = new Rect(rect.x + PlaceholderIndent, rect.y, rect.width - PlaceholderIndent, rect.height);
+                var placeHolderArea = new Rect(rect.x + placeholderIndent, rect.y, rect.width - placeholderIndent, rect.height);
                 GUI.Label(placeHolderArea, ContentCache.GetItem(placeholder), PlaceholderStyle);
             }
 
             return text;
-        }
-
-        /// <summary>
-        /// Sets <see cref="EditorGUI.showMixedValue"/> to the needed value temporarily and draws the content.
-        /// </summary>
-        /// <param name="showMixedValue">Whether to show mixed value.</param>
-        /// <param name="drawAction">
-        /// The action to draw content while <see cref="EditorGUI.showMixedValue"/> is set to
-        /// <paramref name="showMixedValue"/>.
-        /// </param>
-        /// <example><code>
-        /// EditorDrawHelper.WhileShowingMixedValue(
-        ///     _serializedTypeRef.TypeNameHasMultipleDifferentValues,
-        ///     DrawTypeSelectionControl);
-        /// </code></example>
-        [PublicAPI] public static void WhileShowingMixedValue(bool showMixedValue, Action drawAction)
-        {
-            bool valueToRestore = EditorGUI.showMixedValue;
-            EditorGUI.showMixedValue = showMixedValue;
-            drawAction();
-            EditorGUI.showMixedValue = valueToRestore;
-        }
-
-        /// <summary>
-        /// Draw content in a property wrapper, useful for making regular GUI controls work with SerializedProperty.
-        /// </summary>
-        /// <param name="position">Rectangle on the screen to use for the control, including label if applicable.</param>
-        /// <param name="label">Optional label in front of the slider. Use null to use the name from the
-        /// SerializedProperty. Use GUIContent.none to not display a label.</param>
-        /// <param name="property">The SerializedProperty to use for the control.</param>
-        /// <param name="drawContent">The action to draw content for the property.</param>
-        [PublicAPI]
-        public static void InPropertyWrapper(Rect position, GUIContent label, SerializedProperty property, Action drawContent)
-        {
-            EditorGUI.BeginProperty(position, label, property);
-            drawContent();
-            EditorGUI.EndProperty();
-        }
-
-        /// <summary>
-        /// Draws content with the specified indent level.
-        /// </summary>
-        /// <param name="indentLevel">The indent level to set while drawing content.</param>
-        /// <param name="drawContent">The action that draws content.</param>
-        [PublicAPI]
-        public static void DrawWithIndentLevel(int indentLevel, Action drawContent)
-        {
-            int previousIndentLevel = EditorGUI.indentLevel;
-            EditorGUI.indentLevel = indentLevel;
-            drawContent();
-            EditorGUI.indentLevel = previousIndentLevel;
         }
 
         /// <summary>Creates an editor of type <typeparamref name="T"/> for <paramref name="targetObject"/>.</summary>
@@ -318,45 +237,8 @@
 #if UNITY_2020_1_OR_NEWER
             return EditorGUIUtility.GetMainWindowPosition();
 #else
-            const int mainWindowIndex = 4;
-            const string showModeName = "m_ShowMode";
-            const string positionName = "position";
-            const string containerWindowName = "ContainerWindow";
-
-            Type containerWinType = AppDomain.CurrentDomain
-                .GetAllDerivedTypes(typeof(ScriptableObject))
-                .FirstOrDefault(type => type.Name == containerWindowName);
-
-            if (containerWinType == null)
-                throw new MissingMemberException($"Can't find internal type {containerWindowName}. Maybe something has changed inside Unity.");
-
-            FieldInfo showModeField = containerWinType.GetField(showModeName, BindingFlags.NonPublic | BindingFlags.Instance);
-            PropertyInfo positionProperty = containerWinType.GetProperty(positionName, BindingFlags.Public | BindingFlags.Instance);
-
-            if (showModeField == null || positionProperty == null)
-                throw new MissingFieldException($"Can't find internal fields '{showModeName}' or '{positionName}'. Maybe something has changed inside Unity.");
-
-            var windows = Resources.FindObjectsOfTypeAll(containerWinType);
-
-            foreach (Object win in windows)
-            {
-                if ((int) showModeField.GetValue(win) != mainWindowIndex)
-                    continue;
-
-                return (Rect)positionProperty.GetValue(win, null);
-            }
-
-            throw new NotSupportedException("Can't find internal main window. Maybe something has changed inside Unity");
+            return EditorGUIUtilityProxy.GetMainWindowPosition();
 #endif
-        }
-
-        [UsedImplicitly]
-        private static IEnumerable<Type> GetAllDerivedTypes(this AppDomain appDomain, Type parentType)
-        {
-            return from assembly in appDomain.GetAssemblies()
-                from assemblyType in assembly.GetTypes()
-                where assemblyType.IsSubclassOf(parentType)
-                select assemblyType;
         }
     }
 }

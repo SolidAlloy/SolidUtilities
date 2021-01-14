@@ -15,10 +15,10 @@
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            DrawHelper.WithDisabledGUI(() =>
+            using (new EditorGUI.DisabledScope(true))
             {
                 EditorGUI.PropertyField(position, property, label, true);
-            });
+            }
         }
     }
 }
