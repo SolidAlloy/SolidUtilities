@@ -8,7 +8,7 @@
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>SolidUtilities.UnityEditorInternals</RootNamespace>
-        <AssemblyName>UnityEditorInternals</AssemblyName>
+        <!-- Unity.InternalAPIEditorBridgeDev.001 UnityEditorInternals -->
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <_OutputCopyLocation>..\..\</_OutputCopyLocation>
@@ -22,6 +22,7 @@
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
+        <AssemblyName>Unity.InternalAPIEditorBridgeDev.001</AssemblyName>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +32,7 @@
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
+        <AssemblyName>UnityEditorInternals</AssemblyName>
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="System" />
@@ -45,8 +47,6 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="EditorGUIUtilityProxy.cs" />
-        <Compile Include="GenericObjectField\EditorGUIHelper.cs" />
-        <Compile Include="GenericObjectField\ObjectSelectorExtensions.cs" />
         <Compile Include="LogEntry.cs" />
         <Compile Include="MonoScriptExtensions.cs" />
         <Compile Include="MonoImporterProxy.cs" />
@@ -59,17 +59,17 @@
       </PackageReference>
     </ItemGroup>
     <ItemGroup>
+      <Folder Include="GenericObjectField" />
       <Folder Include="Properties" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
          Other similar extension points exist, see Microsoft.Common.targets.
-    <Target Name="BeforeBuild">
-    </Target>
     -->
+
     <Target Name="AfterBuild">
         <ItemGroup> <_FilesToCopy Include="$(OutputPath)$(AssemblyName).dll" /> </ItemGroup>
-        <Copy SourceFiles="@(_FilesToCopy)" DestinationFiles="@(_FilesToCopy->'$(_OutputCopyLocation)%(RecursiveDir)%(Filename)%(Extension)')" />
+        <Copy SourceFiles="@(_FilesToCopy)" DestinationFiles="@(_FilesToCopy->'$(_OutputCopyLocation)%(RecursiveDir)UnityEditorInternals%(Extension)')" />
     </Target>
 
 </Project>
