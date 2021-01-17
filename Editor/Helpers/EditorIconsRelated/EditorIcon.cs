@@ -8,7 +8,8 @@
   /// Icon that can have different tints depending on its state: active, highlighted, etc. Useful for creating custom
   /// inspectors and drawers.
   /// </summary>
-  [PublicAPI] public class EditorIcon
+  [PublicAPI]
+  public readonly struct EditorIcon
   {
     /// <summary>Icon with the default color.</summary>
     public readonly Texture2D Default;
@@ -22,6 +23,9 @@
     public EditorIcon(Texture2D icon)
     {
       Default = icon;
+      Highlighted = null;
+      Active = null;
+
       Highlighted = GetIconWithMaterial(EditorIcons.Database.Highlighted);
       Active = GetIconWithMaterial(EditorIcons.Database.Active);
     }

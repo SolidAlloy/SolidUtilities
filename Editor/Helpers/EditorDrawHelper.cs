@@ -42,8 +42,6 @@
             });
 
         /// <summary>Draws content in an automatically laid out scroll view.</summary>
-        /// <param name="scrollPos">Position of the thumb.</param>
-        /// <param name="drawContent">Action that draws the content in the scroll view.</param>
         /// <returns>The new thumb position.</returns>
         /// <example><code>
         /// _thumbPos = EditorDrawHelper.DrawInScrollView(_thumbPos, () =>
@@ -52,67 +50,94 @@
         ///         DropdownStyle.BackgroundColor);
         /// });
         /// </code></example>
-        [PublicAPI] public static Vector2 DrawInScrollView(Vector2 scrollPos, Action drawContent)
+        public readonly struct ScrollView : IDisposable
         {
-            scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
-            drawContent();
-            EditorGUILayout.EndScrollView();
-            return scrollPos;
+            private static readonly GUILayoutOption[] _dontExpandHeight = { GUILayout.ExpandHeight(false) };
+
+            /// <summary>Draws content in an automatically laid out scroll view.</summary>
+            /// <param name="scrollPos">
+            /// Position of the thumb that is changed to the new thumb position upon <see cref="ScrollView"/> initialization.
+            /// </param>
+            public ScrollView(ref Vector2 scrollPos)
+            {
+                scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
+            }
+
+            /// <summary>
+            /// Draws content in an automatically laid out scroll view.
+            /// </summary>
+            /// <param name="scrollPos">
+            /// Position of the thumb that is changed to the new thumb position upon <see cref="ScrollView"/> initialization.
+            /// </param>
+            /// <param name="visible">
+            /// Whether scrollbar should be visible (it may not be visible if the list is short enough to fit the window.)
+            /// </param>
+            public ScrollView(ref Vector2 scrollPos, bool visible)
+            {
+                scrollPos = visible
+                    ? EditorGUILayout.BeginScrollView(scrollPos, _dontExpandHeight)
+                    : EditorGUILayout.BeginScrollView(scrollPos, GUIStyle.none, GUIStyle.none, _dontExpandHeight);
+            }
+
+            public void Dispose()
+            {
+                EditorGUILayout.EndScrollView();
+            }
         }
 
         /// <summary>Draws content in the vertical direction.</summary>
-        /// <param name="drawContent">Action that draws the content.</param>
-        /// <param name="option">Option to draw the vertical group with.</param>
-        /// <param name="backgroundColor">Background of the vertical group rectangle.</param>
-        /// <returns>Height of the vertical group rectangle.</returns>
         /// <example><code>
-        /// float contentHeight = EditorDrawHelper.DrawVertically(_selectionTree.Draw, _preventExpandingHeight,
-        ///     DropdownStyle.BackgroundColor);
-        /// </code></example>
-        [PublicAPI] public static float DrawVertically(Action drawContent, GUILayoutOption option, Color backgroundColor)
-        {
-            Rect rect = EditorGUILayout.BeginVertical(option);
-            EditorGUI.DrawRect(rect, backgroundColor);
-            drawContent();
-            EditorGUILayout.EndVertical();
-            return rect.height;
-        }
-
-        /// <summary>Draws content in the vertical direction.</summary>
-        /// <param name="drawContent">Action that draws the content.</param>
-        /// <returns>Rectangle of the vertical group.</returns>
-        /// <example><code>
-        /// Rect newWholeListRect = EditorDrawHelper.DrawVertically(() =>
+        /// using (new EditorDrawHelper.VerticalBlock(_preventExpandingHeight, DropdownStyle.BackgroundColor, out float contentHeight))
         /// {
-        ///     for (int index = 0; index &lt; nodes.Count; ++index)
-        ///         nodes[index].DrawSelfAndChildren(0, visibleRect);
-        /// });
-        /// </code></example>
-        [PublicAPI] public static Rect DrawVertically(Action drawContent)
-        {
-            Rect rect = EditorGUILayout.BeginVertical();
-            drawContent();
-            EditorGUILayout.EndVertical();
-            return rect;
-        }
-
-        /// <summary>Draws content in the vertical direction.</summary>
-        /// <param name="drawContent">Action that draws the content.</param>
-        /// <example><code>
-        /// EditorDrawHelper.DrawVertically(windowRect =>
-        /// {
-        ///     if (Event.current.type == EventType.Repaint)
-        ///         _windowRect = windowRect;
+        ///     _selectionTree.Draw();
         ///
-        ///     for (int index = 0; index &lt; nodes.Count; ++index)
-        ///         nodes[index].DrawSelfAndChildren(0, visibleRect);
-        /// });
+        ///     if (Event.current.type == EventType.Repaint)
+        ///         _contentHeight = contentHeight;
+        /// }
         /// </code></example>
-        [PublicAPI] public static void DrawVertically(Action<Rect> drawContent)
+        public readonly struct VerticalBlock : IDisposable
         {
-            Rect rect = EditorGUILayout.BeginVertical();
-            drawContent(rect);
-            EditorGUILayout.EndVertical();
+            private static readonly GUILayoutOption[] _options = new GUILayoutOption[1];
+
+            /// <summary>Draws content in the vertical direction.</summary>
+            /// <param name="option">Option to draw the vertical group with.</param>
+            /// <param name="backgroundColor">Background of the vertical group rectangle.</param>
+            /// <param name="height">Height of the vertical group rectangle.</param>
+            /// <example><code>
+            /// using (new EditorDrawHelper.VerticalBlock(_preventExpandingHeight, DropdownStyle.BackgroundColor, out float contentHeight))
+            /// {
+            ///     _selectionTree.Draw();
+            ///
+            ///     if (Event.current.type == EventType.Repaint)
+            ///         _contentHeight = contentHeight;
+            /// }
+            /// </code></example>
+            public VerticalBlock(GUILayoutOption option, Color backgroundColor, out float height)
+            {
+                _options[0] = option;
+                Rect rect = EditorGUILayout.BeginVertical(_options);
+                EditorGUI.DrawRect(rect, backgroundColor);
+                height = rect.height;
+            }
+
+            /// <summary>Draws content in the vertical direction.</summary>
+            /// <param name="rect">Rectangle of the vertical group.</param>
+            /// <example><code>
+            /// Rect newWholeListRect = EditorDrawHelper.DrawVertically(() =>
+            /// {
+            ///     for (int index = 0; index &lt; nodes.Count; ++index)
+            ///         nodes[index].DrawSelfAndChildren(0, visibleRect);
+            /// });
+            /// </code></example>
+            public VerticalBlock(out Rect rect)
+            {
+                rect = EditorGUILayout.BeginVertical((GUILayoutOption[]) null);
+            }
+
+            public void Dispose()
+            {
+                EditorGUILayout.EndVertical();
+            }
         }
 
         /// <summary>Draws borders with a given color and width around a rectangle.</summary>

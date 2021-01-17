@@ -18,6 +18,7 @@
         [PublicAPI]
         public readonly struct SearchToolbarStyle : IDisposable
         {
+            private static readonly GUILayoutOption[] _options = { DrawHelper.ExpandWidth(false), null };
             private static GUIStyle _style;
 
             private static GUIStyle Style =>
@@ -39,10 +40,11 @@
             /// </code></example>
             public SearchToolbarStyle(float toolbarHeight)
             {
+                _options[1] = GUILayout.Height(toolbarHeight);
+
                 EditorGUILayout.BeginHorizontal(
                     Style,
-                    GUILayout.Height(toolbarHeight),
-                    DrawHelper.ExpandWidth(false));
+                    _options);
             }
 
             public void Dispose()
