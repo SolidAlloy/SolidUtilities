@@ -11,6 +11,8 @@
 
     public static class MonoScriptExtensions
     {
+        private static readonly Regex _namespaceNameRegex = new Regex(@"(?<=namespace[\s]+)[\w_.-]+", RegexOptions.Compiled);
+
         /// <summary>
         /// Returns the <see cref="Type"/> of the class implemented by this script. Works for types not derived from
         /// <see cref="UnityEngine.Object"/> and generic classes (the file must be named by the "GenericClass`1.cs" template).
@@ -65,7 +67,7 @@
 
             int argsCount = className.CountChars(',') + 1;
             int bracketIndex = className.IndexOf('<');
-            return $"{className.Substring(0, bracketIndex)}`{argsCount}";
+            return $"{className.Substring(0, bracketIndex)}`{argsCount.ToString()}";
         }
 
         /// <summary>Returns the assembly name of the class implemented by this script.</summary>
@@ -76,15 +78,14 @@
         [PublicAPI, NotNull] public static string GetAssemblyName(this MonoScript script)
         {
             string assemblyName = script.Internal_GetAssemblyName();
-            string assemblyNameWithoutExtension = assemblyName.Split('.')[0];
-            return assemblyNameWithoutExtension;
+            int lastDotIndex = assemblyName.LastIndexOf('.');
+            return lastDotIndex == -1 ? string.Empty : assemblyName.Substring(0, lastDotIndex);
         }
 
         private static string GetNamespaceName(this MonoScript asset)
         {
             string content = asset.text;
-            var regex = new Regex(@"(?<=namespace[\s]+)[\w_.-]+", RegexOptions.Compiled);
-            Match match = regex.Match(content);
+            Match match = _namespaceNameRegex.Match(content);
             return match.Success ? match.Value : string.Empty;
         }
     }

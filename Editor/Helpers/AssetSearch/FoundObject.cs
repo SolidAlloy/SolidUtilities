@@ -24,14 +24,16 @@
             _details[key] = value;
         }
 
-        public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
+        public Dictionary<string, string>.Enumerator GetEnumerator() => _details.GetEnumerator();
+
+        IEnumerator<KeyValuePair<string, string>> IEnumerable<KeyValuePair<string, string>>.GetEnumerator()
         {
-            return _details.GetEnumerator();
+            return GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _details.GetEnumerator();
+            return GetEnumerator();
         }
     }
 }

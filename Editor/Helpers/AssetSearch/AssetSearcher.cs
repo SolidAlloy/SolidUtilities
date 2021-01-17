@@ -25,10 +25,10 @@
 
         private const string ScriptLinePattern = "m_Script: ";
 
-        private static readonly Regex GUIDRegex = new Regex(@"(?<=guid:[\s]+)\w+?(?=,)", RegexOptions.Compiled);
-        private static readonly Regex ObjectNameRegex = new Regex(@"(?<=m_Name:[\s]+).+?$", RegexOptions.Compiled);
-        private static readonly Regex ObjectNamePrefabRegex = new Regex(@"(?<=value:[\s]+).+?$", RegexOptions.Compiled);
-        private static readonly Regex PrefabFileIdRegex = new Regex(@"(?<=fileID:[\s]+)\d+?(?=,)", RegexOptions.Compiled);
+        private static readonly Regex _guidRegex = new Regex(@"(?<=guid:[\s]+)\w+?(?=,)", RegexOptions.Compiled);
+        private static readonly Regex _objectNameRegex = new Regex(@"(?<=m_Name:[\s]+).+?$", RegexOptions.Compiled);
+        private static readonly Regex _objectNamePrefabRegex = new Regex(@"(?<=value:[\s]+).+?$", RegexOptions.Compiled);
+        private static readonly Regex _prefabFileIdRegex = new Regex(@"(?<=fileID:[\s]+)\d+?(?=,)", RegexOptions.Compiled);
 
         /// <summary>
         /// Finds all scriptable objects, scene objects, prefabs, and their overrides that contain a variable named
@@ -236,7 +236,7 @@
             int propertyPathLineIndex = FindClosestLineBelowWithText(lines, modificationsLineIndex, "propertyPath: m_Name");
 
             string objectNameLine = lines[propertyPathLineIndex + 1];
-            string objectName = ObjectNamePrefabRegex.Find(objectNameLine);
+            string objectName = _objectNamePrefabRegex.Find(objectNameLine);
 
             // The value block in the YAML representation of the scene looks like this:
             // - target: {fileID: 4272606278695419953, guid: 9727a72804665ad4bafc0cb82f431746, type: 3}
@@ -246,8 +246,8 @@
             // FileID that is a locator of the component where the value was overriden.
             string targetLine = lines[valueLineIndex - 2];
 
-            string prefabGuid = GUIDRegex.Find(targetLine);
-            string componentFileID = PrefabFileIdRegex.Find(targetLine);
+            string prefabGuid = _guidRegex.Find(targetLine);
+            string componentFileID = _prefabFileIdRegex.Find(targetLine);
 
             string prefabPath = AssetDatabase.GUIDToAssetPath(prefabGuid);
             string[] prefabLines = File.ReadAllLines(prefabPath);
@@ -277,7 +277,7 @@
 
             // GameObject info block contains the m_Name variable that stores the name of the game object.
             int objectNameLineIndex = FindClosestLineBelowWithText(lines, gameObjectLineIndex, "m_Name:");
-            string objectName = ObjectNameRegex.Find(lines[objectNameLineIndex]);
+            string objectName = _objectNameRegex.Find(lines[objectNameLineIndex]);
 
             return new FoundObject(ObjectType.SceneObject) { { Scene, scenePath }, { Object, objectName }, { Component, componentName } };
         }
@@ -314,7 +314,7 @@
 
         private static string GetComponentNameFromScriptLine(string scriptLine)
         {
-            string componentGuid = GUIDRegex.Find(scriptLine);
+            string componentGuid = _guidRegex.Find(scriptLine);
             string scriptPath = AssetDatabase.GUIDToAssetPath(componentGuid);
             string scriptName = GetScriptNameWithoutExtension(scriptPath);
             string componentName = ObjectNames.NicifyVariableName(scriptName);

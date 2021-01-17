@@ -16,6 +16,10 @@
         public static Type GetTypeFromGUID(string guid)
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+
+            if (string.IsNullOrEmpty(assetPath))
+                return null;
+
             var script = AssetDatabase.LoadAssetAtPath<MonoScript>(assetPath);
 
             return script == null ? null : script.GetClassType();

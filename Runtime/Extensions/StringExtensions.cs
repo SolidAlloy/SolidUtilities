@@ -11,7 +11,7 @@
     {
         #region IsValidPath
 
-        private static readonly HashSet<char> InvalidFilenameChars = new HashSet<char>(Path.GetInvalidFileNameChars());
+        private static readonly HashSet<char> _invalidFilenameChars = new HashSet<char>(Path.GetInvalidFileNameChars());
 
         /// <summary>Checks if the path is a valid Unity path.</summary>
         /// <param name="path">The path to check.</param>
@@ -21,7 +21,7 @@
             return path
                 .Split('/')
                 .All(filename => ! filename.Any(
-                    character => InvalidFilenameChars.Contains(character)));
+                    character => _invalidFilenameChars.Contains(character)));
         }
 
         #endregion
@@ -48,7 +48,7 @@
                                                      IdentifierPartCharacters + ")*";
 
         // C# keywords: http://msdn.microsoft.com/en-us/library/x53a06bb(v=vs.71).aspx
-        private static readonly HashSet<string> Keywords = new HashSet<string>
+        private static readonly HashSet<string> _keywords = new HashSet<string>
         {
             "abstract",  "event",      "new",        "struct",
             "as",        "explicit",   "null",       "switch",
@@ -72,7 +72,7 @@
             "enum",      "namespace",  "string"
         };
 
-        private static readonly Regex ValidIdentifierRegex = new Regex("^" + IdentifierOrKeyword + "$", RegexOptions.Compiled);
+        private static readonly Regex _validIdentifierRegex = new Regex("^" + IdentifierOrKeyword + "$", RegexOptions.Compiled);
 
         /// <summary>Checks whether a string is a valid identifier (class name, namespace name, etc.)</summary>
         /// <param name="identifier">The string to check.</param>
@@ -94,11 +94,11 @@
             string normalizedIdentifier = identifier.Normalize();
 
             // 1. check that the identifier matches the valid identifier regex and it's not a C# keyword
-            if (ValidIdentifierRegex.IsMatch(normalizedIdentifier) && ! Keywords.Contains(normalizedIdentifier))
+            if (_validIdentifierRegex.IsMatch(normalizedIdentifier) && ! _keywords.Contains(normalizedIdentifier))
                 return true;
 
             // 2. check if the identifier starts with @
-            return normalizedIdentifier.StartsWith("@") && ValidIdentifierRegex.IsMatch(normalizedIdentifier.Substring(1));
+            return normalizedIdentifier.StartsWith("@") && _validIdentifierRegex.IsMatch(normalizedIdentifier.Substring(1));
         }
 
         #endregion

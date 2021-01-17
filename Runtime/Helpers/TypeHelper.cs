@@ -7,7 +7,7 @@
     /// <summary>Different helper functions for <see cref="System.Type"/></summary>
     public static class TypeHelper
     {
-        private static readonly Dictionary<string, string> BuiltInTypes = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> _builtInTypes = new Dictionary<string, string>
         {
             { "System.Boolean", "bool" },
             { "System.Byte", "byte" },
@@ -87,7 +87,7 @@
         {
             const string builtInTypesPrefix = "Built-in.";
 
-            if (BuiltInTypes.TryGetValue(fullTypeName, out string builtInName))
+            if (_builtInTypes.TryGetValue(fullTypeName, out string builtInName))
             {
                 return withFolder ? builtInTypesPrefix + builtInName : builtInName;
             }
