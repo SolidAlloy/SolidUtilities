@@ -43,5 +43,10 @@
         {
             LogEntry.Internal_RemoveLogEntriesByMode((int) mode);
         }
+
+        /// <summary> Returns the total number of log entries in the console. </summary>
+        /// <returns> Total number of log entries in the console. </returns>
+        [PublicAPI]
+        public static int GetCount() => LogEntries.GetCount();
     }
 }
