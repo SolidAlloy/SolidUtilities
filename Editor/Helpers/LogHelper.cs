@@ -48,5 +48,42 @@
         /// <returns> Total number of log entries in the console. </returns>
         [PublicAPI]
         public static int GetCount() => LogEntries.GetCount();
+
+        /// <summary> Returns the number of errors in the console. </summary>
+        /// <returns> The number of errors in the console. </returns>
+        [PublicAPI]
+        public static int GetErrorCount()
+        {
+            (int errorCount, int _, int _) = LogEntries.GetCountsByType();
+            return errorCount;
+        }
+
+        /// <summary> Returns the number of warnings in the console. </summary>
+        /// <returns> The number of warnings in the console. </returns>
+        [PublicAPI]
+        public static int GetWarningCount()
+        {
+            (int _, int warningCount, int _) = LogEntries.GetCountsByType();
+            return warningCount;
+        }
+
+        /// <summary> Returns the number of info logs in the console. </summary>
+        /// <returns> The number of info logs in the console. </returns>
+        [PublicAPI]
+        public static int GetLogCount()
+        {
+            (int _, int _, int logCount) = LogEntries.GetCountsByType();
+            return logCount;
+        }
+
+        /// <summary> Returns the number of log entries in the console by type: error logs, warning logs, info logs. </summary>
+        /// <returns> The number of log entries in the console by type: error logs, warning logs, info logs. </returns>
+        [PublicAPI]
+        public static (int errorCount, int warningCount, int logCount) GetCountByType()
+            => LogEntries.GetCountsByType();
+
+        /// <summary> Removes all logs from the console. </summary>
+        [PublicAPI]
+        public static void Clear() => LogEntries.Clear();
     }
 }
