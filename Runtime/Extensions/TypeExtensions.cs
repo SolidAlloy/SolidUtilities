@@ -95,7 +95,7 @@
         {
             const BindingFlags instanceFilter = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
             var instanceFields = type.GetFields(instanceFilter);
-            return instanceFields.Where(field => field.IsPublic || field.GetCustomAttribute<SerializeField>() != null);
+            return instanceFields.Where(field => field.IsPublic || field.HasAttribute<SerializeField>());
         }
 
         /// <summary>Checks whether the type is nullable.</summary>
@@ -149,7 +149,7 @@
         ///
         /// bool isAssignableWithTypeParam = typeof(typeof(Base&lt;int>).IsAssignableFrom(IntDerivative)); // true
         /// bool isAssignableWithoutTypeParam = typeof(typeof(Base&lt;>)).IsAssignableFrom(IntDerivative); // false
-        /// bool inherits = typeof(IntDerivative).Inherits(typeof(Base&lt;>)); // true
+        /// bool inherits = typeof(IntDerivative).InheritsFrom(typeof(Base&lt;>)); // true
         /// </code></example>
         [PublicAPI] public static bool InheritsFrom(this Type typeToCheck, Type baseType)
         {
@@ -192,20 +192,6 @@
         {
             // One found member is the default constructor.
             return type.GetMembers((BindingFlags) (-1)).Length == 1;
-        }
-
-        /// <summary>
-        /// Checks whether the type has a custom attribute of type <typeparamref name="T"/>.
-        /// </summary>
-        /// <param name="type">The type to check.</param>
-        /// <typeparam name="T">The type of attribute to search for.</typeparam>
-        /// <returns><c>true</c> if the type has a custom attribute of type <typeparamref name="T"/>.</returns>
-        [PublicAPI, Pure]
-        public static bool HasAttribute<T>(this Type type)
-            where T : Attribute
-        {
-            // GetCustomAttributes() skips a number of null checks and a pretty long method call chain.
-            return type.GetCustomAttributes(typeof(T), true).Length != 0;
         }
 
         /// <summary>
