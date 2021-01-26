@@ -56,7 +56,7 @@
 
         private static string GetFirstClassFromText(string text)
         {
-            const string classNameRegex = @"(?<=(class )|(struct )).*?(?=(\s|\n)*{)";
+            const string classNameRegex = @"(?<=(class )|(struct )).*?(?=(\s|\n)*(:|{))";
             string className = Regex.Match(text, classNameRegex).Value;
 
             if (string.IsNullOrEmpty(className))
