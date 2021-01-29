@@ -13,6 +13,9 @@
     {
         private static readonly Regex _namespaceNameRegex = new Regex(@"(?<=namespace[\s]+)[\w_.-]+", RegexOptions.Compiled);
 
+        private static readonly Regex _classRegex =
+            new Regex(@"(?<=(class )|(struct )).*?(?=(\s|\n)*(:|{))", RegexOptions.Compiled);
+
         /// <summary>
         /// Returns the <see cref="Type"/> of the class implemented by this script. Works for types not derived from
         /// <see cref="UnityEngine.Object"/> and generic classes (the file must be named by the "GenericClass`1.cs" template).
@@ -56,8 +59,7 @@
 
         private static string GetFirstClassFromText(string text)
         {
-            const string classNameRegex = @"(?<=(class )|(struct )).*?(?=(\s|\n)*(:|{))";
-            string className = Regex.Match(text, classNameRegex).Value;
+            string className = _classRegex.Match(text).Value;
 
             if (string.IsNullOrEmpty(className))
                 return className;

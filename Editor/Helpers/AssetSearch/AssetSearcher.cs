@@ -126,6 +126,7 @@
             return false;
         }
 
+        [NotNull]
         public static string GetClassGUID(Type type) =>
             GetAssetDetails(type, out string guid, out MonoScript _) ? guid : string.Empty;
 
