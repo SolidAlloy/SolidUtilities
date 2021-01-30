@@ -10,7 +10,7 @@ I'm adding new utilities as I write code for other Unity3D projects and discover
 #### Projects that use SolidUtilities:
 
 - [ClassTypeReference-for-Unity](https://github.com/SolidAlloy/ClassTypeReference-for-Unity)
-
+- [Generic Unity Objects](https://github.com/SolidAlloy/GenericUnityObjects)
   
 
 ## Install with OpenUPM
