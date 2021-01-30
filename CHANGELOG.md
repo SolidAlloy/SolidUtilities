@@ -1,3 +1,49 @@
+# [1.23.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.22.1...1.23.0) (2021-01-30)
+
+
+### Bug Fixes
+
+* Fixed the class regex to find generic classes even if they derive or implement an interface ([87e3197](https://github.com/SolidAlloy/SolidUtilities/commit/87e319744197a5122cb767315b3bf51342bbc515))
+* Started handling assembly-loading exceptions in MonoScript.GetClassType() ([eb999ac](https://github.com/SolidAlloy/SolidUtilities/commit/eb999ac69800d4a8e1ee066983bffcd682698c54))
+
+
+### Features
+
+* Added ArrayEqualityComparer - a generic EqualityComparer for arrays ([732130d](https://github.com/SolidAlloy/SolidUtilities/commit/732130dd09e775a97e673e34841e548a186846b8))
+* Added AssetDatabaseHelper.GetTypeFromGUID() method ([f3317ed](https://github.com/SolidAlloy/SolidUtilities/commit/f3317ed500ea97b1d971941cec1ebd1ea15932b0))
+* Added AssetSearcher.GetAssetDetails and GetMonoScriptFromType methods ([d18e9fb](https://github.com/SolidAlloy/SolidUtilities/commit/d18e9fb4e7f03524f03f92109647914f36151930))
+* Added AssetSearcher.GetClassGUID(Type) method ([593861a](https://github.com/SolidAlloy/SolidUtilities/commit/593861a8d232696245fd7909e87716bf74260b45))
+* Added DLLs with access to Unity internal types and methods ([f382686](https://github.com/SolidAlloy/SolidUtilities/commit/f38268667d528b7dd1bfd8c3aa7158af6666dd17))
+* Added EditorGUIUtilityProxy.GetMainWindowPosition() method for Unity under 2020.1 ([75213b7](https://github.com/SolidAlloy/SolidUtilities/commit/75213b78a59d643cceea2c6f9856251564e99d93))
+* Added enum.ContainsFlag() method ([514456c](https://github.com/SolidAlloy/SolidUtilities/commit/514456c3abd768631231836f0395f6ee087b199a))
+* Added FastIterationDictionary that allows for faster iteration over it at a cost of larger memory footprint ([f41f89c](https://github.com/SolidAlloy/SolidUtilities/commit/f41f89c2887d88c3e0588c5c0ede04e24f6774e2))
+* Added HashSet.SetEqualsArray and HashSet.SetEqualsList methods ([2337b49](https://github.com/SolidAlloy/SolidUtilities/commit/2337b49e628b383c88b8c1d970e8679a803e4ac0))
+* Added HashSet<T>.ExceptWithAndCreateNew() and IntersectWithAndCreateNew() methods ([b287d0e](https://github.com/SolidAlloy/SolidUtilities/commit/b287d0e6a2e680df108b3cb297e1eda7715bbc80))
+* Added LogHelper.Clear() and LogHelper.GetCountByType() methods ([e6fa771](https://github.com/SolidAlloy/SolidUtilities/commit/e6fa77164422450505bdcfbeeed53e561b74d40b))
+* Added LogHelper.GetCount() method that returns the total number of log entries in the console ([deda0d5](https://github.com/SolidAlloy/SolidUtilities/commit/deda0d5af463c9e961bc2d4124d4817bd6f1eaee))
+* Added string.CountSubstrings() extension method ([37ba570](https://github.com/SolidAlloy/SolidUtilities/commit/37ba570344fd6d07acbaafa6f9d20c3247c094ec))
+* Added string.GetSubstringAfterLast(char) method ([6722b57](https://github.com/SolidAlloy/SolidUtilities/commit/6722b575e5cc9b17d4f2a9ea2f60ba93b89e1ae9))
+* Added string.ReplaceWithBuiltInName() extension method for type names. ([a89fbbf](https://github.com/SolidAlloy/SolidUtilities/commit/a89fbbf936081ecdd3cdc84a41b39940b9f04ad8))
+* Added the LogHelper.RemoveLogEntriesByMode() method ([8af2a23](https://github.com/SolidAlloy/SolidUtilities/commit/8af2a23b4cf0090dbb11c33e2a7191cc3bb24bb2))
+* Added Type.GetShortAssemblyName method ([356bdca](https://github.com/SolidAlloy/SolidUtilities/commit/356bdca8e29d90d11be20fc8a39a23c4a7fae626))
+* Added Type.HasAttribute<T>() method ([3789b29](https://github.com/SolidAlloy/SolidUtilities/commit/3789b296d20cb5d286157a2c0077974a8b8fbb68))
+* AssetSearcher.GetClassGUID() can now find GUID of a generic type even if the script does not have generic suffix in its name ([e1ce428](https://github.com/SolidAlloy/SolidUtilities/commit/e1ce428c3393fcbbe4631c3158b49cdfb2d3ad0a))
+* Made MonoScript.GetClassType() work with custom non-generic classes ([842c17a](https://github.com/SolidAlloy/SolidUtilities/commit/842c17a3043212c1e299e6408bc418e739d8dbb5))
+* Made StripGenericSuffix work only for the type names that contain backlash ([1c6add8](https://github.com/SolidAlloy/SolidUtilities/commit/1c6add8a44d20a224b47cd473b4f31c27bee1725))
+* Moved HasAttribute<T>() from Type extensions to MemberInfo extensions ([d730d34](https://github.com/SolidAlloy/SolidUtilities/commit/d730d34a0ea2bb8b52afd817c8652be75de2b190))
+* Removed AssetCreator class ([8a874e2](https://github.com/SolidAlloy/SolidUtilities/commit/8a874e2119d94d8e8db6dbcb9db00dfea4ce66a9))
+* Removed IEnumerable.ForEach method ([2f8ec6e](https://github.com/SolidAlloy/SolidUtilities/commit/2f8ec6e0c426de3b915fe965a4c6d25443c0aa4b))
+* Replaced EditorDrawHelper DrawInScrollView and DrawVertically methods with ScrollView and VerticalBlock structs ([0aaaf3e](https://github.com/SolidAlloy/SolidUtilities/commit/0aaaf3e8d2d94ea12c1eda7b6f5ca854bd84b6df))
+
+
+### Performance Improvements
+
+* Got rid of some unnecessary memory allocations ([a6b6464](https://github.com/SolidAlloy/SolidUtilities/commit/a6b6464281e754922b7a0e9f94258cf16e8e4ff4))
+* Improved performance of AssetSearcher.GetClassGUID() ([27c8f57](https://github.com/SolidAlloy/SolidUtilities/commit/27c8f57a9bae6bf72f004fb90a46bd6fc2ad7056))
+* Made class regex a compiled static field member. ([f8f2eeb](https://github.com/SolidAlloy/SolidUtilities/commit/f8f2eeb8bb612951c8dcf051eacba80704b00a83))
+* Removed an accidental NUnit using statement ([62a6640](https://github.com/SolidAlloy/SolidUtilities/commit/62a6640cb2d3f3cbfd0ec19a9f1178659a6808fe))
+* Started using Internals DLLs instead of reflection to access Unity internal members ([f44732f](https://github.com/SolidAlloy/SolidUtilities/commit/f44732f072add5890ba2d783002434581afbfe86))
+
 ## [1.22.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.22.0...1.22.1) (2020-12-17)
 
 
