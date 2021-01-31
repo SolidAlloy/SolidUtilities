@@ -50,6 +50,7 @@
         ///         DropdownStyle.BackgroundColor);
         /// });
         /// </code></example>
+        [PublicAPI]
         public readonly struct ScrollView : IDisposable
         {
             private static readonly GUILayoutOption[] _dontExpandHeight = { GUILayout.ExpandHeight(false) };
@@ -85,6 +86,23 @@
             }
         }
 
+        [PublicAPI]
+        public readonly struct IndentLevel : IDisposable
+        {
+            private readonly int _previousIndentLevel;
+
+            public IndentLevel(int indentLevel)
+            {
+                _previousIndentLevel = EditorGUI.indentLevel;
+                EditorGUI.indentLevel = indentLevel;
+            }
+
+            public void Dispose()
+            {
+                EditorGUI.indentLevel = _previousIndentLevel;
+            }
+        }
+
         /// <summary>Draws content in the vertical direction.</summary>
         /// <example><code>
         /// using (new EditorDrawHelper.VerticalBlock(_preventExpandingHeight, DropdownStyle.BackgroundColor, out float contentHeight))
@@ -95,6 +113,7 @@
         ///         _contentHeight = contentHeight;
         /// }
         /// </code></example>
+        [PublicAPI]
         public readonly struct VerticalBlock : IDisposable
         {
             private static readonly GUILayoutOption[] _options = new GUILayoutOption[1];
