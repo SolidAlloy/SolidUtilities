@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.23.1...1.24.0) (2021-02-01)
+
+
+### Features
+
+* Added EditorDrawHelper.IndentLevel disposable struct ([2a82ec8](https://github.com/SolidAlloy/SolidUtilities/commit/2a82ec8f6b8fa6619269d2e604ddb252b7a1e07e))
+
 ## [1.23.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.23.0...1.23.1) (2021-02-01)
 
 
