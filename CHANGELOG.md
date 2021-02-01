@@ -1,3 +1,10 @@
+## [1.23.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.23.0...1.23.1) (2021-02-01)
+
+
+### Bug Fixes
+
+* Fixed "type 'MonoScript' is defined in a not referenced assembly" in Unity 2019 ([8d2b747](https://github.com/SolidAlloy/SolidUtilities/commit/8d2b747e2a25dd6700d0b87ca14fb50d9f4d54fb))
+
 # [1.23.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.22.1...1.23.0) (2021-01-30)
 
 
