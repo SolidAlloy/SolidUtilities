@@ -11,5 +11,6 @@
   "author": {
     "name": "SolidAlloy",
     "url": "https://github.com/SolidAlloy/"
-  }
+  },
+  "type": "tool"
 }
