@@ -1,3 +1,11 @@
+# [1.25.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.24.0...1.25.0) (2021-02-10)
+
+
+### Features
+
+* Added EditorDrawHelper.DelayedPropertyField method ([c18ce85](https://github.com/SolidAlloy/SolidUtilities/commit/c18ce85643509a3c3dc23841a35950c44a4daa91))
+* Added object.ShallowCopy() and object.DeepCopy() methods ([0afac69](https://github.com/SolidAlloy/SolidUtilities/commit/0afac69bb420eb729ec91ea6564e40cfeb805fc3))
+
 # [1.24.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.23.1...1.24.0) (2021-02-01)
 
 
