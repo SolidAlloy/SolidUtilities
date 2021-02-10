@@ -50,3 +50,5 @@ Desktop.ini
 
 # The file being generated in root directory instead of obj/debug https://github.com/dotnet/roslyn/issues/48430
 *.GeneratedMSBuildEditorConfig.editorconfig
+
+*.csproj.DotSettings

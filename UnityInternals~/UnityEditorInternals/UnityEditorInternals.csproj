@@ -33,9 +33,11 @@
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Platform)' == 'Unity2019' ">
         <_Suffix>2019</_Suffix>
+        <DefineConstants>UNITY_2019</DefineConstants>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Platform)' == 'Unity2020' ">
         <_Suffix>2020</_Suffix>
+        <DefineConstants>UNITY_2020</DefineConstants>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Unity2019' ">
       <OutputPath>bin\Unity2019\Debug\</OutputPath>
@@ -71,6 +73,8 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="EditorGUIHelper.cs" />
+        <Compile Include="EditorGUILayoutHelper.cs" />
         <Compile Include="EditorGUIUtilityProxy.cs" />
         <Compile Include="LogEntries.cs" />
         <Compile Include="LogEntry.cs" />

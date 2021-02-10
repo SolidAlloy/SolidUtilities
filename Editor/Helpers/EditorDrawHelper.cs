@@ -3,6 +3,7 @@
     using System;
     using JetBrains.Annotations;
     using UnityEditor;
+    using UnityEditorInternals;
     using UnityEngine;
     using Object = UnityEngine.Object;
 
@@ -282,6 +283,25 @@
             return EditorGUIUtility.GetMainWindowPosition();
 #else
             return EditorGUIUtilityProxy.GetMainWindowPosition();
+#endif
+        }
+
+        /// <summary>
+        /// Draws the property identically to <see cref="EditorGUILayout.PropertyField(SerializedProperty, GUIContent, GUILayoutOption[])"/>
+        /// but makes fields delayed where possible.
+        /// </summary>
+        /// <param name="property">The SerializedProperty to make a field for.</param>
+        /// <param name="label">Optional label to use. If not specified the label of the property itself is used. Use GUIContent.none to not display a label at all.</param>
+        /// <param name="options">An optional list of layout options that specify extra layout properties. Any values passed in here will override settings defined by the style.&lt;br&gt;
+        /// See Also: GUILayout.Width, GUILayout.Height, GUILayout.MinWidth, GUILayout.MaxWidth, GUILayout.MinHeight,
+        /// GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
+        /// <returns>True if the property has children and is expanded and includeChildren was set to false; otherwise false.</returns>
+        public static bool DelayedPropertyField(SerializedProperty property, GUIContent label = null, params GUILayoutOption[] options)
+        {
+#if UNITY_2020_1_OR_NEWER
+            return EditorGUILayoutHelper.DelayedPropertyField(property, label, options);
+#else
+            throw new NotImplementedException("The method is implemented only for Unity 2020 and higher");
 #endif
         }
     }
