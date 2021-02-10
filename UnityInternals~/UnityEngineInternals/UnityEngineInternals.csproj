@@ -46,6 +46,10 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="GUIClip.cs" />
+        <Compile Include="ObjectCopy\ArrayExtensions.cs" />
+        <Compile Include="ObjectCopy\ArrayTraverse.cs" />
+        <Compile Include="ObjectCopy\ObjectExtensions.cs" />
+        <Compile Include="ObjectCopy\ReferenceEqualityComparer.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
