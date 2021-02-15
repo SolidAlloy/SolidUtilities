@@ -1,3 +1,10 @@
+# [1.26.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.25.0...1.26.0) (2021-02-15)
+
+
+### Features
+
+* Added SerializedProperty.HasCustomPropertyDrawer() method ([101a14a](https://github.com/SolidAlloy/SolidUtilities/commit/101a14a7f6e26874902b7cece18c5d44f3035deb))
+
 # [1.25.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.24.0...1.25.0) (2021-02-10)
 
 
