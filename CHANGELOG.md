@@ -1,3 +1,11 @@
+## [1.26.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.26.0...1.26.1) (2021-02-19)
+
+
+### Bug Fixes
+
+* Removed 2020 suffix from UnityEditorInternals ([ae579b5](https://github.com/SolidAlloy/SolidUtilities/commit/ae579b5f73e12eca2181584c3810ec9b62e3d4c6))
+* Removed a duplicate using statement ([1fda48e](https://github.com/SolidAlloy/SolidUtilities/commit/1fda48e4f314432c0071082a71688777c3bc4210))
+
 # [1.26.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.25.0...1.26.0) (2021-02-15)
 
 
