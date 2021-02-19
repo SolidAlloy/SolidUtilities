@@ -36,7 +36,7 @@
         <DefineConstants>UNITY_2019</DefineConstants>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Platform)' == 'Unity2020' ">
-        <_Suffix>2020</_Suffix>
+        <_Suffix></_Suffix>
         <DefineConstants>UNITY_2020</DefineConstants>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Unity2019' ">
