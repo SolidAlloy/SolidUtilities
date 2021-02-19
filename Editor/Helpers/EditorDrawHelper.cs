@@ -7,10 +7,6 @@
     using UnityEngine;
     using Object = UnityEngine.Object;
 
-#if !UNITY_2020_1_OR_NEWER
-    using UnityEditorInternals;
-#endif
-
     /// <summary>Different useful methods that simplify <see cref="EditorGUILayout"/> API.</summary>
     public static partial class EditorDrawHelper
     {
