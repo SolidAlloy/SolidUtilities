@@ -73,6 +73,7 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="DrawerReplacer.cs" />
         <Compile Include="EditorGUIHelper.cs" />
         <Compile Include="EditorGUILayoutHelper.cs" />
         <Compile Include="EditorGUIUtilityProxy.cs" />
