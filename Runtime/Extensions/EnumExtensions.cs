@@ -3,6 +3,10 @@
     using System;
     using JetBrains.Annotations;
 
+#if ! CSHARP_7_3_OR_NEWER
+    using Unity.Collections.LowLevel.Unsafe;
+#endif
+
     public static class EnumExtensions
     {
         /// <summary>
@@ -46,33 +50,33 @@
                     case 1:
                         {
                             byte valLhs = 0;
-                            UnsafeUtility.CopyStructureToPtr(ref lhs, &valLhs);
+                            UnsafeUtility.CopyStructureToPtr(ref thisEnum, &valLhs);
                             byte valRhs = 0;
-                            UnsafeUtility.CopyStructureToPtr(ref rhs, &valRhs);
+                            UnsafeUtility.CopyStructureToPtr(ref flag, &valRhs);
                             return (valLhs & valRhs) > 0;
                         }
                     case 2:
                         {
                             ushort valLhs = 0;
-                            UnsafeUtility.CopyStructureToPtr(ref lhs, &valLhs);
+                            UnsafeUtility.CopyStructureToPtr(ref thisEnum, &valLhs);
                             ushort valRhs = 0;
-                            UnsafeUtility.CopyStructureToPtr(ref rhs, &valRhs);
+                            UnsafeUtility.CopyStructureToPtr(ref flag, &valRhs);
                             return (valLhs & valRhs) > 0;
                         }
                     case 4:
                         {
                             uint valLhs = 0;
-                            UnsafeUtility.CopyStructureToPtr(ref lhs, &valLhs);
+                            UnsafeUtility.CopyStructureToPtr(ref thisEnum, &valLhs);
                             uint valRhs = 0;
-                            UnsafeUtility.CopyStructureToPtr(ref rhs, &valRhs);
+                            UnsafeUtility.CopyStructureToPtr(ref flag, &valRhs);
                             return (valLhs & valRhs) > 0;
                         }
                     case 8:
                         {
                             ulong valLhs = 0;
-                            UnsafeUtility.CopyStructureToPtr(ref lhs, &valLhs);
+                            UnsafeUtility.CopyStructureToPtr(ref thisEnum, &valLhs);
                             ulong valRhs = 0;
-                            UnsafeUtility.CopyStructureToPtr(ref rhs, &valRhs);
+                            UnsafeUtility.CopyStructureToPtr(ref flag, &valRhs);
                             return (valLhs & valRhs) > 0;
                         }
                     default:
