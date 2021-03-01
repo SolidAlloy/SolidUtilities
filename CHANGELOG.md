@@ -1,3 +1,15 @@
+# [1.27.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.26.1...1.27.0) (2021-03-01)
+
+
+### Bug Fixes
+
+* Fixed compilation errors in Enum.ContainsFlag for C# 7.0 and below ([4cf1c63](https://github.com/SolidAlloy/SolidUtilities/commit/4cf1c63467a4f4db3e5097a56eb9d046e777077c))
+
+
+### Features
+
+* Added ReplaceDefaultDrawer method ([67c6f8e](https://github.com/SolidAlloy/SolidUtilities/commit/67c6f8ecfc7de42970b26429b9bcd0569af70f91))
+
 ## [1.26.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.26.0...1.26.1) (2021-02-19)
 
 
