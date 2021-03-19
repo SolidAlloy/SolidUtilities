@@ -1,3 +1,11 @@
+# [1.28.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.27.0...1.28.0) (2021-03-19)
+
+
+### Features
+
+* Added Dictionary.TryGetTypedValue method ([1459966](https://github.com/SolidAlloy/SolidUtilities/commit/14599669ec56f51898860f8f62802443e69ee19f))
+* Added the iterationCount parameter to Timer ([a7e6c92](https://github.com/SolidAlloy/SolidUtilities/commit/a7e6c92988b0bd410b75057bb2f20fc03f7c8eda))
+
 # [1.27.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.26.1...1.27.0) (2021-03-01)
 
 
