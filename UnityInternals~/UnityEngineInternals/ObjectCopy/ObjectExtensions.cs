@@ -27,7 +27,7 @@
         [PublicAPI]
         public static T DeepCopy<T>(this T obj)
         {
-            return new Cloner().Clone(obj);
+            return Cloner.Create().Clone(obj);
         }
 
         /// <summary> Determines whether this instance is primitive. </summary>
@@ -41,9 +41,13 @@
                    || type == typeof(DateTime);
         }
 
-        private class Cloner
+        private readonly struct Cloner
         {
-            private readonly Dictionary<Type, List<FieldInfo>> _fieldsRequiringDeepClone = new Dictionary<Type, List<FieldInfo>>();
+            private readonly Dictionary<Type, List<FieldInfo>> _fieldsRequiringDeepClone;
+
+            public static Cloner Create() => new Cloner(new Dictionary<Type, List<FieldInfo>>());
+
+            private Cloner(Dictionary<Type, List<FieldInfo>> emptyDict) => _fieldsRequiringDeepClone = emptyDict;
 
             public T Clone<T>(T obj)
             {

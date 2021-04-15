@@ -38,10 +38,10 @@
         <Reference Include="System.Core" />
         <Reference Include="System.Xml" />
         <Reference Include="UnityEngine.CoreModule">
-          <HintPath>C:\Program Files\Unity Editors\2020.2.2f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
+          <HintPath>C:\Program Files\Unity Editors\2020.3.3f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.IMGUIModule">
-          <HintPath>C:\Program Files\Unity Editors\2020.2.2f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
+          <HintPath>C:\Program Files\Unity Editors\2020.3.3f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
         </Reference>
     </ItemGroup>
     <ItemGroup>
