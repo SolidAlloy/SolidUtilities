@@ -1,3 +1,10 @@
+## [1.28.2](https://github.com/SolidAlloy/SolidUtilities/compare/1.28.1...1.28.2) (2021-04-15)
+
+
+### Performance Improvements
+
+* Reduced garbage allocation in the Object.DeepCopy() method ([4184431](https://github.com/SolidAlloy/SolidUtilities/commit/4184431ad226b2c7cc0e4edbba6d2f4253f3bcef))
+
 ## [1.28.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.28.0...1.28.1) (2021-04-15)
 
 
