@@ -1,3 +1,10 @@
+## [1.28.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.28.0...1.28.1) (2021-04-15)
+
+
+### Bug Fixes
+
+* Fixed MissingMethodException when calling EditorGUILayoutHelper.DelayedPropertyField() ([05b1a00](https://github.com/SolidAlloy/SolidUtilities/commit/05b1a001d00ccdd371d1dcd577b909d9f28ba4dc))
+
 # [1.28.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.27.0...1.28.0) (2021-03-19)
 
 
