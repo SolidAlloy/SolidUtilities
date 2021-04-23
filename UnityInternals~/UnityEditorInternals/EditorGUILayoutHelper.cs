@@ -91,7 +91,7 @@ namespace SolidUtilities.UnityEditorInternals
                 }
 
                 reorderableList.Property = property;
-                reorderableList.Draw(label, position, visibleArea);
+                reorderableList.Draw(label, position, visibleArea, includeChildren);
                 return false;
             }
 
