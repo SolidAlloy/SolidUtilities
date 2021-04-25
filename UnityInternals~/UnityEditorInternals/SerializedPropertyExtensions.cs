@@ -1,5 +1,7 @@
 ﻿namespace SolidUtilities.UnityEditorInternals
 {
+    using System;
+    using System.Reflection;
     using JetBrains.Annotations;
     using UnityEditor;
 
@@ -12,6 +14,13 @@
         public static bool HasCustomPropertyDrawer(this SerializedProperty property)
         {
             return ScriptAttributeUtility.GetHandler(property).propertyDrawer != null;
+        }
+
+        [PublicAPI]
+        public static (FieldInfo, Type) GetFieldInfoAndType(this SerializedProperty property)
+        {
+            var fieldInfo = ScriptAttributeUtility.GetFieldInfoFromProperty(property, out Type type);
+            return (fieldInfo, type);
         }
     }
 }
