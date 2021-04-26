@@ -156,6 +156,22 @@
             }
         }
 
+        public readonly struct LabelWidth : IDisposable
+        {
+            private readonly float _oldWidth;
+
+            public LabelWidth(float width)
+            {
+                _oldWidth = EditorGUIUtility.labelWidth;
+                EditorGUIUtility.labelWidth = width;
+            }
+
+            public void Dispose()
+            {
+                EditorGUIUtility.labelWidth = _oldWidth;
+            }
+        }
+
         /// <summary>Draws borders with a given color and width around a rectangle.</summary>
         /// <param name="rectWidth">Width of the rectangle.</param>
         /// <param name="rectHeight">Height of the rectangle.</param>
