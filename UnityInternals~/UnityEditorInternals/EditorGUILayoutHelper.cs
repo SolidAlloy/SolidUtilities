@@ -20,6 +20,12 @@ namespace SolidUtilities.UnityEditorInternals
             return handler.OnGUIDelayed(rect, property, label, includeChildren);
         }
 
+        [PublicAPI]
+        public static bool DelayedPropertyField(Rect rect, SerializedProperty property, GUIContent label = null, bool includeChildren = false)
+        {
+            return ScriptAttributeUtility.GetHandler(property).OnGUIDelayed(rect, property, label, includeChildren);
+        }
+
         private static Rect GetPropertyRect(this PropertyHandler handler, SerializedProperty property, GUIContent label,
             bool includeChildren, GUILayoutOption[] options)
         {
@@ -34,6 +40,23 @@ namespace SolidUtilities.UnityEditorInternals
                 EditorGUI.LabelHasContent(label),
                 handler.GetHeight(property, label, includeChildren),
                 options);
+        }
+
+        private static void OnGUISafeExtended(this PropertyDrawer propertyDrawer, Rect position,
+            SerializedProperty property, GUIContent label)
+        {
+            ScriptAttributeUtility.s_DrawerStack.Push(propertyDrawer);
+
+            if (propertyDrawer is IDelayable delayableDrawer)
+            {
+                delayableDrawer.OnGUIDelayed(position, property, label);
+            }
+            else
+            {
+                propertyDrawer.OnGUI(position, property, label);
+            }
+
+            ScriptAttributeUtility.s_DrawerStack.Pop();
         }
 
         // Only EditorGUI.DefaultPropertyField is replaced with EditorGUIHelper.DefaultPropertyFieldDelayed
@@ -72,7 +95,7 @@ namespace SolidUtilities.UnityEditorInternals
                 oldLabelWidth = EditorGUIUtility.labelWidth;
                 oldFieldWidth = EditorGUIUtility.fieldWidth;
                 // Draw with custom drawer
-                handler.propertyDrawer.OnGUISafe(position, property.Copy(), label ?? EditorGUIUtility.TempContent(property.localizedDisplayName));
+                handler.propertyDrawer.OnGUISafeExtended(position, property.Copy(), label ?? EditorGUIUtility.TempContent(property.localizedDisplayName));
                 // Restore widths
                 EditorGUIUtility.labelWidth = oldLabelWidth;
                 EditorGUIUtility.fieldWidth = oldFieldWidth;

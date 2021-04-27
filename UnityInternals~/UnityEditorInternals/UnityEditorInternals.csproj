@@ -77,6 +77,7 @@
         <Compile Include="EditorGUIHelper.cs" />
         <Compile Include="EditorGUILayoutHelper.cs" />
         <Compile Include="EditorGUIUtilityProxy.cs" />
+        <Compile Include="IDelayable.cs" />
         <Compile Include="LogEntries.cs" />
         <Compile Include="LogEntry.cs" />
         <Compile Include="MonoScriptExtensions.cs" />
