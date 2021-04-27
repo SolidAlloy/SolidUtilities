@@ -7,13 +7,19 @@
     public static class RectExtensions
     {
         [PublicAPI]
-        public static Rect ShiftLinesDown(this Rect rect, int linesNum)
+        public static Rect ShiftOneLineDown(this Rect rect, int indent = -1, float lineHeight = 0f)
         {
             const float paddingBetweenFields = 2f;
             const float indentPerLevel = 15f;
 
-            rect.xMin += linesNum * indentPerLevel;
-            rect.y += EditorGUIUtility.singleLineHeight + paddingBetweenFields;
+            if (lineHeight == 0f)
+                lineHeight = EditorGUIUtility.singleLineHeight;
+
+            if (indent == -1)
+                indent = EditorGUI.indentLevel;
+
+            rect.xMin += indent * indentPerLevel;
+            rect.y += lineHeight + paddingBetweenFields;
 
             return rect;
         }
