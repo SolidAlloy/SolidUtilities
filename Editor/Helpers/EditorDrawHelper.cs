@@ -316,5 +316,14 @@
             throw new NotImplementedException("The method is implemented only for Unity 2020 and higher");
 #endif
         }
+
+        public static bool DelayedPropertyField(Rect rect, SerializedProperty property, GUIContent label = null, bool includeChildren = false)
+        {
+#if UNITY_2020_1_OR_NEWER
+            return EditorGUILayoutHelper.DelayedPropertyField(rect, property, label, includeChildren);
+#else
+            throw new NotImplementedException("The method is implemented only for Unity 2020 and higher");
+#endif
+        }
     }
 }
