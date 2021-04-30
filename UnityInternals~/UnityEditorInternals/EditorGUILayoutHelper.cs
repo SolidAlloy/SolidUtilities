@@ -59,7 +59,8 @@ namespace SolidUtilities.UnityEditorInternals
             ScriptAttributeUtility.s_DrawerStack.Pop();
         }
 
-        // Only EditorGUI.DefaultPropertyField is replaced with EditorGUIHelper.DefaultPropertyFieldDelayed
+        // EditorGUI.DefaultPropertyField is replaced with EditorGUIHelper.DefaultPropertyFieldDelayed
+        // propertyDrawer.OnGUISafe is replaced with propertyDrawer.OnGUISafeExtended
         private static bool OnGUIDelayed(this PropertyHandler handler, Rect position, SerializedProperty property,
             GUIContent label, bool includeChildren)
         {

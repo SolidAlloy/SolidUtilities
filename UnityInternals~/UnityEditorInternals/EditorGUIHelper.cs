@@ -1,5 +1,4 @@
-﻿#if UNITY_2020
-namespace SolidUtilities.UnityEditorInternals
+﻿namespace SolidUtilities.UnityEditorInternals
 {
     using System;
     using UnityEditor;
@@ -8,6 +7,9 @@ namespace SolidUtilities.UnityEditorInternals
 
     public static class EditorGUIHelper
     {
+        public static bool HasKeyboardFocus(int controlID) => EditorGUI.HasKeyboardFocus(controlID);
+
+#if UNITY_2020
         // I've seen a lot of ugly methods in Unity source code, but this is just.. OMG
         // The method is identical to the original, only non-delayed fields are replaced with their delayed versions where possible.
         // For SerializedPropertyType.Integer, there is also a ternary expression instead of a single LongField because a version of DelayedLongField doesn't exist.
@@ -301,6 +303,6 @@ namespace SolidUtilities.UnityEditorInternals
 
             return childrenAreExpanded;
         }
+#endif
     }
 }
-#endif

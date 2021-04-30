@@ -69,13 +69,14 @@
     </ItemGroup>
     <ItemGroup Condition=" '$(Platform)' == 'Unity2019'">
         <Reference Include="UnityEditor">
-            <HintPath>C:\Program Files\Unity Editors\2019.4.12f1\Editor\Data\Managed\UnityEngine\UnityEditor.dll</HintPath>
+            <HintPath>C:\Program Files\Unity Editors\2019.4.24f1\Editor\Data\Managed\UnityEngine\UnityEditor.dll</HintPath>
         </Reference>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="DrawerReplacer.cs" />
         <Compile Include="EditorGUIHelper.cs" />
         <Compile Include="EditorGUILayoutHelper.cs" />
+        <Compile Include="EditorGUISlider.cs" />
         <Compile Include="EditorGUIUtilityProxy.cs" />
         <Compile Include="IDelayable.cs" />
         <Compile Include="LogEntries.cs" />
