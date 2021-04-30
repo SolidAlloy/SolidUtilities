@@ -1,3 +1,21 @@
+# [1.29.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.28.2...1.29.0) (2021-04-30)
+
+
+### Bug Fixes
+
+* Fixed MissingMethodException when using DelayedPropertyField in Unity 2021 ([a5bfb94](https://github.com/SolidAlloy/SolidUtilities/commit/a5bfb9445724f220375651b414c766896ea69c5d))
+
+
+### Features
+
+* Added a SerializedProperty.GetFieldInfoAndType() extension method ([ff2af73](https://github.com/SolidAlloy/SolidUtilities/commit/ff2af73ea4012740301a8be66613507aee9a7c5b))
+* Added DelayedPropertyField(Rect, SerializedProperty, GUIContent, bool) method ([414909d](https://github.com/SolidAlloy/SolidUtilities/commit/414909d475fc57dead092d7426ccdbb7a96be06c))
+* Added EditorDrawHelper.LabelWidth disposable struct ([fb07ef9](https://github.com/SolidAlloy/SolidUtilities/commit/fb07ef962b564cb29ae3a9d127e6f85d57929508))
+* Added EditorGUIHelper.HasKeyboardFocus(int controlID) method ([9428a87](https://github.com/SolidAlloy/SolidUtilities/commit/9428a87fc6522d275b3948a352e2420fc5bbed15))
+* Added IDelayable interface that can be used on custom PropertyDrawers to be drawn as delayable ([9a573ac](https://github.com/SolidAlloy/SolidUtilities/commit/9a573aca037e593ffc38476b13163236f2ccd3bd))
+* Added Rect.ShiftLinesDown(int linesNum) method ([9c95b8a](https://github.com/SolidAlloy/SolidUtilities/commit/9c95b8acb17634eeecd8c6403c25b845e482d1b6))
+* Replaced Rect.ShiftLindesDown with Rect.ShiftOneLineDown method ([0c048a9](https://github.com/SolidAlloy/SolidUtilities/commit/0c048a90a1bbfe6867944871efda093c4c85b9ed))
+
 ## [1.28.2](https://github.com/SolidAlloy/SolidUtilities/compare/1.28.1...1.28.2) (2021-04-15)
 
 
