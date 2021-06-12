@@ -17,7 +17,7 @@
         }
 
         [PublicAPI]
-        public static (FieldInfo, Type) GetFieldInfoAndType(this SerializedProperty property)
+        public static (FieldInfo FieldInfo, Type Type) GetFieldInfoAndType(this SerializedProperty property)
         {
             var fieldInfo = ScriptAttributeUtility.GetFieldInfoFromProperty(property, out Type type);
             return (fieldInfo, type);
