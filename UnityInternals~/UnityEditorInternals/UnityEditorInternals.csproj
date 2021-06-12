@@ -56,15 +56,15 @@
         <Reference Include="System.Core" />
         <Reference Include="System.Xml" />
         <Reference Include="UnityEngine.CoreModule">
-          <HintPath>C:\Program Files\Unity Editors\2021.1.3f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
+          <HintPath>C:\Program Files\Unity Editors\2021.1.9f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.IMGUIModule">
-          <HintPath>C:\Program Files\Unity Editors\2021.1.3f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
+          <HintPath>C:\Program Files\Unity Editors\2021.1.9f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
         </Reference>
     </ItemGroup>
     <ItemGroup Condition=" '$(Platform)' == 'Unity2020'">
         <Reference Include="UnityEditor.CoreModule">
-            <HintPath>C:\Program Files\Unity Editors\2021.1.3f1\Editor\Data\Managed\UnityEngine\UnityEditor.CoreModule.dll</HintPath>
+            <HintPath>C:\Program Files\Unity Editors\2021.1.9f1\Editor\Data\Managed\UnityEngine\UnityEditor.CoreModule.dll</HintPath>
         </Reference>
     </ItemGroup>
     <ItemGroup Condition=" '$(Platform)' == 'Unity2019'">
@@ -76,13 +76,13 @@
         <Compile Include="DrawerReplacer.cs" />
         <Compile Include="EditorGUIHelper.cs" />
         <Compile Include="EditorGUILayoutHelper.cs" />
-        <Compile Include="EditorGUISlider.cs" />
         <Compile Include="EditorGUIUtilityProxy.cs" />
         <Compile Include="IDelayable.cs" />
         <Compile Include="LogEntries.cs" />
         <Compile Include="LogEntry.cs" />
         <Compile Include="MonoScriptExtensions.cs" />
         <Compile Include="MonoImporterProxy.cs" />
+        <Compile Include="ProjectWindowUtilProxy.cs" />
         <Compile Include="PropertyDrawerExtensions.cs" />
         <Compile Include="SerializedPropertyExtensions.cs" />
     </ItemGroup>

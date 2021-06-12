@@ -25,13 +25,13 @@
         /// <param name="cutDistance">
         /// The distance from the left or right border of the rect where to place vertical cut.
         /// </param>
-        /// <param name="fromRightBorder">Whether to count the distance from left or right border.</param>
+        /// <param name="fromRightSide">Whether to count the distance from left or right border.</param>
         /// <returns>Left and right rects that appeared after the cut.</returns>
         /// <example><code>
         /// (Rect searchFieldArea, Rect buttonArea) = innerToolbarArea.CutVertically(DropdownStyle.IconSize, true);
         /// </code></example>
         [PublicAPI] public static (Rect leftRect, Rect rightRect) CutVertically(this Rect originalRect, float cutDistance,
-            bool fromRightBorder = false)
+            bool fromRightSide = false)
         {
             Rect leftRect, rightRect;
 
@@ -40,7 +40,7 @@
             var cutDistanceSize = new Vector2(cutDistance, originalRect.height);
             var leftoverSize = new Vector2(originalRect.width - cutDistance, originalRect.height);
 
-            if (fromRightBorder)
+            if (fromRightSide)
             {
                 leftRect = new Rect(leftRectPos, leftoverSize);
                 rightRect = new Rect(RightRectPos(), cutDistanceSize);
