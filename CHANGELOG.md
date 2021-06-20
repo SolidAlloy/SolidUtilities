@@ -1,3 +1,11 @@
+# [1.30.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.29.0...1.30.0) (2021-06-20)
+
+
+### Features
+
+* Added PathHelper.MakeRelative() and PathHelper.IsSubPathOf() methods ([7f9803f](https://github.com/SolidAlloy/SolidUtilities/commit/7f9803f6259aea6d0c446c51bd7a7b96ce7ba0f8))
+* Added ProjectWindowUtilProxy.GetActiveFolderPath() method ([fae929f](https://github.com/SolidAlloy/SolidUtilities/commit/fae929f67e2b53f4a8c2df71139e7132772d0d17))
+
 # [1.29.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.28.2...1.29.0) (2021-04-30)
 
 
