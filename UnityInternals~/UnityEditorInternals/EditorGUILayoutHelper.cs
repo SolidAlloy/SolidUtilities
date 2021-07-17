@@ -8,7 +8,7 @@ namespace SolidUtilities.UnityEditorInternals
     using UnityEditorInternal;
     using UnityEngine;
 
-    public static class EditorGUILayoutHelper
+    public static class EditorGUILayoutProxy
     {
         [PublicAPI]
         public static bool DelayedPropertyField(SerializedProperty property, GUIContent label = null, params GUILayoutOption[] options)
@@ -121,7 +121,7 @@ namespace SolidUtilities.UnityEditorInternals
 
             if ( ! includeChildren)
             {
-                return EditorGUIHelper.DefaultPropertyFieldDelayed(position, property, label);
+                return EditorGUIProxy.DefaultPropertyFieldDelayed(position, property, label);
             }
 
             // Remember state
@@ -137,7 +137,7 @@ namespace SolidUtilities.UnityEditorInternals
 
             // First property with custom label
             EditorGUI.indentLevel = prop.depth + relIndent;
-            bool childrenAreExpanded = EditorGUIHelper.DefaultPropertyFieldDelayed(position, prop, label) && EditorGUI.HasVisibleChildFields(prop);
+            bool childrenAreExpanded = EditorGUIProxy.DefaultPropertyFieldDelayed(position, prop, label) && EditorGUI.HasVisibleChildFields(prop);
             position.y += position.height + EditorGUI.kControlVerticalSpacing;
 
             // Loop through all child properties

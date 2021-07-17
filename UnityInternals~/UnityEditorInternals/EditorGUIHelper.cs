@@ -5,7 +5,7 @@
     using UnityEngine;
     using Object = UnityEngine.Object;
 
-    public static class EditorGUIHelper
+    public static class EditorGUIProxy
     {
         public static bool HasKeyboardFocus(int controlID) => EditorGUI.HasKeyboardFocus(controlID);
 

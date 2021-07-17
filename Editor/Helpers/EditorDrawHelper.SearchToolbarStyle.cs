@@ -18,7 +18,7 @@
         [PublicAPI]
         public readonly struct SearchToolbarStyle : IDisposable
         {
-            private static readonly GUILayoutOption[] _options = { DrawHelper.ExpandWidth(false), null };
+            private static readonly GUILayoutOption[] _options = { GUILayoutHelper.ExpandWidth(false), null };
             private static GUIStyle _style;
 
             private static GUIStyle Style =>

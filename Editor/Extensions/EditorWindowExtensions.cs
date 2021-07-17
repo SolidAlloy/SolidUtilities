@@ -54,7 +54,7 @@
 
             if (changeWidth)
             {
-                float screenWidth = EditorDrawHelper.GetScreenWidth();
+                float screenWidth = EditorGUIUtilityHelper.GetScreenWidth();
                 if (positionToAdjust.xMax >= screenWidth)
                     positionToAdjust.x -= positionToAdjust.xMax - screenWidth;
             }
@@ -62,7 +62,7 @@
             if (changeHeight)
             {
                 // MainWindow is more reliable than Screen.currentResolution.height, especially for the multi-display setup.
-                float mainWinYMax = EditorDrawHelper.GetMainWindowPosition().yMax;
+                float mainWinYMax = EditorGUIUtilityHelper.GetMainWindowPosition().yMax;
 
                 if (positionToAdjust.yMax >= mainWinYMax)
                     positionToAdjust.y -= positionToAdjust.yMax - mainWinYMax;
@@ -88,7 +88,7 @@
         /// <param name="window">The window to center.</param>
         [PublicAPI] public static void CenterOnMainWin(this EditorWindow window)
         {
-            Rect main = EditorDrawHelper.GetMainWindowPosition();
+            Rect main = EditorGUIUtilityHelper.GetMainWindowPosition();
 
             Rect pos = window.position;
             float centerWidth = (main.width - pos.width) * 0.5f;
