@@ -24,6 +24,8 @@
         /// <summary>The default Unity info icon.</summary>
         public static readonly Texture2D Info = (Texture2D) EditorGUIUtility.Load("console.infoicon");
 
+        public static readonly Texture2D Error = (Texture2D) EditorGUIUtility.Load("console.erroricon");
+
         /// <summary>Triangle with one of the vertices looking to the right. Useful in foldout menus.</summary>
         public static readonly EditorIcon TriangleRight = new EditorIcon(Database.TriangleRight);
 

@@ -4,10 +4,13 @@
 
     public static class CollectionExtensions
     {
-        public static void AddIfMissing<T>(this ICollection<T> list, T value)
+        public static bool AddIfMissing<T>(this ICollection<T> list, T value)
         {
-            if ( ! list.Contains(value))
-                list.Add(value);
+            if (list.Contains(value))
+                return false;
+
+            list.Add(value);
+            return true;
         }
     }
 }

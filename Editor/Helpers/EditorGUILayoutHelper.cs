@@ -95,9 +95,16 @@
         /// <summary>Shows the info message.</summary>
         /// <param name="message">The message to output.</param>
         /// <example><code>EditorDrawHelper.DrawInfoMessage("No types to select.");</code></example>
-        [PublicAPI] public static void DrawInfoMessage(string message)
+        [PublicAPI] public static void DrawInfoMessage(string message) => DrawMessage(message, EditorIcons.Info);
+
+        /// <summary>Shows the info message.</summary>
+        /// <param name="message">The message to output.</param>
+        /// <example><code>EditorDrawHelper.DrawInfoMessage("No types to select.");</code></example>
+        [PublicAPI] public static void DrawErrorMessage(string message) => DrawMessage(message, EditorIcons.Error);
+
+        private static void DrawMessage(string message, Texture2D icon)
         {
-            var messageContent = new GUIContent(message, EditorIcons.Info);
+            var messageContent = new GUIContent(message, icon);
             Rect labelPos = EditorGUI.IndentedRect(GUILayoutUtility.GetRect(messageContent, InfoMessageStyle));
             GUI.Label(labelPos, messageContent, InfoMessageStyle);
         }
