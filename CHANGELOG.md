@@ -1,3 +1,21 @@
+# [1.31.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.30.0...1.31.0) (2021-08-22)
+
+
+### Bug Fixes
+
+* Moved StackTraceHelper to the Editor assembly ([e2292ca](https://github.com/SolidAlloy/SolidUtilities/commit/e2292ca328b603bb7ff7e6b4533eb16eb44a78d1))
+
+
+### Features
+
+* Added EditorGUILayoutHelper.DrawErrorMessage() ([ff8c94e](https://github.com/SolidAlloy/SolidUtilities/commit/ff8c94ef2cfafd5b9ce874129c189880931b9096))
+* Added ICollection.AddIfMissing() extension method ([6e8b360](https://github.com/SolidAlloy/SolidUtilities/commit/6e8b360eab6cbadc8b8dd2d9488122876a42dd0a))
+* Added ListHelper.Empty<T>() method ([b8d29c0](https://github.com/SolidAlloy/SolidUtilities/commit/b8d29c0dc53896dc355953d51f83958a57b55bbb))
+* Added PlayModeSaver - utility that allows saving select component fields into edit mode ([ac9b1fd](https://github.com/SolidAlloy/SolidUtilities/commit/ac9b1fda486accfbe741752f7dd6b8110d32173d))
+* Added StackTraceHelper.EnvironmentToUnityStyle() and AddLinks() methods ([38d11e9](https://github.com/SolidAlloy/SolidUtilities/commit/38d11e9c5043ff6c6301ab77d3fd349efeb3a9d9))
+* Added string.IndexOfNth() extension method ([741fbbe](https://github.com/SolidAlloy/SolidUtilities/commit/741fbbece90362b6ad986c6c608f355f2b3ad445))
+* Refactored DrawHelpers and moved their methods to classes with more familiar names ([262d982](https://github.com/SolidAlloy/SolidUtilities/commit/262d982211b1ea3fdab4f81b57bd4e2246450343))
+
 # [1.30.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.29.0...1.30.0) (2021-06-20)
 
 
