@@ -1,3 +1,10 @@
+# [1.32.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.31.0...1.32.0) (2021-08-28)
+
+
+### Features
+
+* Added ability to draw additional fields in the build settings window ([f6ba5e9](https://github.com/SolidAlloy/SolidUtilities/commit/f6ba5e9085d688f28dc296996af40d768af898d9))
+
 # [1.31.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.30.0...1.31.0) (2021-08-22)
 
 
