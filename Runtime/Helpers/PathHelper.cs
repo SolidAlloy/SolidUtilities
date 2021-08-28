@@ -19,17 +19,21 @@
         {
             const string pathSep = "\\";
             string fullFromPath = Path.GetFullPath(fromPath);
-            string fullBaseDir = Path.GetFullPath(baseDir);            // If folder contains upper folder references, they gets lost here. "c:\test\..\test2" => "c:\test2"
+            // If folder contains upper folder references, they gets lost here. "c:\test\..\test2" => "c:\test2"
+            string fullBaseDir = Path.GetFullPath(baseDir);
 
             string[] p1 = Regex.Split(fullFromPath, "[\\\\/]").Where(x => x.Length != 0).ToArray();
             string[] p2 = Regex.Split(fullBaseDir, "[\\\\/]").Where(x => x.Length != 0).ToArray();
             int i = 0;
 
             for (; i < p1.Length && i < p2.Length; i++)
+            {
                 if (string.Compare(p1[i], p2[i], StringComparison.OrdinalIgnoreCase) != 0)
                     break;
+            }
 
-            if (i == 0)     // Cannot make relative path, for example if resides on different drive
+            // Cannot make relative path, for example if resides on different drive
+            if (i == 0)
                 return fullFromPath;
 
             string r = string.Join(pathSep, Enumerable.Repeat("..", p2.Length - i).Concat(p1.Skip(i).Take(p1.Length - i)));
@@ -44,12 +48,8 @@
         [PublicAPI]
         public static bool IsSubPathOf(string path, string baseDirPath)
         {
-            string normalizedPath = Path.GetFullPath(path.Replace('/', '\\')
-                .WithEnding("\\"));
-
-            string normalizedBaseDirPath = Path.GetFullPath(baseDirPath.Replace('/', '\\')
-                .WithEnding("\\"));
-
+            string normalizedPath = Path.GetFullPath(path.Replace('/', '\\').WithEnding("\\"));
+            string normalizedBaseDirPath = Path.GetFullPath(baseDirPath.Replace('/', '\\').WithEnding("\\"));
             return normalizedPath.StartsWith(normalizedBaseDirPath, StringComparison.OrdinalIgnoreCase);
         }
 
@@ -88,6 +88,7 @@
             {
                 throw new ArgumentNullException(nameof(value));
             }
+
             if (length < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(length), length, "Length is less than zero");
