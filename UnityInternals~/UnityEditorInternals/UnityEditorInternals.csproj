@@ -74,6 +74,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="ConsoleWindowProxy.cs" />
+        <Compile Include="CustomBuildOptions.cs" />
         <Compile Include="DrawerReplacer.cs" />
         <Compile Include="EditorGUIHelper.cs" />
         <Compile Include="EditorGUILayoutHelper.cs" />

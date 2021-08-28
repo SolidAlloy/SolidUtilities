@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEditorInternals", "Uni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEngineInternals", "UnityEngineInternals\UnityEngineInternals.csproj", "{0ECCC8A8-BCF8-4429-A35C-05C9FFD4741C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEditorInternals.Android", "UnityEditorInternals.Android\UnityEditorInternals.Android.csproj", "{5DC6C857-1750-4A13-A501-0F57F943C5B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEditorInternals.Ios", "UnityEditorInternals.Ios\UnityEditorInternals.Ios.csproj", "{38E8226C-70A9-4998-9E20-CA031DB9EA2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release|Unity2020 = Release|Unity2020
@@ -28,5 +32,21 @@ Global
 		{0ECCC8A8-BCF8-4429-A35C-05C9FFD4741C}.Release|Unity2019.Build.0 = Release|AnyUnityVersion
 		{0ECCC8A8-BCF8-4429-A35C-05C9FFD4741C}.Release|Unity2020.ActiveCfg = Release|AnyUnityVersion
 		{0ECCC8A8-BCF8-4429-A35C-05C9FFD4741C}.Release|Unity2020.Build.0 = Release|AnyUnityVersion
+		{5DC6C857-1750-4A13-A501-0F57F943C5B5}.Release|Unity2020.ActiveCfg = Release|Any CPU
+		{5DC6C857-1750-4A13-A501-0F57F943C5B5}.Release|Unity2020.Build.0 = Release|Any CPU
+		{5DC6C857-1750-4A13-A501-0F57F943C5B5}.Release|Unity2019.ActiveCfg = Release|Any CPU
+		{5DC6C857-1750-4A13-A501-0F57F943C5B5}.Release|Unity2019.Build.0 = Release|Any CPU
+		{5DC6C857-1750-4A13-A501-0F57F943C5B5}.Debug|Unity2020.ActiveCfg = Debug|Any CPU
+		{5DC6C857-1750-4A13-A501-0F57F943C5B5}.Debug|Unity2020.Build.0 = Debug|Any CPU
+		{5DC6C857-1750-4A13-A501-0F57F943C5B5}.Debug|Unity2019.ActiveCfg = Debug|Any CPU
+		{5DC6C857-1750-4A13-A501-0F57F943C5B5}.Debug|Unity2019.Build.0 = Debug|Any CPU
+		{38E8226C-70A9-4998-9E20-CA031DB9EA2C}.Release|Unity2020.ActiveCfg = Release|Any CPU
+		{38E8226C-70A9-4998-9E20-CA031DB9EA2C}.Release|Unity2020.Build.0 = Release|Any CPU
+		{38E8226C-70A9-4998-9E20-CA031DB9EA2C}.Release|Unity2019.ActiveCfg = Release|Any CPU
+		{38E8226C-70A9-4998-9E20-CA031DB9EA2C}.Release|Unity2019.Build.0 = Release|Any CPU
+		{38E8226C-70A9-4998-9E20-CA031DB9EA2C}.Debug|Unity2020.ActiveCfg = Debug|Any CPU
+		{38E8226C-70A9-4998-9E20-CA031DB9EA2C}.Debug|Unity2020.Build.0 = Debug|Any CPU
+		{38E8226C-70A9-4998-9E20-CA031DB9EA2C}.Debug|Unity2019.ActiveCfg = Debug|Any CPU
+		{38E8226C-70A9-4998-9E20-CA031DB9EA2C}.Debug|Unity2019.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
