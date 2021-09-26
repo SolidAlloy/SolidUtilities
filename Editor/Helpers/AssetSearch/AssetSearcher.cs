@@ -110,12 +110,14 @@
             if (type.IsGenericType)
                 type = type.GetGenericTypeDefinition();
 
-            foreach (string guid in AssetDatabase.FindAssets($"t:MonoScript {type.Name.StripGenericSuffix()}"))
+            string typeNameWithoutSuffix = type.Name.StripGenericSuffix();
+
+            foreach (string guid in AssetDatabase.FindAssets($"t:MonoScript {typeNameWithoutSuffix}"))
             {
                 string assetPath = AssetDatabase.GUIDToAssetPath(guid);
                 var asset = AssetDatabase.LoadAssetAtPath<MonoScript>(assetPath);
 
-                if (asset is null || asset.GetClassType() != type)
+                if (asset is null || asset.GetClassType(typeNameWithoutSuffix) != type)
                     continue;
 
                 GUID = guid;

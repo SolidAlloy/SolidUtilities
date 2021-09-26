@@ -21,17 +21,18 @@
         /// <see cref="UnityEngine.Object"/> and generic classes (the file must be named by the "GenericClass`1.cs" template).
         /// </summary>
         /// <param name="script">The script to get the type from.</param>
+        /// <param name="className">A specific class name to search for.</param>
         /// <returns>The <see cref="Type"/> of the class implemented by this script or <see langword="null"/>,
         /// if the type was not found.</returns>
-        [PublicAPI, CanBeNull] public static Type GetClassType(this MonoScript script)
+        [PublicAPI, CanBeNull] public static Type GetClassType(this MonoScript script, string className = null)
         {
             Type simpleType = script.GetClass();
             if (simpleType != null)
                 return simpleType;
 
-            string className = GetFirstClassFromText(script.text);
+            string foundClassName = string.IsNullOrEmpty(className) ? GetFirstClassFromText(script.text) : GetFirstClassWithName(script.text, className);
 
-            if (string.IsNullOrEmpty(className))
+            if (string.IsNullOrEmpty(foundClassName))
                 return null;
 
             string assemblyName = script.GetAssemblyName();
@@ -51,7 +52,7 @@
             }
 
             string namespaceName = script.GetNamespaceName();
-            string fullTypeName = namespaceName == string.Empty ? className : $"{namespaceName}.{className}";
+            string fullTypeName = namespaceName == string.Empty ? foundClassName : $"{namespaceName}.{foundClassName}";
 
             Type type = assembly.GetType(fullTypeName);
             return type;
@@ -60,16 +61,27 @@
         private static string GetFirstClassFromText(string text)
         {
             string className = _classRegex.Match(text).Value;
+            return GetProperClassName(className);
+        }
 
-            if (string.IsNullOrEmpty(className))
-                return className;
+        private static string GetFirstClassWithName(string text, string className)
+        {
+            string pattern = $@"(?<=(class )|(struct )){className}(\s)?(<.*?>)?(?=(\s|\n)*(:|{{))";
+            string foundClassName = Regex.Match(text, pattern).Value;
+            return GetProperClassName(foundClassName);
+        }
 
-            if ( ! className.Contains("<"))
-                return className;
+        private static string GetProperClassName(string rawClassName)
+        {
+            if (string.IsNullOrEmpty(rawClassName))
+                return rawClassName;
 
-            int argsCount = className.CountChars(',') + 1;
-            int bracketIndex = className.IndexOf('<');
-            return $"{className.Substring(0, bracketIndex)}`{argsCount.ToString()}";
+            if ( ! rawClassName.Contains("<"))
+                return rawClassName;
+
+            int argsCount = rawClassName.CountChars(',') + 1;
+            int bracketIndex = rawClassName.IndexOf('<');
+            return $"{rawClassName.Substring(0, bracketIndex)}`{argsCount.ToString()}";
         }
 
         /// <summary>Returns the assembly name of the class implemented by this script.</summary>
