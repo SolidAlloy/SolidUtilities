@@ -1,3 +1,10 @@
+## [1.32.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.32.0...1.32.1) (2021-09-26)
+
+
+### Bug Fixes
+
+* Fixed the correct type not being found in MonoScript if the class was not the first in the file ([4703bb0](https://github.com/SolidAlloy/SolidUtilities/commit/4703bb06db067e57e94f301d568c571790b56e58))
+
 # [1.32.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.31.0...1.32.0) (2021-08-28)
 
 
