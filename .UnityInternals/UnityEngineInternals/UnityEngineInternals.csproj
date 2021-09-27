@@ -67,7 +67,7 @@
     </Target>
     -->
     <Target Name="AfterBuild">
-        <ItemGroup> <_FilesToCopy Include="$(OutputPath)$(AssemblyName).dll" /> </ItemGroup>
+        <ItemGroup> <_FilesToCopy Include="$(OutputPath)$(AssemblyName).*" /> </ItemGroup>
         <Copy SourceFiles="@(_FilesToCopy)" DestinationFiles="@(_FilesToCopy->'$(_OutputCopyLocation)%(RecursiveDir)UnityEngineInternals%(Extension)')" />
     </Target>
 

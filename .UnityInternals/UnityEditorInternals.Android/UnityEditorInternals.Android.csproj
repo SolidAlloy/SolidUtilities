@@ -4,11 +4,11 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{38E8226C-70A9-4998-9E20-CA031DB9EA2C}</ProjectGuid>
+        <ProjectGuid>{5DC6C857-1750-4A13-A501-0F57F943C5B5}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>UnityEditorInternals.Ios</RootNamespace>
-        <AssemblyName>UnityEditorInternals.Ios</AssemblyName>
+        <RootNamespace>UnityEditorInternals.Android</RootNamespace>
+        <AssemblyName>UnityEditorInternals.Android</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <_OutputCopyLocation>..\..\</_OutputCopyLocation>
@@ -22,7 +22,7 @@
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
-        <AssemblyName>Unity.InternalAPIEditorBridgeDev.003</AssemblyName>
+        <AssemblyName>Unity.InternalAPIEditorBridgeDev.002</AssemblyName>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,7 +32,7 @@
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
-        <AssemblyName>UnityEditorInternals.Ios</AssemblyName>
+        <AssemblyName>UnityEditorInternals.Android</AssemblyName>
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="System" />
@@ -42,15 +42,12 @@
         <Reference Include="UnityEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>C:\Program Files\Unity Editors\2020.3.13f1\Editor\Data\Managed\UnityEditor.dll</HintPath>
         </Reference>
-        <Reference Include="UnityEditor.iOS.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>C:\Program Files\Unity Editors\2020.3.13f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.dll</HintPath>
-        </Reference>
-        <Reference Include="UnityEditor.iOS.Extensions.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>C:\Program Files\Unity Editors\2020.3.13f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+        <Reference Include="UnityEditor.Android.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>C:\Program Files\Unity Editors\2020.3.16f1\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="CustomIosBuildOptions.cs" />
+        <Compile Include="CustomAndroidBuildOptions.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
@@ -66,7 +63,7 @@
       </PackageReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
          Other similar extension points exist, see Microsoft.Common.targets.
     <Target Name="BeforeBuild">
     </Target>
@@ -74,8 +71,8 @@
     </Target>
     -->
     <Target Name="AfterBuild">
-        <ItemGroup> <_FilesToCopy Include="$(OutputPath)$(AssemblyName).dll" /> </ItemGroup>
-        <Copy SourceFiles="@(_FilesToCopy)" DestinationFiles="@(_FilesToCopy->'$(_OutputCopyLocation)%(RecursiveDir)UnityEditorInternals.Ios%(Extension)')" />
+        <ItemGroup> <_FilesToCopy Include="$(OutputPath)$(AssemblyName).*" /> </ItemGroup>
+        <Copy SourceFiles="@(_FilesToCopy)" DestinationFiles="@(_FilesToCopy->'$(_OutputCopyLocation)%(RecursiveDir)UnityEditorInternals.Android%(Extension)')" />
     </Target>
 
 </Project>
