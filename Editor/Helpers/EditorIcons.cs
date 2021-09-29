@@ -27,10 +27,30 @@
         public static readonly Texture2D Error = (Texture2D) EditorGUIUtility.Load("console.erroricon");
 
         /// <summary>Triangle with one of the vertices looking to the right. Useful in foldout menus.</summary>
-        public static readonly EditorIcon TriangleRight = new EditorIcon(Database.TriangleRight);
+        public static readonly EditorIcon TriangleRight;
 
         /// <summary>Triangle with one of the vertices looking to the bottom. Useful in foldout menus.</summary>
-        public static readonly EditorIcon TriangleDown = new EditorIcon(Database.TriangleRight.Rotate());
+        public static readonly EditorIcon TriangleDown;
+
+        static EditorIcons()
+        {
+            // The icon sometimes reports MissingReferenceException on MacOS for some reason.
+            if (Database.TriangleRight == null)
+            {
+                const string triangleRightGuid = "bb26edf4be136b0459bfdf7ff0c7455b";
+                string path = AssetDatabase.GUIDToAssetPath(triangleRightGuid);
+                Database.TriangleRight = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+            }
+
+            TriangleRight = new EditorIcon(Database.TriangleRight);
+            TriangleDown = new EditorIcon(Database.TriangleRight.Rotate());
+
+            AssemblyReloadEvents.beforeAssemblyReload += () =>
+            {
+                TriangleRight.Dispose();
+                TriangleDown.Dispose();
+            };
+        }
 
         private static EditorIconsDatabase GetDatabase()
         {
