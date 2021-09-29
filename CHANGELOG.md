@@ -1,3 +1,10 @@
+## [1.32.2](https://github.com/SolidAlloy/SolidUtilities/compare/1.32.1...1.32.2) (2021-09-29)
+
+
+### Bug Fixes
+
+* Fixed MissingReferenceException sometimes being reported in EditorIcons on MacOS ([a363c70](https://github.com/SolidAlloy/SolidUtilities/commit/a363c70cb8b700bb6e8ab7b1aad92caea0af905f))
+
 ## [1.32.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.32.0...1.32.1) (2021-09-26)
 
 
