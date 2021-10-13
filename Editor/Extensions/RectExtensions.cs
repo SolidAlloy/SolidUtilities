@@ -23,5 +23,14 @@
 
             return rect;
         }
+
+        [PublicAPI]
+        public static bool Contains(this Rect rect, Rect otherRect)
+        {
+            return rect.xMin <= otherRect.xMin
+                   && rect.yMin <= otherRect.yMin
+                   && rect.xMax >= otherRect.xMax
+                   && rect.yMax >= otherRect.yMax;
+        }
     }
 }
