@@ -1,3 +1,10 @@
+# [1.33.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.32.2...1.33.0) (2021-10-13)
+
+
+### Features
+
+* Added the Rect.Contains(Rect otherRect) extension method ([b860bc5](https://github.com/SolidAlloy/SolidUtilities/commit/b860bc559de57d5947b35e9e46b38445e2ea5448))
+
 ## [1.32.2](https://github.com/SolidAlloy/SolidUtilities/compare/1.32.1...1.32.2) (2021-09-29)
 
 
