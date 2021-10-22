@@ -1,3 +1,10 @@
+## [1.33.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.33.0...1.33.1) (2021-10-22)
+
+
+### Bug Fixes
+
+* Fixed MissingReferenceException on MacOS ([16a2fd3](https://github.com/SolidAlloy/SolidUtilities/commit/16a2fd3253f16fba03b5dd66b37704f65c1fc249))
+
 # [1.33.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.32.2...1.33.0) (2021-10-13)
 
 
