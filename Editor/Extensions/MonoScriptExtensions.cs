@@ -12,9 +12,7 @@
     public static class MonoScriptExtensions
     {
         private static readonly Regex _namespaceNameRegex = new Regex(@"(?<=namespace[\s]+)[\w_.-]+", RegexOptions.Compiled);
-
-        private static readonly Regex _classRegex =
-            new Regex(@"(?<=(class )|(struct )).*?(?=(\s|\n)*(:|{))", RegexOptions.Compiled);
+        private static readonly Regex _classRegex = new Regex(@"(?<=(class )|(struct )).*?(?=(\s|\n)*(:|{))", RegexOptions.Compiled);
 
         /// <summary>
         /// Returns the <see cref="Type"/> of the class implemented by this script. Works for types not derived from

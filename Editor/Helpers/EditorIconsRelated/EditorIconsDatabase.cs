@@ -1,5 +1,6 @@
 ﻿namespace SolidUtilities.Editor.Helpers.EditorIconsRelated
 {
+    using System;
     using JetBrains.Annotations;
     using UnityEditor;
     using UnityEngine;
@@ -13,10 +14,27 @@
     /// </summary>
     internal class EditorIconsDatabase : ScriptableObject
     {
+        private const string TriangleRightData = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABaklEQVQ4jdWRsWrCUBSGT87NrSGQ0WAgT9AH8AV8BXHqpJNDodClQ0GhSwuFLn2DQl/AxaXi0EWKUKhbcHBx65QrNAnnnnKjETW6t/90uNz/u+f/L/x/WUWCXq8HlmVBlmUghEDbtllrzcycnxv1+/1SYCwGc4mIwPf9MymlVkoxAAhEBAM5JXtLQhRKKWo0GvfVajUZj8ePs9nsW2sNlUpFMDMdY2w3YGZrEyHwff+m1Wp9drvdqzAM3TiOKU3TkvkwQp4XETPzWpZlYRAET51O56PZbF7UajWv5N4FrBlWMQghxA8RpVLK83q9/tJuty9L7t0O1inyskz7RESOlBJWq9X7ZDK5m06nbyX3ASDfgJkdUygifs3n84fBYPC6XC7ZcZySeQ/AzHrTQbRYLK5Ho9FzFEWpEAI8z0NtvuOI9gCu68JwOLxVSkGSJOC6LppzItJFPydL3LwOcRybLGhgxVanzH9AAPALQK6xKuQq1X8AAAAASUVORK5CYII=";
+
         [UsedImplicitly]
         [SerializeField, Multiline(6)] private string _description;
 
-        public Texture2D TriangleRight;
+        private Texture2D _triangleRight;
+
+        public Texture2D TriangleRight
+        {
+            get
+            {
+                if (_triangleRight == null)
+                {
+                    var pngBytes = Convert.FromBase64String(TriangleRightData);
+                    _triangleRight = new Texture2D(2, 2);
+                    _triangleRight.LoadImage(pngBytes);
+                }
+
+                return _triangleRight;
+            }
+        }
 
         [SerializeField] private Material _activeDarkSkin;
         [SerializeField] private Material _activeLightSkin;
