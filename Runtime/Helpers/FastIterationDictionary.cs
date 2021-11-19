@@ -5,6 +5,13 @@
     using System.Collections.Generic;
     using JetBrains.Annotations;
 
+    public interface IKeysValuesHolder<out TKey, out TValue>
+    {
+        IReadOnlyList<TKey> Keys { get; }
+
+        IReadOnlyList<TValue> Values { get; }
+    }
+
     /// <summary>
     /// A dictionary that can be iterated as fast as a List at the cost of a larger memory footprint and
     /// slower <see cref="Remove(System.Collections.Generic.KeyValuePair{TKey,TValue})"/> execution.
@@ -12,11 +19,9 @@
     /// <typeparam name="TKey">Type of the key.</typeparam>
     /// <typeparam name="TValue">Type of the value.</typeparam>
     /// <remarks>
-    /// Besides making iteration faster, the speed of <see cref="Count"/>, <see cref="KeysCollection"/>, and
-    /// <see cref="ValuesCollection"/> is also increased (note that they must be used instead of
-    /// <see cref="Keys"/> and <see cref="Values"/>)
+    /// Besides making iteration faster, the speed of <see cref="Count"/>, <see cref="Keys"/>, and <see cref="Values"/> is also increased
     /// </remarks>
-    public class FastIterationDictionary<TKey, TValue> : IDictionary<TKey, TValue>
+    public class FastIterationDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IKeysValuesHolder<TKey, TValue>
     {
         private readonly List<TKey> _keys;
         private readonly List<TValue> _values;
@@ -30,21 +35,19 @@
             _dictionary = new Dictionary<TKey, TValue>(capacity);
         }
 
-        public ICollection<TKey> Keys => throw new NotSupportedException("Use KeysCollection instead.");
-
-        [PublicAPI]
-        public TKey[] KeysCollection => _keys.ToArray();
-
-        public ICollection<TValue> Values => throw new NotSupportedException("Use ValuesCollection instead.");
-
-        [PublicAPI]
-        public TValue[] ValuesCollection => _values.ToArray();
-
         public TValue this[TKey key]
         {
             get => _dictionary[key];
             set => Add(key, value);
         }
+
+        public IReadOnlyList<TKey> Keys => _keys;
+
+        public IReadOnlyList<TValue> Values => _values;
+
+        ICollection<TValue> IDictionary<TKey, TValue>.Values => _values;
+
+        ICollection<TKey> IDictionary<TKey, TValue>.Keys => _keys;
 
         /// <summary>
         /// Allows to update fields of a <see cref="key"/> that take part in calculating hash of the object without
