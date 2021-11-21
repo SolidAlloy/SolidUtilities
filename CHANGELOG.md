@@ -1,3 +1,10 @@
+# [1.34.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.33.1...1.34.0) (2021-11-21)
+
+
+### Features
+
+* Replaced KeysCollection and ValuesCollection in FastIterationDictionary with IKeysValuesHolder interface ([4bd56af](https://github.com/SolidAlloy/SolidUtilities/commit/4bd56af6014ab97ee4ab184a9f832d1d74e4e150))
+
 ## [1.33.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.33.0...1.33.1) (2021-10-22)
 
 
