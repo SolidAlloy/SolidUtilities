@@ -114,8 +114,13 @@
         public static string GetSubstringAfterLast(this string text, char character)
         {
             int lastDot = text.LastIndexOf(character);
-
             return lastDot == -1 ? text : text.Substring(lastDot + 1, text.Length - lastDot - 1);
+        }
+
+        public static string GetSubstringBeforeLast(this string text, char character)
+        {
+            int lastDot = text.LastIndexOf(character);
+            return lastDot == -1 ? text : text.Substring(0, lastDot);
         }
 
         /// <summary>
