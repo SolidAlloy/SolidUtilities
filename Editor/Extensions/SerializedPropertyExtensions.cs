@@ -1,10 +1,15 @@
 ﻿namespace SolidUtilities.Editor.Extensions
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Reflection;
+    using System.Text.RegularExpressions;
     using JetBrains.Annotations;
     using SolidUtilities.Extensions;
     using UnityEditor;
+    using UnityEditorInternals;
     using UnityEngine.Assertions;
 
     /// <summary>Different useful extensions for <see cref="SerializedProperty"/>.</summary>
@@ -26,50 +31,64 @@
             return firstTwoChars == "m_";
         }
 
+        public static SerializedProperty GetParent(this SerializedProperty property)
+        {
+            if (!property.propertyPath.Contains('.'))
+                return null;
+
+            var parentPropertyPath = property.propertyPath.GetSubstringBeforeLast('.');
+            if (parentPropertyPath.EndsWith(".Array"))
+            {
+                parentPropertyPath = parentPropertyPath.Substring(0, parentPropertyPath.Length - 6);
+            }
+
+            if (string.IsNullOrEmpty(parentPropertyPath))
+                return null;
+
+            return property.serializedObject.FindProperty(parentPropertyPath);
+        }
+
         /// <summary>Gets type of the object serialized by the <paramref name="property"/>.</summary>
         /// <param name="property">The property whose type to find.</param>
         /// <returns>Type of the object serialized by <paramref name="property"/>.</returns>
-        [NotNull]
-        public static Type GetObjectType(this SerializedProperty property)
+        [NotNull, PublicAPI]
+        public static Type GetObjectType(this SerializedProperty property) => property.GetFieldInfoAndType().Type;
+
+        [PublicAPI]
+        public static FieldInfo GetFieldInfo(this SerializedProperty property) => property.GetFieldInfoAndType().FieldInfo;
+
+        public static T GetObject<T>(this SerializedProperty property) => (T) property.GetObject();
+
+        public static object GetObject(this SerializedProperty property)
         {
-            const BindingFlags instanceFieldFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
-            Type parentType = property.serializedObject.targetObject.GetType();
+            var propertyPaths = property.propertyPath.Split('.');
 
-            const string arraySuffix = ".Array.data";
-            string fieldName = property.propertyPath;
+            var currentProperty = property.serializedObject.FindProperty(propertyPaths[0]);
+            var fieldInfo = currentProperty.GetFieldInfo();
+            object target = fieldInfo.GetValue(property.serializedObject.targetObject);
 
-            if (fieldName.Contains(arraySuffix))
+            foreach (string path in propertyPaths.Skip(1))
             {
-                int suffixIndex = fieldName.IndexOf(arraySuffix, StringComparison.Ordinal);
-                fieldName = fieldName.Substring(0, suffixIndex);
-                FieldInfo propertyField = parentType.GetFieldAtPath(fieldName, instanceFieldFlags);
-                Assert.IsNotNull(propertyField);
-                Type collectionType = propertyField.FieldType;
-                Type realType;
-
-                if (collectionType.IsGenericType && collectionType.GetGenericArguments().Length == 1)
+                if (path == "Array")
                 {
-                    realType = collectionType.GetGenericArguments()[0];
+                    continue;
                 }
-                else if (collectionType.IsArray)
+
+                if (path.StartsWith("data["))
                 {
-                    realType = collectionType.GetElementType();
+                    int index = int.Parse(path[5].ToString());
+                    currentProperty = currentProperty.GetArrayElementAtIndex(index);
+                    target = ((IList) target)[index];
                 }
                 else
                 {
-                    throw new ArgumentException("The method does not know how to handle this collection type. " +
-                                                "Please contact the author of the plugin to discuss how it can be implemented.");
+                    currentProperty = currentProperty.FindPropertyRelative(path);
+                    fieldInfo = currentProperty.GetFieldInfo();
+                    target = fieldInfo.GetValue(target);
                 }
+            }
 
-                Assert.IsNotNull(realType);
-                return realType;
-            }
-            else
-            {
-                FieldInfo propertyField = parentType.GetFieldAtPath(fieldName, instanceFieldFlags);
-                Assert.IsNotNull(propertyField);
-                return propertyField.FieldType;
-            }
+            return target;
         }
     }
 }
