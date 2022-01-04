@@ -113,14 +113,22 @@
         [PublicAPI, Pure]
         public static string GetSubstringAfterLast(this string text, char character)
         {
-            int lastDot = text.LastIndexOf(character);
-            return lastDot == -1 ? text : text.Substring(lastDot + 1, text.Length - lastDot - 1);
+            int lastCharIndex = text.LastIndexOf(character);
+            return lastCharIndex == -1 ? text : text.Substring(lastCharIndex + 1, text.Length - lastCharIndex - 1);
         }
 
+        [PublicAPI, Pure]
         public static string GetSubstringBeforeLast(this string text, char character)
         {
-            int lastDot = text.LastIndexOf(character);
-            return lastDot == -1 ? text : text.Substring(0, lastDot);
+            int lastCharIndex = text.LastIndexOf(character);
+            return lastCharIndex == -1 ? text : text.Substring(0, lastCharIndex);
+        }
+
+        [PublicAPI, Pure]
+        public static string GetSubstringBefore(this string text, char character)
+        {
+            int charIndex = text.IndexOf(character);
+            return charIndex == -1 ? text : text.Substring(0, charIndex);
         }
 
         /// <summary>
