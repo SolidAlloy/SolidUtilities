@@ -1,9 +1,9 @@
 ﻿namespace SolidUtilities.Editor
 {
-    using SolidUtilities.Editor.Extensions;
+    using Extensions;
     using SolidUtilities.Extensions;
-    using SolidUtilities.UnityEditorInternals;
     using UnityEditor;
+    using UnityEditorInternals;
     using UnityEngine;
 
     public abstract class DrawerWithModes : PropertyDrawer
@@ -23,6 +23,8 @@
         protected abstract string[] PopupOptions { get; }
 
         protected abstract int PopupValue { get; set; }
+
+        protected bool ShowChoiceButton { get; set; } = true;
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
@@ -48,7 +50,9 @@
             int previousIndent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
-            PopupValue = DrawButton(buttonRect, PopupValue);
+            if (ShowChoiceButton)
+                PopupValue = DrawButton(buttonRect, PopupValue);
+
             DrawValue(property, valueRect, fieldRect, previousIndent);
 
             EditorGUI.indentLevel = previousIndent;
@@ -80,7 +84,7 @@
             }
         }
 
-        private static (Rect label, Rect button, Rect value) GetLabelButtonValueRects(Rect totalRect)
+        private (Rect label, Rect button, Rect value) GetLabelButtonValueRects(Rect totalRect)
         {
             const float indentWidth = 15f;
             const float valueLeftIndent = 2f;
@@ -92,7 +96,7 @@
             labelAndButtonRect.xMin += EditorGUI.indentLevel * indentWidth;
 
             (Rect labelRect, Rect buttonRect) =
-                labelAndButtonRect.CutVertically(ButtonWidth, fromRightSide: true);
+                labelAndButtonRect.CutVertically(ShowChoiceButton ? ButtonWidth : 0f, fromRightSide: true);
 
             valueRect.xMin += valueLeftIndent;
             return (labelRect, buttonRect, valueRect);
