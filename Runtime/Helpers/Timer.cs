@@ -1,4 +1,4 @@
-﻿namespace SolidUtilities.Helpers
+﻿namespace SolidUtilities
 {
     using System;
     using System.Diagnostics;
@@ -10,12 +10,13 @@
     /// runs the actions only once.
     /// </summary>
     [PublicAPI]
-    public readonly struct Timer : IDisposable
+    public class Timer : IDisposable
     {
-        private readonly TimeUnit _timeUnit;
-        private readonly Stopwatch _stopwatch;
-        private readonly string _actionName;
-        private readonly int _iterationCount;
+        private TimeUnit _timeUnit;
+        private Stopwatch _stopwatch;
+        private string _actionName;
+        private int _iterationCount;
+        public string Message;
 
         private Timer(string actionName, TimeUnit timeUnit, int iterationCount)
         {
@@ -23,6 +24,7 @@
             _stopwatch = Stopwatch.StartNew();
             _actionName = actionName;
             _iterationCount = iterationCount;
+            Message = null;
         }
 
         private enum TimeUnit { Milliseconds, Nanoseconds }
@@ -70,7 +72,8 @@
             if (_iterationCount > 1)
                 message += $" One iteration took {GetIterationTime(totalTime)} {unitName} on average.";
 
-            Debug.Log(message);
+            Message = message;
+            Debug.Log(Message);
         }
 
         private int GetTotalTime()

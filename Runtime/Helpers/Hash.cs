@@ -1,4 +1,4 @@
-﻿namespace SolidUtilities.Helpers
+﻿namespace SolidUtilities
 {
     using System.Security.Cryptography;
     using System.Text;

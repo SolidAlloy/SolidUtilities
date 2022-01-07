@@ -1,7 +1,7 @@
 ﻿namespace SolidUtilities.Editor.Helpers
 {
     using EditorIconsRelated;
-    using SolidUtilities.Extensions;
+    using SolidUtilities;
     using UnityEditor;
     using UnityEngine;
     using UnityEngine.Assertions;

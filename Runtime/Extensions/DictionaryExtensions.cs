@@ -1,4 +1,4 @@
-﻿namespace SolidUtilities.Extensions
+﻿namespace SolidUtilities
 {
     using System.Collections.Generic;
 

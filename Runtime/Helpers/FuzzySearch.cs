@@ -1,4 +1,4 @@
-﻿namespace SolidUtilities.Helpers
+﻿namespace SolidUtilities
 {
     using System.Runtime.CompilerServices;
     using JetBrains.Annotations;

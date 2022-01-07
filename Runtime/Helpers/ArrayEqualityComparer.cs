@@ -1,4 +1,4 @@
-﻿namespace SolidUtilities.Helpers
+﻿namespace SolidUtilities
 {
     using System.Collections.Generic;
     using JetBrains.Annotations;

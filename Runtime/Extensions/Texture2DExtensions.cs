@@ -1,4 +1,4 @@
-﻿namespace SolidUtilities.Extensions
+﻿namespace SolidUtilities
 {
     using JetBrains.Annotations;
     using UnityEngine;

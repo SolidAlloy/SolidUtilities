@@ -6,8 +6,7 @@
     using System.Text.RegularExpressions;
     using Extensions;
     using JetBrains.Annotations;
-    using SolidUtilities.Extensions;
-    using SolidUtilities.Helpers;
+    using SolidUtilities;
     using UnityEditor;
     using UnityEngine.Assertions;
 

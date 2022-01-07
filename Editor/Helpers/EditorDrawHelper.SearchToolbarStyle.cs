@@ -2,7 +2,7 @@
 {
     using System;
     using JetBrains.Annotations;
-    using SolidUtilities.Helpers;
+    using SolidUtilities;
     using UnityEditor;
     using UnityEngine;
 

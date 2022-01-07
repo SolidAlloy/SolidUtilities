@@ -1,7 +1,7 @@
 ﻿namespace SolidUtilities.Editor
 {
     using Extensions;
-    using SolidUtilities.Extensions;
+    using SolidUtilities;
     using UnityEditor;
     using UnityEditorInternals;
     using UnityEngine;

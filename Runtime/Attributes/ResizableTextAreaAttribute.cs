@@ -1,4 +1,4 @@
-﻿namespace SolidUtilities.Attributes
+﻿namespace SolidUtilities
 {
     using System;
     using UnityEngine;

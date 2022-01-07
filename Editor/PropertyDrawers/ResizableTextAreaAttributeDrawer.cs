@@ -1,7 +1,7 @@
 ﻿namespace SolidUtilities.Editor.PropertyDrawers
 {
     using System;
-    using Attributes;
+    using SolidUtilities;
     using UnityEditor;
     using UnityEngine;
 

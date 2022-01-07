@@ -5,7 +5,7 @@
     using System.Reflection;
     using System.Text.RegularExpressions;
     using JetBrains.Annotations;
-    using SolidUtilities.Extensions;
+    using SolidUtilities;
     using UnityEditor;
     using UnityEditorInternals;
 

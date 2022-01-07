@@ -1,4 +1,4 @@
-﻿namespace SolidUtilities.Helpers.Editor
+﻿namespace SolidUtilities.Editor
 {
     using System.Text.RegularExpressions;
     using UnityEditorInternals;

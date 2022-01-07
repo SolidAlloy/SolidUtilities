@@ -1,6 +1,6 @@
 ﻿namespace GenericScriptableObjects.Usage_Example.Editor
 {
-    using SolidUtilities.Attributes;
+    using SolidUtilities;
     using UnityEditor;
     using UnityEngine;
 
