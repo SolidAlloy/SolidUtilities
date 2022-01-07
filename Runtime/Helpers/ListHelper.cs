@@ -15,7 +15,7 @@
             if (_lists.TryGetValue(type, out IList list))
                 return (List<T>) list;
 
-            var newList = new List<T>();
+            var newList = new List<T>(0);
             _lists.Add(type, newList);
             return newList;
         }
