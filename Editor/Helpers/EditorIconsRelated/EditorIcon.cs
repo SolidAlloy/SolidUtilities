@@ -1,7 +1,7 @@
-﻿namespace SolidUtilities.Editor.Helpers.EditorIconsRelated
+﻿namespace SolidUtilities.Editor
 {
     using System;
-    using Helpers;
+    using Editor;
     using JetBrains.Annotations;
     using UnityEngine;
     using Object = UnityEngine.Object;

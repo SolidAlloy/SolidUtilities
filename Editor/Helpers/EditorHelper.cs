@@ -1,4 +1,4 @@
-﻿namespace SolidUtilities.Editor.Helpers
+﻿namespace SolidUtilities.Editor
 {
     using JetBrains.Annotations;
     using UnityEditor;

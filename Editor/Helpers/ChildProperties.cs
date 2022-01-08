@@ -1,9 +1,9 @@
-﻿namespace SolidUtilities.Editor.Helpers
+﻿namespace SolidUtilities.Editor
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using Extensions;
+    using Editor;
     using JetBrains.Annotations;
     using UnityEditor;
 

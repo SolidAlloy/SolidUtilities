@@ -1,10 +1,10 @@
-﻿namespace SolidUtilities.Editor.Helpers
+﻿namespace SolidUtilities.Editor
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Text.RegularExpressions;
-    using Extensions;
+    using Editor;
     using JetBrains.Annotations;
     using SolidUtilities;
     using UnityEditor;

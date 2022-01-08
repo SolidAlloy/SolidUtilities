@@ -1,6 +1,6 @@
-﻿namespace SolidUtilities.Editor
+﻿namespace SolidUtilities.Editor.PropertyDrawers
 {
-    using Extensions;
+    using Editor;
     using SolidUtilities;
     using UnityEditor;
     using UnityEditorInternals;

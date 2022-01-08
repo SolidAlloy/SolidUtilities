@@ -1,4 +1,4 @@
-﻿namespace GenericScriptableObjects.Usage_Example.Editor
+﻿namespace SolidUtilities.Editor.PropertyDrawers
 {
     using SolidUtilities;
     using UnityEditor;

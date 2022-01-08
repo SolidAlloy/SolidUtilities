@@ -1,6 +1,6 @@
-﻿namespace SolidUtilities.Editor.Helpers
+﻿namespace SolidUtilities.Editor
 {
-    using EditorIconsRelated;
+    using Editor;
     using SolidUtilities;
     using UnityEditor;
     using UnityEngine;
