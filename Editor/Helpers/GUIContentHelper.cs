@@ -10,6 +10,15 @@
         {
             _content.text = text;
             _content.image = icon;
+            _content.tooltip = string.Empty;
+            return _content;
+        }
+        
+        public static GUIContent Temp(string text, string tooltip)
+        {
+            _content.text = text;
+            _content.tooltip = tooltip;
+            _content.image = null;
             return _content;
         }
     }
