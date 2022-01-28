@@ -24,5 +24,32 @@
 
             return script == null ? null : script.GetClassType();
         }
+
+        /// <summary>
+        /// Completely prevents AssetDatabase from importing assets or refreshin.
+        /// </summary>
+        /// <returns>Instance of a disposable struct.</returns>
+        [PublicAPI]
+        public static DisabledAssetDatabase DisabledScope() => new DisabledAssetDatabase(default);
+        
+        /// <summary>
+        /// Completely prevents AssetDatabase from importing assets or refreshing.
+        /// </summary>
+        public readonly struct DisabledAssetDatabase : IDisposable
+        {
+            public DisabledAssetDatabase(bool _)
+            {
+                EditorApplication.LockReloadAssemblies();
+                AssetDatabase.DisallowAutoRefresh();
+                AssetDatabase.StartAssetEditing();
+            }
+
+            public void Dispose()
+            {
+                AssetDatabase.StopAssetEditing();
+                AssetDatabase.AllowAutoRefresh();
+                EditorApplication.UnlockReloadAssemblies();
+            }
+        }
     }
 }
