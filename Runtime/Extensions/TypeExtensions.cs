@@ -166,7 +166,7 @@
             bool IsSystemType(Type typeToCheck) => typeToCheck.Namespace != null && typeToCheck.Namespace.StartsWith("System");
 
             bool IsCustomSerializableType(Type typeToCheck) =>
-                typeToCheck.IsSerializable && typeToCheck.GetSerializedFields().Any() &&
+                typeToCheck.IsSerializable &&
                 !IsSystemType(typeToCheck);
 
             if (type.IsAbstract) // static classes and interfaces are considered abstract too.
