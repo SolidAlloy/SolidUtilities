@@ -46,12 +46,12 @@
                     GL.Clear(false, true, new Color(1f, 1f, 1f, 0f));
                     Graphics.Blit(Default, temporary, material);
 
-                    newTexture = new Texture2D(Default.width, Default.width, TextureFormat.ARGB32, false, true)
+                    newTexture = new Texture2D(Default.width, Default.height, TextureFormat.ARGB32, false, true)
                     {
                         filterMode = FilterMode.Bilinear
                     };
 
-                    newTexture.ReadPixels(new Rect(0.0f, 0.0f, Default.width, Default.width), 0, 0);
+                    newTexture.ReadPixels(new Rect(0.0f, 0.0f, Default.width, Default.height), 0, 0);
                     newTexture.alphaIsTransparency = true;
                     newTexture.Apply();
                 }

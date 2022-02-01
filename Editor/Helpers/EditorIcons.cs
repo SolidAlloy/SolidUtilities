@@ -32,15 +32,23 @@
         /// <summary>Triangle with one of the vertices looking to the bottom. Useful in foldout menus.</summary>
         public static readonly EditorIcon TriangleDown;
 
+        public static readonly EditorIcon AddButtonS;
+        
+        public static readonly EditorIcon AddButtonI;
+
         static EditorIcons()
         {
-            TriangleRight = new EditorIcon(Database.TriangleRight);
-            TriangleDown = new EditorIcon(Database.TriangleRight.Rotate());
+            TriangleRight = new EditorIcon(EditorIconsDatabase.TriangleRight);
+            TriangleDown = new EditorIcon(EditorIconsDatabase.TriangleRight.Rotate());
+            AddButtonS = new EditorIcon(EditorIconsDatabase.ToolbarPlusS);
+            AddButtonI = new EditorIcon(EditorIconsDatabase.ToolbarPlusI);
 
             AssemblyReloadEvents.beforeAssemblyReload += () =>
             {
                 TriangleRight.Dispose();
                 TriangleDown.Dispose();
+                AddButtonS.Dispose();
+                AddButtonI.Dispose();
             };
         }
 
