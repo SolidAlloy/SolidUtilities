@@ -1,3 +1,29 @@
+# [1.35.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.34.0...1.35.0) (2022-02-03)
+
+
+### Bug Fixes
+
+* Fixed unnecessary garbage allocations in ListHelper.Empty<T> ([8a09a55](https://github.com/SolidAlloy/SolidUtilities/commit/8a09a5585182917c6c57a13536abcbbdb431f2a9))
+* Removed the unnecessary requirement for serializable types to have at least one serialized field ([da8e3bf](https://github.com/SolidAlloy/SolidUtilities/commit/da8e3bf00de7fe3da7bed489ec86240bba3d0219))
+
+
+### Features
+
+* Added an optional icon argument to GUIContentHelper.Temp() ([ede56bd](https://github.com/SolidAlloy/SolidUtilities/commit/ede56bd12488d04e72e8e076a9d3caeb01051f3f))
+* Added AssemblyGeneration class useful for generating assemblies that are not supposed to be auto-referenced ([3b30b54](https://github.com/SolidAlloy/SolidUtilities/commit/3b30b54a22ca4378c163cf237454dbc019b29919))
+* Added AssetDatabaseHelper.DisabledScope() for disabling asset database temporarily ([4727f9d](https://github.com/SolidAlloy/SolidUtilities/commit/4727f9df5eb05921c325345219000c118481da71))
+* Added AssetDatabaseHelper.GetUniqueGUID() method ([b644fd8](https://github.com/SolidAlloy/SolidUtilities/commit/b644fd86b73a20db3bc668e7a979df17c8c30c80))
+* Added DrawerWithModes property drawer ([2ebe4e7](https://github.com/SolidAlloy/SolidUtilities/commit/2ebe4e7261fdf226fb575b28801c3b3d2290ec0b))
+* Added Enumerable.SelectWhere() extension method ([02c02c9](https://github.com/SolidAlloy/SolidUtilities/commit/02c02c94af6169ce4bc0d1080332650f5c01ea10))
+* Added IEnumerable interface for ReadOnlySpan<T> and Split() extension method ([6b6241d](https://github.com/SolidAlloy/SolidUtilities/commit/6b6241d8b4c7dc00b8e4b09139baaa52dd59b9ca))
+* Added new icons to EditorIcons: AddButtonS and AddButtonI ([8c19edf](https://github.com/SolidAlloy/SolidUtilities/commit/8c19edfd5dfd2372360c0f017f62f1380e4c2958))
+* Added SerializedProperty.GetParent(), GetObjectType, GetFieldInfo, GetObject methods ([ce3394a](https://github.com/SolidAlloy/SolidUtilities/commit/ce3394a1dcb7ec1000020c169affcfd35080a986))
+* Added string.GetSubstringBefore(char character) extension method ([79ef45e](https://github.com/SolidAlloy/SolidUtilities/commit/79ef45e39089482ba28abdc695c195afa1f1eff3))
+* Added the ArrayHelper class with methods that allow changing the size of the array ([cebdd0f](https://github.com/SolidAlloy/SolidUtilities/commit/cebdd0f601895394c0dd7c015792ea9905fc17a3))
+* Added the EditorHelper.GetCurrentMousePosition() method ([8d154df](https://github.com/SolidAlloy/SolidUtilities/commit/8d154df8e6dd4339101f9217ecd65d163c6b9a9c))
+* Added the GUIContentHelper.Temp(text, tooltip) method ([585544d](https://github.com/SolidAlloy/SolidUtilities/commit/585544d303e1163f5e11ee6da1d32a34afd794dc))
+* Added the string.GetSubstringBeforeLast extension method ([cd45460](https://github.com/SolidAlloy/SolidUtilities/commit/cd45460e41feaabcea62f459386fa0809b28466e))
+
 # [1.34.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.33.1...1.34.0) (2021-11-21)
 
 
