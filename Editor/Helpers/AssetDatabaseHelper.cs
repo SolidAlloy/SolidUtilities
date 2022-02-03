@@ -24,6 +24,23 @@
 
             return script == null ? null : script.GetClassType();
         }
+        
+        /// <summary>
+        /// Returns a unique GUID that is known to have no conflicts with the existing assets, so that you create a new asset manually.
+        /// </summary>
+        /// <returns>A unique asset GUID.</returns>
+        public static string GetUniqueGUID()
+        {
+            GUID newGUID;
+
+            do
+            {
+                newGUID = GUID.Generate();
+            }
+            while ( ! string.IsNullOrEmpty(AssetDatabase.GUIDToAssetPath(newGUID.ToString())));
+
+            return newGUID.ToString();
+        }
 
         /// <summary>
         /// Completely prevents AssetDatabase from importing assets or refreshin.
