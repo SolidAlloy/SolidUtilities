@@ -1,3 +1,11 @@
+# [1.36.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.35.0...1.36.0) (2022-02-12)
+
+
+### Features
+
+* Added EditorHelper.ForceRebuildInspectors() ([8121c2e](https://github.com/SolidAlloy/SolidUtilities/commit/8121c2e22ac23207fdf489d1cfdac88d6c31346d))
+* Added TypeHelper.GetNiceNameOfGenericType() method ([2052bcd](https://github.com/SolidAlloy/SolidUtilities/commit/2052bcd997e9ec323edba014b0fbdf317d530d2b))
+
 # [1.35.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.34.0...1.35.0) (2022-02-03)
 
 
