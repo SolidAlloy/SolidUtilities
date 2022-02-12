@@ -38,5 +38,19 @@
 
             return _getCurrentMousePosition();
         }
+
+        private static Action _forceRebuildInspectors;
+        public static void ForceRebuildInspectors()
+        {
+            if (_forceRebuildInspectors == null)
+            {
+                var rebuildMethod = typeof(EditorUtility).GetMethod("ForceRebuildInspectors",
+                    BindingFlags.NonPublic | BindingFlags.Static);
+
+                _forceRebuildInspectors = (Action) Delegate.CreateDelegate(typeof(Action), rebuildMethod);
+            }
+
+            _forceRebuildInspectors();
+        }
     }
 }
