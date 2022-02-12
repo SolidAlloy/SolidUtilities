@@ -130,6 +130,13 @@
             int charIndex = text.IndexOf(character);
             return charIndex == -1 ? text : text.Substring(0, charIndex);
         }
+        
+        [PublicAPI, Pure]
+        public static string GetSubstringAfter(this string text, char character)
+        {
+            int charIndex = text.IndexOf(character);
+            return charIndex == -1 ? text : text.Substring(charIndex + 1, text.Length - charIndex - 1);
+        }
 
         /// <summary>
         /// Counts the number of times <paramref name="substring"/> occured in <paramref name="text"/>.
