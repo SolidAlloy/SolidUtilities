@@ -1,4 +1,5 @@
-﻿namespace SolidUtilities
+﻿#if ENABLE_UNSAFE
+namespace SolidUtilities
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -93,3 +94,4 @@
             where T : IEquatable<T> => new Enumerable<T>(span, separator);
     }
 }
+#endif
