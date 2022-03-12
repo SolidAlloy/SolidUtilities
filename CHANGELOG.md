@@ -1,3 +1,10 @@
+## [1.36.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.36.0...1.36.1) (2022-03-12)
+
+
+### Bug Fixes
+
+* Fixed the compilation error when installing SolidUtilities without Stytem.Runtime.CompilerServices ([b447e9c](https://github.com/SolidAlloy/SolidUtilities/commit/b447e9c808c9c352e8b1210cd9e1728b1dd0a3ff))
+
 # [1.36.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.35.0...1.36.0) (2022-02-12)
 
 
