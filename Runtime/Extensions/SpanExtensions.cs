@@ -1,4 +1,4 @@
-﻿#if ENABLE_UNSAFE
+﻿#if UNITY_2021_1_OR_NEWER || SYSTEM_MEMORY
 namespace SolidUtilities
 {
     using System;
