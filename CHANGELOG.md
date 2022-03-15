@@ -1,3 +1,10 @@
+## [1.36.2](https://github.com/SolidAlloy/SolidUtilities/compare/1.36.1...1.36.2) (2022-03-15)
+
+
+### Bug Fixes
+
+* Fixed ReadOnlySpan not being found in Unity 2020.3 and lower ([b2cc6b2](https://github.com/SolidAlloy/SolidUtilities/commit/b2cc6b215b911a7ed1ce93897ae9b45868bf0b5b))
+
 ## [1.36.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.36.0...1.36.1) (2022-03-12)
 
 
