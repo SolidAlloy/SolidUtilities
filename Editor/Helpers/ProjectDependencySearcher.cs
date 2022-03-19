@@ -14,13 +14,37 @@
             return EditorBuildSettingsScene.GetActiveSceneList(EditorBuildSettings.scenes)
                 .SelectMany(scenePath => GetSerializedObjectsFromScene(scenePath, foundObjects));
         }
-            
+
+        public static IEnumerable<SerializedObject> GetSerializedObjectsFromOpenScenes(FoundObjects foundObjects)
+        {
+            int countLoaded = SceneManager.sceneCount;
+ 
+            for (int i = 0; i < countLoaded; i++)
+            {
+                foreach (var serializedObject in GetSerializedObjectsFromScene(SceneManager.GetSceneAt(i), foundObjects))
+                {
+                    yield return serializedObject;
+                }
+            }
+        }
+
         public static IEnumerable<SerializedObject> GetSerializedObjectsFromScene(string scenePath, FoundObjects foundObjects)
         {
             var currentScene = SceneManager.GetActiveScene();
 
             var scene = currentScene.path == scenePath ? currentScene : EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Additive);
 
+            foreach (var serializedObject in GetSerializedObjectsFromScene(scene, foundObjects))
+            {
+                yield return serializedObject;
+            }
+
+            if (scene != currentScene)
+                EditorSceneManager.CloseScene(scene, true);
+        }
+
+        public static IEnumerable<SerializedObject> GetSerializedObjectsFromScene(Scene scene, FoundObjects foundObjects)
+        {
             var rootGameObjects = scene.GetRootGameObjects();
 
             foreach (GameObject rootGameObject in rootGameObjects)
@@ -30,9 +54,6 @@
                     yield return serializedObject;
                 }
             }
-
-            if (scene != currentScene)
-                EditorSceneManager.CloseScene(scene, true);
         }
 
         public static IEnumerable<SerializedObject> GetSerializedObjectsFromGameObject(GameObject gameObject, FoundObjects foundObjects)
@@ -41,6 +62,9 @@
 
             foreach (Component component in components)
             {
+                if (component == null) // The component script is probably missing.
+                    continue;
+                
                 int instanceId = component.GetInstanceID();
                 if (foundObjects.Components.Contains(instanceId))
                     continue;
@@ -116,6 +140,8 @@
             {
                 yield return serializedObject;
             }
+            
+            PrefabUtility.UnloadPrefabContents(rootGameObject);
         }
 
         private static IEnumerable<SerializedObject> GetSerializedObjectsFromScriptableObject(Object scriptableObject, FoundObjects foundObjects)
@@ -125,7 +151,6 @@
                 yield break;
 
             foundObjects.ScriptableObjects.Add(instanceId);
-            foundObjects.ScriptableObjectNames.Add(scriptableObject.name);
             var soSerializedObject = new SerializedObject(scriptableObject);
 
             yield return soSerializedObject;
@@ -141,7 +166,6 @@
             public readonly HashSet<int> ScriptableObjects = new HashSet<int>();
             public readonly HashSet<int> Components = new HashSet<int>();
             public readonly HashSet<string> Prefabs = new HashSet<string>();
-            public readonly List<string> ScriptableObjectNames = new List<string>();
         }
     }
 }
