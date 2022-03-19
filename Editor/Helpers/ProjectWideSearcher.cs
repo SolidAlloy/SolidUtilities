@@ -76,13 +76,13 @@
 
             foreach (var prefabGUID in prefabGUIDs)
             {
-                string prefabPath = AssetDatabase.AssetPathToGUID(prefabGUID);
+                string prefabPath = AssetDatabase.GUIDToAssetPath(prefabGUID);
 
                 if (string.IsNullOrEmpty(prefabPath))
                     continue;
-                
+
                 var rootGameObject = PrefabUtility.LoadPrefabContents(prefabPath);
-                
+
                 if (rootGameObject == null)
                     continue;
 
@@ -90,6 +90,8 @@
                 {
                     yield return serializedObject;
                 }
+                
+                PrefabUtility.UnloadPrefabContents(rootGameObject);
             }
         }
 
@@ -107,6 +109,7 @@
                     continue;
 
                 yield return new SerializedObject(scriptableObject);
+                Resources.UnloadAsset(scriptableObject);
             }
         }
     }
