@@ -14,12 +14,12 @@
             {
                 yield return serializedObject;
             }
-            
+
             foreach (var serializedObject in GetSerializedObjectsFromPrefabs())
             {
                 yield return serializedObject;
             }
-            
+
             foreach (var serializedObject in GetSerializedObjectsFromScriptableObjects())
             {
                 yield return serializedObject;
@@ -28,12 +28,12 @@
 
         private static IEnumerable<SerializedObject> GetSerializedObjectsFromScenes()
         {
-            var sceneGUIDs = AssetDatabase.FindAssets("t:scene");
+            var sceneGUIDs = AssetDatabase.FindAssets("t:scene", new[] { "Assets" });
 
             foreach (string sceneGUID in sceneGUIDs)
             {
                 string scenePath = AssetDatabase.GUIDToAssetPath(sceneGUID);
-                
+
                 var currentScene = SceneManager.GetActiveScene();
 
                 var scene = currentScene.path == scenePath ? currentScene : EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Additive);
@@ -44,7 +44,7 @@
                 {
                     if (rootGameObject == null)
                         continue;
-                    
+
                     foreach (var serializedObject in GetSerializedObjectsFromGameObject(rootGameObject))
                     {
                         yield return serializedObject;
@@ -64,7 +64,7 @@
             {
                 if (component == null)
                     continue;
-                
+
                 var serializedObject = new SerializedObject(component);
                 yield return serializedObject;
             }
@@ -90,7 +90,7 @@
                 {
                     yield return serializedObject;
                 }
-                
+
                 PrefabUtility.UnloadPrefabContents(rootGameObject);
             }
         }
@@ -102,9 +102,9 @@
             foreach (string soGUID in soGUIDs)
             {
                 string soPath = AssetDatabase.AssetPathToGUID(soGUID);
-                
+
                 var scriptableObject = AssetDatabase.LoadAssetAtPath<ScriptableObject>(soPath);
-                
+
                 if (scriptableObject == null)
                     continue;
 
