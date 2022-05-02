@@ -1,3 +1,20 @@
+# [1.37.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.36.2...1.37.0) (2022-05-02)
+
+
+### Bug Fixes
+
+* Fixed errors related to read-only scenes during build ([d8a4220](https://github.com/SolidAlloy/SolidUtilities/commit/d8a4220c0cb01809ade44b285a57c0de9ede4ecd))
+* Fixed the prefabs not being found in ProjectWideSearcher ([a916bf1](https://github.com/SolidAlloy/SolidUtilities/commit/a916bf1466dd0b4f392fe65b8747397b0a6e0e55))
+* Replaced buttons of plus-i and plus-s with a less blurry ones ([fa7642d](https://github.com/SolidAlloy/SolidUtilities/commit/fa7642df70fdc1039d8da399d56ab4650701a1a9))
+
+
+### Features
+
+* Added ProjectDependencySearcher that searches for SerializedObjects that will be put in a build, or objects that a scene depends upon, etc. ([f286e4e](https://github.com/SolidAlloy/SolidUtilities/commit/f286e4e674b3598304de5a441ae361df609564a7))
+* Added ProjectDependencySearcher.GetSerializedObjectsFromOpenScenes() method ([a54a6ea](https://github.com/SolidAlloy/SolidUtilities/commit/a54a6ea2bc91191a0edb0bae0e8bdbcb8c7e20e2))
+* Added ProjectWideSearcher that searches for all SerializedObjects in the project, or in a certain scene, prefab, etc. ([ee3da0b](https://github.com/SolidAlloy/SolidUtilities/commit/ee3da0b2a66c29eb6c5ed2663facd2c02bfdc571))
+* Added SerializedPropertyHelper.FindPropertiesOfType() ([fc61190](https://github.com/SolidAlloy/SolidUtilities/commit/fc61190a47cce634b042f6c5a47a1293ed048eb6))
+
 ## [1.36.2](https://github.com/SolidAlloy/SolidUtilities/compare/1.36.1...1.36.2) (2022-03-15)
 
 
