@@ -11,9 +11,9 @@
     "defineConstraints": [],
     "versionDefines": [
         {
-            "name": "org.nuget.system.memory",
+            "name": "org.nuget.system.runtime.compilerservices.unsafe",
             "expression": "",
-            "define": "SYSTEM_MEMORY"
+            "define": "COMPILERSERVICES_UNSAFE"
         }
     ],
     "noEngineReferences": false
