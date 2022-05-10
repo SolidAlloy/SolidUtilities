@@ -9,6 +9,28 @@
 
     public static class EnumExtensions
     {
+#if CSHARP_7_3_OR_NEWER
+        public static bool DoesNotContainFlag<TEnum>(this TEnum thisEnum, TEnum flag) where TEnum : unmanaged, Enum
+        {
+            unsafe
+            {
+                switch (sizeof(TEnum))
+                {
+                    case 1:
+                        return (*(byte*)&thisEnum | ~*(byte*)&flag) != byte.MaxValue;
+                    case 2:
+                        return (*(ushort*)&thisEnum | ~*(ushort*)&flag) != ushort.MaxValue;
+                    case 4:
+                        return (*(uint*)&thisEnum | ~*(uint*)&flag) != uint.MaxValue;
+                    case 8:
+                        return (*(ulong*)&thisEnum | ~*(ulong*)&flag) != ulong.MaxValue;
+                    default:
+                        throw new Exception("Size does not match a known Enum backing type.");
+                }
+            }
+        }
+#endif
+
         /// <summary>
         /// Allocation-less version of <see cref="Enum.HasFlag"/> that still runs very fast.
         /// </summary>
