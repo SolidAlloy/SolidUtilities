@@ -1,3 +1,10 @@
+## [1.37.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.37.0...1.37.1) (2022-05-10)
+
+
+### Bug Fixes
+
+* Fixed incorrect dependency in SolidUtitlites assembly definition ([f8e0bb9](https://github.com/SolidAlloy/SolidUtilities/commit/f8e0bb93a36bfddcf5bef5224b9ecc3c330054b9))
+
 # [1.37.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.36.2...1.37.0) (2022-05-02)
 
 
