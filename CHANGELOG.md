@@ -1,3 +1,15 @@
+# [1.38.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.37.1...1.38.0) (2022-05-13)
+
+
+### Bug Fixes
+
+* Fixed editor icons missing after exiting play mode ([4280803](https://github.com/SolidAlloy/SolidUtilities/commit/42808039419f891d519142c202bdef907ceb7325))
+
+
+### Features
+
+* Added Enum.DoesNotContainFlag() extension method ([24f68bd](https://github.com/SolidAlloy/SolidUtilities/commit/24f68bd24e1f685ec790fc2a0959cfbf2f9d9598))
+
 ## [1.37.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.37.0...1.37.1) (2022-05-10)
 
 
