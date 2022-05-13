@@ -1,3 +1,10 @@
+## [1.38.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.38.0...1.38.1) (2022-05-13)
+
+
+### Bug Fixes
+
+* Fixed abstract serializable classes not being considered serializable by type.IsUnitySerializable() ([7afc0b2](https://github.com/SolidAlloy/SolidUtilities/commit/7afc0b209383f17725e4c078a1357e8881498198))
+
 # [1.38.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.37.1...1.38.0) (2022-05-13)
 
 
