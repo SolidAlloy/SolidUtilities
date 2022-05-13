@@ -1,6 +1,5 @@
 ﻿namespace SolidUtilities.Editor
 {
-    using Editor;
     using SolidUtilities;
     using UnityEditor;
     using UnityEngine;
@@ -27,29 +26,20 @@
         public static readonly Texture2D Error = (Texture2D) EditorGUIUtility.Load("console.erroricon");
 
         /// <summary>Triangle with one of the vertices looking to the right. Useful in foldout menus.</summary>
-        public static readonly EditorIcon TriangleRight;
+        public static EditorIcon TriangleRight { get; private set; }
 
         /// <summary>Triangle with one of the vertices looking to the bottom. Useful in foldout menus.</summary>
-        public static readonly EditorIcon TriangleDown;
+        public static EditorIcon TriangleDown { get; private set; }
 
-        public static readonly EditorIcon AddButtonS;
-        
-        public static readonly EditorIcon AddButtonI;
+        public static EditorIcon AddButtonS { get; private set; }
+
+        public static EditorIcon AddButtonI { get; private set; }
 
         static EditorIcons()
         {
-            TriangleRight = new EditorIcon(EditorIconsDatabase.TriangleRight);
-            TriangleDown = new EditorIcon(EditorIconsDatabase.TriangleRight.Rotate());
-            AddButtonS = new EditorIcon(EditorIconsDatabase.ToolbarPlusS);
-            AddButtonI = new EditorIcon(EditorIconsDatabase.ToolbarPlusI);
-
-            AssemblyReloadEvents.beforeAssemblyReload += () =>
-            {
-                TriangleRight.Dispose();
-                TriangleDown.Dispose();
-                AddButtonS.Dispose();
-                AddButtonI.Dispose();
-            };
+            CreateEditorIcons();
+            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+            AssemblyReloadEvents.beforeAssemblyReload += DisposeOfEditorIcons;
         }
 
         private static EditorIconsDatabase GetDatabase()
@@ -59,6 +49,29 @@
             var database = AssetDatabase.LoadAssetAtPath<EditorIconsDatabase>(databasePath);
             Assert.IsNotNull(database);
             return database;
+        }
+
+        private static void CreateEditorIcons()
+        {
+            DisposeOfEditorIcons(); // dispose of previous editor icons on play mode exit just in case.
+            TriangleRight = new EditorIcon(EditorIconsDatabase.TriangleRight);
+            TriangleDown = new EditorIcon(EditorIconsDatabase.TriangleRight.Rotate());
+            AddButtonS = new EditorIcon(EditorIconsDatabase.ToolbarPlusS);
+            AddButtonI = new EditorIcon(EditorIconsDatabase.ToolbarPlusI);
+        }
+
+        private static void DisposeOfEditorIcons()
+        {
+            TriangleRight.Dispose();
+            TriangleDown.Dispose();
+            AddButtonS.Dispose();
+            AddButtonI.Dispose();
+        }
+
+        private static void OnPlayModeStateChanged(PlayModeStateChange stateChange)
+        {
+            if (stateChange == PlayModeStateChange.EnteredEditMode)
+                CreateEditorIcons();
         }
     }
 }
