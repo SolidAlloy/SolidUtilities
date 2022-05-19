@@ -1,3 +1,10 @@
+## [1.38.2](https://github.com/SolidAlloy/SolidUtilities/compare/1.38.1...1.38.2) (2022-05-19)
+
+
+### Bug Fixes
+
+* Fixed the issue with editor icons disappearing randomly ([fadd6a7](https://github.com/SolidAlloy/SolidUtilities/commit/fadd6a7e82d812db1651885370ee0b1aa9d38078))
+
 ## [1.38.1](https://github.com/SolidAlloy/SolidUtilities/compare/1.38.0...1.38.1) (2022-05-13)
 
 
