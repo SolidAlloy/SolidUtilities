@@ -26,19 +26,34 @@
         public static readonly Texture2D Error = (Texture2D) EditorGUIUtility.Load("console.erroricon");
 
         /// <summary>Triangle with one of the vertices looking to the right. Useful in foldout menus.</summary>
-        public static EditorIcon TriangleRight { get; private set; }
+        public static EditorIcon TriangleRight => GetEditorIcon(ref _triangleRight, EditorIconsDatabase.TriangleRight);
+        private static EditorIcon _triangleRight;
 
         /// <summary>Triangle with one of the vertices looking to the bottom. Useful in foldout menus.</summary>
-        public static EditorIcon TriangleDown { get; private set; }
+        public static EditorIcon TriangleDown
+        {
+            get
+            {
+                // not using GetEditorIcon here because it would rotate the texture each time the parameter is passed into the method.
+                if (_triangleDown.Default == null)
+                {
+                    _triangleDown.Dispose();
+                    _triangleDown = new EditorIcon(EditorIconsDatabase.TriangleRight.Rotate());
+                }
 
-        public static EditorIcon AddButtonS { get; private set; }
+                return _triangleDown;
+            }
+        }
+        private static EditorIcon _triangleDown;
 
-        public static EditorIcon AddButtonI { get; private set; }
+        public static EditorIcon AddButtonS => GetEditorIcon(ref _addButtonS, EditorIconsDatabase.ToolbarPlusS);
+        private static EditorIcon _addButtonS;
+
+        public static EditorIcon AddButtonI => GetEditorIcon(ref _addButtonI, EditorIconsDatabase.ToolbarPlusI);
+        private static EditorIcon _addButtonI;
 
         static EditorIcons()
         {
-            CreateEditorIcons();
-            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
             AssemblyReloadEvents.beforeAssemblyReload += DisposeOfEditorIcons;
         }
 
@@ -51,27 +66,23 @@
             return database;
         }
 
-        private static void CreateEditorIcons()
-        {
-            DisposeOfEditorIcons(); // dispose of previous editor icons on play mode exit just in case.
-            TriangleRight = new EditorIcon(EditorIconsDatabase.TriangleRight);
-            TriangleDown = new EditorIcon(EditorIconsDatabase.TriangleRight.Rotate());
-            AddButtonS = new EditorIcon(EditorIconsDatabase.ToolbarPlusS);
-            AddButtonI = new EditorIcon(EditorIconsDatabase.ToolbarPlusI);
-        }
-
         private static void DisposeOfEditorIcons()
         {
-            TriangleRight.Dispose();
-            TriangleDown.Dispose();
-            AddButtonS.Dispose();
-            AddButtonI.Dispose();
+            _triangleRight.Dispose();
+            _triangleDown.Dispose();
+            _addButtonS.Dispose();
+            _addButtonI.Dispose();
         }
 
-        private static void OnPlayModeStateChanged(PlayModeStateChange stateChange)
+        private static EditorIcon GetEditorIcon(ref EditorIcon editorIcon, Texture2D originalIcon)
         {
-            if (stateChange == PlayModeStateChange.EnteredEditMode)
-                CreateEditorIcons();
+            if (editorIcon.Default == null)
+            {
+                editorIcon.Dispose();
+                editorIcon = new EditorIcon(originalIcon);
+            }
+
+            return editorIcon;
         }
     }
 }
