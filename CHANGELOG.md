@@ -1,3 +1,10 @@
+# [1.39.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.38.2...1.39.0) (2022-06-07)
+
+
+### Features
+
+* Added an option to exclude assembly from editor during import ([5f7dea7](https://github.com/SolidAlloy/SolidUtilities/commit/5f7dea715a639b2f52badcaeafa81a652d6412bc))
+
 ## [1.38.2](https://github.com/SolidAlloy/SolidUtilities/compare/1.38.1...1.38.2) (2022-05-19)
 
 
