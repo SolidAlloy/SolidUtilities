@@ -13,41 +13,46 @@ I'm adding new utilities as I write code for other Unity3D projects and discover
 - [Generic Unity Objects](https://github.com/SolidAlloy/GenericUnityObjects)
   
 
-## Install with OpenUPM
-Once you have the OpenUpm cli, run the following command:
+### Install with OpenUPM
+
+Once you have the [OpenUPM cli](https://github.com/openupm/openupm-cli#installation), run the following command:
 
 ```openupm install com.solidalloy.util```
 
 Or if you don't have it, add the scoped registry to manifest.json with the desired dependency semantic version: 
 
-```
+```json
   "scopedRegistries": [
     {
       "name": "package.openupm.com",
       "url": "https://package.openupm.com",
       "scopes": [
-        "com.solidalloy.util",
+        "com.solidalloy",
         "com.openupm"
       ]
     }
   ],
   "dependencies": {
-    "com.solidalloy.util": "1.0.0""
+    "com.solidalloy.util": "1.39.0"
   },
 
 ```
 
-
-
-## Install via Git URL
+### Install via Package Manager
 
 Project supports Unity Package Manager. To install the project as a Git package do the following:
 
-1. In Unity, open **Window** -> **Package Manager**.
-2. Press the **+** button, choose "**Add package from git URL...**"
-3. Enter "https://github.com/SolidAlloy/SolidUtilities.git" and press **Add**.
-
-
+1. In Unity, open **Project Settings** -> **Package Manager**.
+2. Add a new scoped registry with the following details:
+   - **Name**: package.openupm.com
+   - **URL**: https://package.openupm.com
+   - Scope(s):
+     - com.openupm
+     - com.solidalloy
+3. Hit **Apply**.
+4. Go to **Window** -> **Package Manager**.
+5. Press the **+** button, *Add package from git URL*.
+6. Enter **com.solidalloy.util**, press **Add**.
 
 # The most useful utilities
 
@@ -209,5 +214,4 @@ DrawHelper.DrawVertically(() =>
     EditorDrawHelper.DrawInfoMessage("No types to select.");
 });
 ```
-
 
