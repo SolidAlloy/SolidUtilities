@@ -1,23 +1,17 @@
 ﻿namespace SolidUtilities
 {
-    using System;
-    using System.Collections;
     using System.Collections.Generic;
 
     public static class ListHelper
     {
-        private static readonly Dictionary<Type, IList> _lists = new Dictionary<Type, IList>();
-
         public static List<T> Empty<T>()
         {
-            Type type = typeof(T);
+            return EmptyList<T>.Value;
+        }
 
-            if (_lists.TryGetValue(type, out IList list))
-                return (List<T>) list;
-
-            var newList = new List<T>(0);
-            _lists.Add(type, newList);
-            return newList;
+        private static class EmptyList<T>
+        {
+            public static readonly List<T> Value = new List<T>(0);
         }
     }
 }
