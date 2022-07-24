@@ -6,10 +6,16 @@
     {
         public static void Add<T>(ref T[] array, T item)
         {
+            if (array == null)
+            {
+                array = new T[] { item };
+                return;
+            }
+
             Array.Resize(ref array, array.Length + 1);
             array[array.Length - 1] = item;
         }
-        
+
         public static void RemoveAt<T>(ref T[] array, int index)
         {
             if (index < 0 || index >= array.Length)
@@ -36,7 +42,7 @@
 
             if (index == -1)
                 return false;
-            
+
             RemoveAt(ref array, index);
             return true;
         }
