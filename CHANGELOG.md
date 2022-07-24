@@ -1,3 +1,18 @@
+# [1.40.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.39.0...1.40.0) (2022-07-24)
+
+
+### Bug Fixes
+
+* Fixed exception when passing null array to ArrayHelper.Add() ([38c5068](https://github.com/SolidAlloy/SolidUtilities/commit/38c5068e9df3355211d48f08feb3efcb3522bf9c))
+* Improved performance of ListHelper.EmptyList<T>() ([bb218be](https://github.com/SolidAlloy/SolidUtilities/commit/bb218be452264f4ef82d82db65fdbd367cfd7f4d))
+* Resolved a GUID conflict with old SerializableDictionary ([a967057](https://github.com/SolidAlloy/SolidUtilities/commit/a967057ec472130101c8ac24f762523eee4aa18c))
+
+
+### Features
+
+* Added SerializedObject.SetHideFlagsPersistently() extension method ([0965d89](https://github.com/SolidAlloy/SolidUtilities/commit/0965d89bf71c0d6ee97f4c9d1ed31e658b6c0ccf))
+* Switched from GUID to assembly names in asmdefs ([67002a9](https://github.com/SolidAlloy/SolidUtilities/commit/67002a9d4b05e616a59bfc9cc826f70a2f07311e))
+
 # [1.39.0](https://github.com/SolidAlloy/SolidUtilities/compare/1.38.2...1.39.0) (2022-06-07)
 
 
