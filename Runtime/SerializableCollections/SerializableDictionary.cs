@@ -19,8 +19,8 @@
     /// }
     /// </code></example>
     [Serializable]
-    public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary,
-        ISerializationCallbackReceiver, IDeserializationCallback, ISerializable
+    public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>,
+        ISerializationCallbackReceiver, IDeserializationCallback, ISerializable   
     {
         private Dictionary<TKey, TValue> _dict;
         [SerializeField] private TKey[] _keys;
@@ -47,6 +47,10 @@
         public bool IsSynchronized => ((IDictionary) _dict).IsSynchronized;
 
         public object SyncRoot => ((IDictionary) _dict).SyncRoot;
+
+        IEnumerable<TKey> IReadOnlyDictionary<TKey, TValue>.Keys => ((IReadOnlyDictionary<TKey, TValue>)_dict).Keys;
+
+        IEnumerable<TValue> IReadOnlyDictionary<TKey, TValue>.Values => ((IReadOnlyDictionary<TKey, TValue>)_dict).Values;
 
         public object this[object key]
         {
