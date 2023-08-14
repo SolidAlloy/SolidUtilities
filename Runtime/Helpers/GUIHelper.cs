@@ -5,8 +5,12 @@
     using UnityEngine;
 
     public static class GUIHelper
-    {
+    {                
+        #if UNITY_2022_3_OR_NEWER       
+        private static readonly GUIStyle _closeButtonStyle = GUI.skin.FindStyle("ToolbarSearchCancelButton");
+        #else        
         private static readonly GUIStyle _closeButtonStyle = GUI.skin.FindStyle("ToolbarSeachCancelButton");
+        #endif
 
         /// <summary>Draws the close button.</summary>
         /// <param name="buttonRect">Rect the button should be located in.</param>
