@@ -5,8 +5,8 @@
     using UnityEngine;
 
     public static class GUIHelper
-    {
-        private static readonly GUIStyle _closeButtonStyle = GUI.skin.FindStyle("ToolbarSeachCancelButton");
+    {                
+        private static readonly GUIStyle _closeButtonStyle = FindCloseButtonStyle();
 
         /// <summary>Draws the close button.</summary>
         /// <param name="buttonRect">Rect the button should be located in.</param>
@@ -34,6 +34,17 @@
         /// <param name="viewRect">The rectangle used inside the scrollView.</param>
         public static ScrollView ScrollViewBlock(Rect position, ref Vector2 scrollPosition, Rect viewRect) => new ScrollView(position, ref scrollPosition, viewRect);
 
+        private static GUIStyle FindCloseButtonStyle()
+        {
+            // Name was changed in Unity 2023.2, 2021.3.28, 2022.3.1
+            GUIStyle style = GUI.skin.FindStyle("ToolbarSearchCancelButton");
+            if (style == null)
+            {
+                style = GUI.skin.FindStyle("ToolbarSeachCancelButton");
+            }
+            return style;
+        }
+        
         public readonly struct ScrollView : IDisposable
         {
             public ScrollView(Rect position, ref Vector2 scrollPosition, Rect viewRect)
