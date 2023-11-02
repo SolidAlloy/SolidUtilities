@@ -6,7 +6,7 @@
 
     public static class GUIHelper
     {
-        private static readonly GUIStyle _closeButtonStyle = GUI.skin.FindStyle("ToolbarSeachCancelButton");
+        private static readonly GUIStyle _closeButtonStyle = GUI.skin.FindStyle("ToolbarSearchCancelButton");
 
         /// <summary>Draws the close button.</summary>
         /// <param name="buttonRect">Rect the button should be located in.</param>
