@@ -6,8 +6,11 @@
 
     public static class GUIHelper
     {
+#if UNITY_2023_2_OR_NEWER || UNITY_2021_3_28 || UNITY_2022_3_1
         private static readonly GUIStyle _closeButtonStyle = GUI.skin.FindStyle("ToolbarSearchCancelButton");
-
+#else
+        private static readonly GUIStyle _closeButtonStyle = GUI.skin.FindStyle("ToolbarSeachCancelButton");
+#endif
         /// <summary>Draws the close button.</summary>
         /// <param name="buttonRect">Rect the button should be located in.</param>
         /// <returns>Whether the button was pressed.</returns>
